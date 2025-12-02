@@ -1,0 +1,11 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<h1>Подача на членство — {{ mtype.name }}</h1>
+<p class="small text-muted">Цена: {{ mtype.price }}</p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary">Отправить заявку</button>
+</form>
+{% endblock %}

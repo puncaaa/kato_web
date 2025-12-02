@@ -1,0 +1,37 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<h1>Публикации</h1>
+
+<form method="get" class="row g-2 mb-3">
+  <div class="col-auto">
+    <select name="category" class="form-select">
+      <option value="">Все категории</option>
+      {% for c in categories %}
+        <option value="{{ c.slug }}" {% if request.GET.category == c.slug %}selected{% endif %}>{{ c.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-auto">
+    <input type="text" name="year" value="{{ request.GET.year }}" class="form-control" placeholder="Год">
+  </div>
+  <div class="col-auto"><button class="btn btn-primary">Фильтр</button></div>
+</form>
+
+{% for p in items %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h5><a href="{% url 'publication_detail' p.slug %}">{{ p.title }}</a></h5>
+      <small class="text-muted">{{ p.year }}{% if p.category %} — {{ p.category.name }}{% endif %}</small>
+      <p class="small">{{ p.authors }}</p>
+    </div>
+  </div>
+{% empty %}<p>Публикации не найдены.</p>{% endfor %}
+
+<nav aria-label="page">
+  <ul class="pagination">
+    {% if items.has_previous %}<li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">←</a></li>{% endif %}
+    <li class="page-item disabled"><span class="page-link">Стр. {{ items.number }} из {{ items.paginator.num_pages }}</span></li>
+    {% if items.has_next %}<li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">→</a></li>{% endif %}
+  </ul>
+</nav>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<h1>Новости</h1>
+<div class="row g-3">
+{% for item in items %}
+  <div class="col-md-12">
+    <div class="card d-flex flex-row">
+      {% if item.image %}
+        <img src="{{ item.image.url }}" class="preview-img" style="width:220px; height:140px; object-fit:cover;">
+      {% endif %}
+      <div class="card-body">
+        <a href="{% url 'news_detail' item.slug %}" class="h5 d-block text-dark">{{ item.title }}</a>
+        <div class="meta">{{ item.created_at|date:"d M Y" }}{% if item.category %} • {{ item.category.name }}{% endif %}</div>
+        <p class="mt-2">{{ item.content|truncatechars:180 }}</p>
+      </div>
+    </div>
+  </div>
+{% empty %}
+  <p>Нет новостей.</p>
+{% endfor %}
+</div>
+
+<nav aria-label="page" class="mt-4">
+  <ul class="pagination">
+    {% if items.has_previous %}<li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">←</a></li>{% endif %}
+    <li class="page-item disabled"><span class="page-link">Стр. {{ items.number }} из {{ items.paginator.num_pages }}</span></li>
+    {% if items.has_next %}<li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">→</a></li>{% endif %}
+  </ul>
+</nav>
+{% endblock %}

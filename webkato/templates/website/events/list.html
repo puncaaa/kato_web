@@ -1,0 +1,24 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<h1>Мероприятия</h1>
+
+<h5>Предстоящие</h5>
+{% for e in upcoming %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h6><a href="{% url 'event_detail' e.slug %}">{{ e.title }}</a></h6>
+      <small class="text-muted">{{ e.date|date:"d M Y H:i" }} — {{ e.location }}</small>
+    </div>
+  </div>
+{% empty %}<p>Нет предстоящих мероприятий.</p>{% endfor %}
+
+<h5 class="mt-4">Прошедшие</h5>
+{% for e in past %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h6><a href="{% url 'event_detail' e.slug %}">{{ e.title }}</a></h6>
+      <small class="text-muted">{{ e.date|date:"d M Y" }}</small>
+    </div>
+  </div>
+{% empty %}<p>Архив пуст.</p>{% endfor %}
+{% endblock %}

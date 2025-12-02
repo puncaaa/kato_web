@@ -1,0 +1,26 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<section class="my-4 container">
+  <h1>Членство в КАТО</h1>
+  <p class="lead">Выберите тип членства и подайте заявку. Инструкции по оплате: Kaspi QR и отправка чека на <a href="mailto:Jaxybekova_g@nscto.kz">Jaxybekova_g@nscto.kz</a></p>
+
+  <div class="row g-3">
+    {% for t in types %}
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <h5 class="mb-1">{{ t.name }}</h5>
+          <div class="text-muted mb-2">Цена: {{ t.price }} KZT</div>
+          <p class="small text-muted mb-3">{{ t.description|default:"Описание типа членства" }}</p>
+          {% if user.is_authenticated %}
+            <a href="{% url 'membership_apply' t.slug %}" class="btn btn-primary">Подать заявку</a>
+          {% else %}
+            <a href="{% url 'login' %}?next={% url 'membership' %}" class="btn btn-outline-primary">Войдите, чтобы подать</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12"><p>Типы членства отсутствуют. Добавьте в админке.</p></div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

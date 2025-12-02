@@ -1,0 +1,33 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<h1>Контакты</h1>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <h5>Адрес</h5>
+    <p>Республика Казахстан, г. Астана</p>
+
+    <h5>Email</h5>
+    <p><a href="mailto:trauma@nscto.kz">trauma@nscto.kz</a></p>
+
+    <h5>Телефон</h5>
+    <p><a href="tel:+77781095500">+7 (778) 109–55–00</a></p>
+  </div>
+  <div class="col-md-6">
+    <!-- карта (оставлена как iframe) -->
+    <div class="ratio ratio-16x9">
+      <iframe src="https://www.google.com/maps" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+{% if sent %}
+  <div class="alert alert-success">Сообщение отправлено. Спасибо.</div>
+{% endif %}
+
+<form method="post" class="mb-4">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary">Отправить</button>
+</form>
+{% endblock %}

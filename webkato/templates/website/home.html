@@ -1,0 +1,231 @@
+{% extends 'website/base.html' %}
+{% block content %}
+
+<!-- Hero / main conference promo (использует материалы с rookato.kz) -->
+<section id="hero" class="ai hero-promo">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="ai__uptitle">Международная научно–практическая конференция</div>
+        <h1 class="display-5 ai__title">«Современные подходы в травматологии, ортопедии и реабилитации»</h1>
+        <p class="lead ai__text">Посвященная 110‑летию профессора Х.Ж. Макажанова — 9‑10 октября 2025</p>
+        <p class="mt-3"><a href="https://conference.nscto.online/" target="_blank" class="btn btn-primary me-2">Регистрация</a><a href="{% url 'membership' %}" class="btn btn-outline-light">Стать членом</a></p>
+      </div>
+      <div class="col-md-4 text-center">
+        <img src="https://rookato.kz/storage/app/media/qr.png" alt="QR" style="max-width:170px;">
+        <div class="mt-2 text-muted small">Сканируйте для оплаты / регистрации</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Numbers / quick stats -->
+<section id="numbers" class="my-4">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-6 col-md-3 text-center">
+        <div class="numbers__item p-3 rounded"> <div class="h3 mb-0">9</div><div class="text-muted">филиалов</div></div>
+      </div>
+      <div class="col-6 col-md-3 text-center">
+        <div class="numbers__item p-3 rounded"> <div class="h3 mb-0">550</div><div class="text-muted">ортопедов</div></div>
+      </div>
+      <div class="col-6 col-md-3 text-center">
+        <div class="numbers__item p-3 rounded"> <div class="h3 mb-0">12</div><div class="text-muted">конференций</div></div>
+      </div>
+      <div class="col-6 col-md-3 text-center">
+        <div class="numbers__item p-3 rounded"> <div class="h3 mb-0">10</div><div class="text-muted">стран</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <h4>Последние новости</h4>
+    {% if latest_news %}
+      <!-- добавлен data-bs-interval="7000" (7s) -->
+      <div id="latestNewsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+        <div class="carousel-indicators">
+          {% for n in latest_news %}
+            <button type="button" data-bs-target="#latestNewsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+          {% endfor %}
+        </div>
+        <div class="carousel-inner">
+          {% for n in latest_news %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              {% if n.image %}
+                <img src="{{ n.image.url }}" class="d-block w-100 carousel-preview-img" alt="{{ n.title }}">
+              {% else %}
+                <div class="carousel-placeholder d-flex align-items-center justify-content-center">
+                  <div class="px-3">
+                    <h5 class="text-white">{{ n.title }}</h5>
+                  </div>
+                </div>
+              {% endif %}
+              <!-- явный белый фон, тень и корректный z-index для подписи -->
+              <div class="carousel-caption d-none d-md-block text-start caption-bottom bg-white shadow-sm">
+                <a href="{% url 'news_detail' n.slug %}" class="h5 d-block text-dark">{{ n.title }}</a>
+                <div class="meta small text-muted">{{ n.created_at|date:"d M Y" }}{% if n.category %} • {{ n.category.name }}{% endif %}</div>
+                <p class="mt-2 mb-0 small">{{ n.content|truncatechars:140 }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#latestNewsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#latestNewsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    {% else %}
+      <p>Пока нет новостей.</p>
+    {% endif %}
+  </div>
+
+  <div class="col-lg-5">
+    <h4>Предстоящие мероприятия</h4>
+    {% for e in upcoming_events %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <a href="{% url 'event_detail' e.slug %}" class="h6 text-dark">{{ e.title }}</a>
+          <div class="meta">{{ e.date|date:"d M Y H:i" }} • {{ e.location }}</div>
+          <p class="small mt-2 text-muted">{{ e.description|truncatechars:120 }}</p>
+        </div>
+      </div>
+    {% empty %}
+      <p>Скоро появятся анонсы.</p>
+    {% endfor %}
+
+    <div class="card mt-4">
+      <div class="card-body p-0">
+        <div class="quick-links-card p-3">
+          <div class="d-flex align-items-start gap-3">
+            <div class="quick-links-icon" aria-hidden="true">
+              <!-- book icon filled for contrast -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 4h11a2 2 0 0 1 2 2v12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 20H6a2 2 0 0 1-2-2V6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="flex-fill">
+              <h6 class="mb-2">Полезные ссылки</h6>
+              <ul class="list-unstyled mb-0 quick-links-list">
+                <li class="quick-link-item">
+                  <a href="{% url 'publications_list' %}">
+                    <span class="link-title">Библиотека публикаций</span>
+                    <span class="link-arrow" aria-hidden="true">›</span>
+                  </a>
+                </li>
+                <li class="quick-link-item">
+                  <a href="{% url 'contacts' %}">
+                    <span class="link-title">Контакты</span>
+                    <span class="link-arrow" aria-hidden="true">›</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Directions / mission / leaders / partners секции (содержимое с rookato.kz) -->
+<section class="directions my-5">
+  <div class="directions__container">
+    <div class="directions__title title">СТРАТЕГИЧЕСКИЕ НАПРАВЛЕНИЯ</div>
+    <div class="directions__text">а также преимущества ассоциации КАТО</div>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-6 col-lg-3">
+        <div class="card p-3 h-100 text-center">
+          <img src="https://rookato.kz/storage/app/uploads/public/65f/d7d/cbc/1(1).svg" alt="" style="height:48px;margin-bottom:12px;">
+          <h6 class="mt-2">Интеграция</h6>
+          <p class="small text-muted">Интеграция во всемирное ортопедическое сообщество в соответствии с международными стандартами.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card p-3 h-100 text-center">
+          <img src="https://rookato.kz/storage/app/uploads/public/65f/d7d/cbc/2(1).svg" alt="" style="height:48px;margin-bottom:12px;">
+          <h6 class="mt-2">Совершенствование</h6>
+          <p class="small text-muted">Усовершенствование травматолого-ортопедической помощи на основе передовой практики.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card p-3 h-100 text-center">
+          <img src="https://rookato.kz/storage/app/uploads/public/65f/d7d/cbc/3(1).svg" alt="" style="height:48px;margin-bottom:12px;">
+          <h6 class="mt-2">Популяризация</h6>
+          <p class="small text-muted">Повышение значимости профессии травматолога-ортопеда и поддержка членов Ассоциации.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card p-3 h-100 text-center">
+          <img src="https://rookato.kz/storage/app/uploads/public/65f/d7d/cbc/4(1).svg" alt="" style="height:48px;margin-bottom:12px;">
+          <h6 class="mt-2">Развитие</h6>
+          <p class="small text-muted">Привлечение регионов и расширение сети филиалов по Казахстану.</p>
+        </div>
+      </div>
+
+      <!-- можно добавить остальные направления аналогично -->
+    </div>
+  </div>
+</section>
+
+<!-- New: Mission -->
+<section class="mission my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <img src="https://rookato.kz/storage/app/media/65fd7dfe4cdda512196533.jpg" class="img-fluid rounded" alt="Mission image">
+    </div>
+    <div class="col-md-6">
+      <h3>МИССИЯ КАТО</h3>
+      <p>Содействовать развитию травматологии и ортопедии, профессиональной консолидации, укреплению и развитию профессиональных связей и контактов между травматологами-ортопедами стран ближнего и дальнего зарубежья. Создавать условия для реализации творческого потенциала членов КАТО, развивать преподавание, научные исследования и образование.</p>
+    </div>
+  </div>
+</section>
+
+<!-- New: Leaders (руководство) -->
+<section class="leaders my-5">
+  <h3>РУКОВОДСТВО КАТО</h3>
+  <div class="row g-3 mt-3">
+    <div class="col-md-6">
+      <div class="card p-3 text-center">
+        <img src="https://rookato.kz/storage/app/media/1.jpg" class="img-fluid rounded-circle mb-2" style="width:110px;height:110px;object-fit:cover;" alt="Батпенов Нурлан">
+        <h6 class="mb-0">Батпенов Нурлан Джумагулович</h6>
+        <small class="text-muted">Основатель КАТО</small>
+        <p class="mt-2 small">Организатор и первый директор Научно‑исследовательского института травматологии и ортопедии МЗ РК.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-3 text-center">
+        <img src="https://rookato.kz/storage/app/media/2.jpg" class="img-fluid rounded-circle mb-2" style="width:110px;height:110px;object-fit:cover;" alt="Бекарисов Олжас">
+        <h6 class="mb-0">Бекарисов Олжас Сапаргалиевич</h6>
+        <small class="text-muted">Президент КАТО</small>
+        <p class="mt-2 small">Директор Н. Ж. Батпенов атындағы ҰҒТОО, кандидат медицинских наук.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- New: Partners (слайдер логотипов) -->
+<section class="partners my-5">
+  <h3>ПАРТНЁРЫ И СПОНСОРЫ</h3>
+  <div class="d-flex flex-wrap gap-3 mt-3 align-items-center">
+    <img src="https://rookato.kz/storage/app/media/Apex2024.jpg" alt="Apex" style="height:48px;">
+    <img src="https://rookato.kz/storage/app/media/ABMG%20j.jpg" alt="ABMG" style="height:48px;">
+    <img src="https://rookato.kz/storage/app/media/Naton.jpg" alt="Naton" style="height:48px;">
+    <img src="https://rookato.kz/storage/app/media/Astra.jpg" alt="AstraZeneca" style="height:48px;">
+    <img src="https://rookato.kz/storage/app/media/Artrex.jpg" alt="Arthrex" style="height:48px;">
+    <img src="https://rookato.kz/storage/app/media/zimmer%20bion.jpg" alt="Zimmer" style="height:48px;">
+  </div>
+</section>
+
+{% endblock %}

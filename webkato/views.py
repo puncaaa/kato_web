@@ -1,0 +1,145 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login as auth_login
+from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
+from .models import News, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
+from .forms import ContactForm, CommentForm, MembershipApplicationForm, UserRegistrationForm
+from django.contrib.auth import logout
+from django.http import HttpResponseNotAllowed
+
+def home(request):
+    latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:4]
+    upcoming_events = Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')[:3]
+    return render(request, 'website/home.html', {'latest_news': latest_news, 'upcoming_events': upcoming_events})
+
+def news_list(request):
+    qs = News.objects.filter(is_published=True).order_by('-created_at')
+    paginator = Paginator(qs, 10)
+    page = request.GET.get('page')
+    items = paginator.get_page(page)
+    return render(request, 'website/news/list.html', {'items': items})
+
+def news_detail(request, slug):
+    item = get_object_or_404(News, slug=slug, is_published=True)
+    comments = Comment.objects.filter(content_type=ContentType.objects.get_for_model(News), object_id=item.pk)
+    comment_form = CommentForm()
+    return render(request, 'website/news/detail.html', {'item': item, 'comments': comments, 'comment_form': comment_form})
+
+def events_list(request):
+    now = timezone.now()
+    upcoming = Event.objects.filter(date__gte=now, is_active=True).order_by('date')
+    past = Event.objects.filter(date__lt=now).order_by('-date')
+    return render(request, 'website/events/list.html', {'upcoming': upcoming, 'past': past})
+
+def event_detail(request, slug):
+    event = get_object_or_404(Event, slug=slug)
+    comments = Comment.objects.filter(content_type=ContentType.objects.get_for_model(Event), object_id=event.pk)
+    comment_form = CommentForm()
+    return render(request, 'website/events/detail.html', {'event': event, 'comments': comments, 'comment_form': comment_form})
+
+def publications_list(request):
+    qs = Publication.objects.select_related('category').all().order_by('-year', '-created_at')
+    year = request.GET.get('year')
+    cat = request.GET.get('category')
+    if year:
+        qs = qs.filter(year=year)
+    if cat:
+        qs = qs.filter(category__slug=cat)
+    categories = PublicationCategory.objects.all()
+    paginator = Paginator(qs, 10)
+    page = request.GET.get('page')
+    items = paginator.get_page(page)
+    return render(request, 'website/publications/list.html', {'items': items, 'categories': categories})
+
+def publication_detail(request, slug):
+    pub = get_object_or_404(Publication, slug=slug)
+    comments = Comment.objects.filter(content_type=ContentType.objects.get_for_model(Publication), object_id=pub.pk)
+    comment_form = CommentForm()
+    return render(request, 'website/publications/detail.html', {'pub': pub, 'comments': comments, 'comment_form': comment_form})
+
+def about(request):
+    return render(request, 'website/about.html')
+
+def membership(request):
+    types = MembershipType.objects.all()
+    applied = request.GET.get('applied') == '1'
+    return render(request, 'website/membership.html', {'types': types, 'applied': applied})
+
+@login_required
+def membership_apply(request, slug):
+    mtype = get_object_or_404(MembershipType, slug=slug)
+    if request.method == 'POST':
+        form = MembershipApplicationForm(request.POST)
+        if form.is_valid():
+            app = form.save(commit=False)
+            app.user = request.user
+            app.membership_type = mtype
+            app.save()
+            # redirect to membership page with flag (payment step can be integrated later)
+            return redirect(reverse('membership') + '?applied=1')
+    else:
+        form = MembershipApplicationForm()
+    return render(request, 'website/membership_apply.html', {'form': form, 'mtype': mtype})
+
+def contacts(request):
+    sent = False
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sent = True
+            form = ContactForm()
+    else:
+        form = ContactForm()
+    return render(request, 'website/contacts.html', {'form': form, 'sent': sent})
+
+@login_required
+def add_comment(request):
+    if request.method != 'POST':
+        return redirect('home')
+    model_name = request.POST.get('model')
+    slug = request.POST.get('slug')
+    content = request.POST.get('content')
+    model_map = {'news': News, 'event': Event, 'publication': Publication}
+    Model = model_map.get(model_name)
+    if not Model:
+        return redirect('home')
+    try:
+        obj = Model.objects.get(slug=slug)
+    except Model.DoesNotExist:
+        return redirect('home')
+    ct = ContentType.objects.get_for_model(Model)
+    Comment.objects.create(user=request.user, content_type=ct, object_id=obj.pk, content=content)
+    # redirect back to detail
+    if model_name == 'news':
+        return redirect('news_detail', slug=slug)
+    if model_name == 'event':
+        return redirect('event_detail', slug=slug)
+    return redirect('publication_detail', slug=slug)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+# New: handle /accounts/profile/ (redirect to home)
+def profile_redirect(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    return redirect('login')
+
+# New: logout view that accepts GET and POST and redirects to home
+def logout_view(request):
+    if request.method not in ('GET', 'POST'):
+        return HttpResponseNotAllowed(['GET', 'POST'])
+    logout(request)
+    return redirect('home')
