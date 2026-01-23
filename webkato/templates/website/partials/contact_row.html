@@ -1,0 +1,13 @@
+{% load static %}
+<div class="d-flex align-items-center gap-2 contact-row">
+  {% if icon %}
+    <img src="{% static icon %}" alt="" width="20" height="20">
+  {% endif %}
+  <div class="flex-fill">
+    <div class="small text-muted">{{ label }}</div>
+    <div>{{ value }}</div>
+  </div>
+  {% if copy %}
+    <button id="{{ id|default:'copy-btn' }}" class="btn btn-sm btn-outline-secondary" data-value="{{ value }}">Копировать</button>
+  {% endif %}
+</div>

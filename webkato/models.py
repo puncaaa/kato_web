@@ -38,6 +38,8 @@ class Event(models.Model):
     location = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
     image = models.FileField(upload_to='events/', null=True, blank=True)
+    # Optional external URL for the event (e.g. registration page, conference site)
+    external_link = models.URLField(max_length=500, blank=True, null=True, help_text='Optional external URL for the conference (registration page, etc.)')
     program_pdf = models.FileField(upload_to='events/programs/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
@@ -124,8 +126,18 @@ class MembershipType(models.Model):
 class MembershipApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     membership_type = models.ForeignKey(MembershipType, on_delete=models.SET_NULL, null=True)
-    additional_info = models.TextField(blank=True)
-    is_paid = models.BooleanField(default=False)
+    
+    # New detailed fields
+    full_name = models.CharField(max_length=255, verbose_name="ФИО", default="")
+    birth_date = models.DateField(null=True, blank=True, verbose_name="Дата рождения")
+    citizenship = models.CharField(max_length=100, verbose_name="Гражданство", default="")
+    degree = models.CharField(max_length=100, blank=True, verbose_name="Ученая степень")
+    job_title = models.CharField(max_length=150, verbose_name="Должность", default="")
+    place_of_work = models.CharField(max_length=255, verbose_name="Место работы", default="")
+    phone = models.CharField(max_length=20, verbose_name="Телефон", default="")
+
+    additional_info = models.TextField(blank=True, verbose_name="Дополнительная информация")
+    is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -133,4 +145,4 @@ class MembershipApplication(models.Model):
         verbose_name_plural = 'Заявки на членство'
 
     def __str__(self):
-        return f'{self.user} — {self.membership_type}'
+        return f'{self.full_name or self.user} — {self.membership_type}'

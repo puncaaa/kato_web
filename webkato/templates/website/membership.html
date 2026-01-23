@@ -1,26 +1,106 @@
 {% extends 'website/base.html' %}
+{% load static %}
 {% block content %}
-<section class="my-4 container">
-  <h1>Членство в КАТО</h1>
-  <p class="lead">Выберите тип членства и подайте заявку. Инструкции по оплате: Kaspi QR и отправка чека на <a href="mailto:Jaxybekova_g@nscto.kz">Jaxybekova_g@nscto.kz</a></p>
+<div class="page-header text-center d-flex align-items-center justify-content-center position-relative"
+  style="background: url('{% static 'website/img/membership-bg.png' %}') no-repeat center center/cover; min-height: 350px;">
+  <div style="position: absolute; inset:0; background: rgba(0,0,50,0.7);"></div>
+  <div class="container position-relative z-1 text-white">
+    <h1 class="display-4 fw-bold mb-3">Вступить в Ассоциацию</h1>
+    <p class="lead opacity-75 mb-4 mx-auto" style="max-width: 700px;">Присоединяйтесь к ведущему сообществу
+      травматологов и ортопедов Казахстана. Развивайтесь профессионально вместе с нами.</p>
+    <a href="#tariffs" class="btn btn-primary rounded-pill px-4 fw-bold">Выбрать план</a>
+  </div>
+</div>
 
-  <div class="row g-3">
-    {% for t in types %}
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <h5 class="mb-1">{{ t.name }}</h5>
-          <div class="text-muted mb-2">Цена: {{ t.price }} KZT</div>
-          <p class="small text-muted mb-3">{{ t.description|default:"Описание типа членства" }}</p>
-          {% if user.is_authenticated %}
-            <a href="{% url 'membership_apply' t.slug %}" class="btn btn-primary">Подать заявку</a>
-          {% else %}
-            <a href="{% url 'login' %}?next={% url 'membership' %}" class="btn btn-outline-primary">Войдите, чтобы подать</a>
-          {% endif %}
+<section id="tariffs" class="mb-5 text-center mt-5">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      {% for t in types %}
+      <div class="col-lg-4 col-md-6">
+        <div
+          class="card pricing-card h-100 p-4 border-0 shadow-sm {% if 'Премиум' in t.name or 'Premium' in t.name %}featured{% endif %}">
+          <div class="card-body d-flex flex-column">
+            <h4 class="fw-bold mb-3">{{ t.name }}</h4>
+            <div class="price-tag mb-3">{{ t.price|floatformat:0 }} ₸ <span class="fs-6 text-muted fw-normal">/
+                год</span></div>
+            <p class="text-muted small mb-4 flex-grow-1">
+              {% if t.description %}
+              {{ t.description }}
+              {% else %}
+              Доступ к базовым ресурсам ассоциации.
+              {% endif %}
+            </p>
+
+            <ul class="list-unstyled text-start small text-muted mb-4">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Доступ к протоколам</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Участие в вебинарах</li>
+              {% if 'Премиум' in t.name %}
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Приоритетная регистрация</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Скидки на конференции</li>
+              {% endif %}
+            </ul>
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'membership_apply' t.slug %}" class="btn btn-primary rounded-pill w-100 mt-auto">Выбрать
+              тариф</a>
+            {% else %}
+            <a href="{% url 'login' %}?next={% url 'membership' %}"
+              class="btn btn-outline-primary rounded-pill w-100 mt-auto">Войти для выбора</a>
+            {% endif %}
+          </div>
         </div>
       </div>
-    {% empty %}
-      <div class="col-12"><p>Типы членства отсутствуют. Добавьте в админке.</p></div>
-    {% endfor %}
+      {% empty %}
+      <p>Тарифы не найдены.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="bg-light p-5 rounded-4 shadow-sm container mb-5">
+  <div class="row align-items-center">
+    <div class="col-lg-5 mb-4 mb-lg-0">
+      <h3 class="fw-bold">Остались вопросы?</h3>
+      <p class="text-muted border-bottom pb-4 mb-4">Если вы не нашли подходящий тариф или у вас есть вопросы по
+        вступлению, заполните эту форму.</p>
+      <div class="d-flex align-items-start gap-3 mb-3">
+        <div class="bg-white p-2 rounded shadow-sm text-primary"><i class="bi bi-telephone-fill"></i></div>
+        <div>
+          <h6 class="mb-0">Телефон</h6>
+          <small>+7 (778) 109‑55‑00</small>
+        </div>
+      </div>
+      <div class="d-flex align-items-start gap-3">
+        <div class="bg-white p-2 rounded shadow-sm text-primary"><i class="bi bi-envelope-fill"></i></div>
+        <div>
+          <h6 class="mb-0">Email</h6>
+          <small>trauma@nscto.kz</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <form method="post" action="{% url 'contacts' %}" class="card border-0 p-4">
+        {% csrf_token %}
+        <input type="hidden" name="subject" value="join_question">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="small text-muted mb-1">ФИО</label>
+            <input name="name" class="form-control bg-light border-0" required>
+          </div>
+          <div class="col-md-6">
+            <label class="small text-muted mb-1">Email</label>
+            <input name="email" class="form-control bg-light border-0" required>
+          </div>
+          <div class="col-12">
+            <label class="small text-muted mb-1">Сообщение</label>
+            <textarea name="message" class="form-control bg-light border-0" rows="3" required></textarea>
+          </div>
+          <div class="col-12 text-end">
+            <button class="btn btn-primary rounded-pill px-4">Отправить вопрос</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 {% endblock %}

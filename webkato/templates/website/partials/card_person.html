@@ -1,0 +1,11 @@
+{% load static %}
+<div class="card card-person text-center p-3">
+  {% if image %}
+    <img src="{% static image %}" alt="{{ name }}" class="rounded-circle mb-2" width="150" height="150" loading="lazy">
+  {% endif %}
+  <div class="fw-bold">{{ name }}</div>
+  <div class="small text-muted">{{ role }}</div>
+  {% if bio %}
+    <p class="small text-muted mt-2 mb-0">{{ bio }}</p>
+  {% endif %}
+</div>

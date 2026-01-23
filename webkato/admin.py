@@ -40,10 +40,10 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'location', 'is_active', 'admin_image')
+    list_display = ('title', 'date', 'location', 'is_active', 'admin_image', 'external_link')
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('is_active', 'date')
-    search_fields = ('title', 'description', 'location')
+    search_fields = ('title', 'description', 'location', 'external_link')
 
     def admin_image(self, obj):
         if obj.image:

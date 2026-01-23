@@ -1,33 +1,79 @@
 {% extends 'website/base.html' %}
+{% load static %}
 {% block content %}
-<h1>Контакты</h1>
+<div class="row g-5">
+  <div class="col-lg-5">
+    <h1 class="display-5 fw-bold mb-4">Наши контакты</h1>
+    <p class="lead text-muted mb-5">Мы всегда открыты для сотрудничества. Свяжитесь с нами по любым вопросам.</p>
 
-<div class="row mb-4">
-  <div class="col-md-6">
-    <h5>Адрес</h5>
-    <p>Республика Казахстан, г. Астана</p>
+    <div class="d-flex mb-4">
+      <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3"
+        style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+        <i class="bi bi-geo-alt-fill fs-5"></i>
+        <!-- SVG fallback -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+        </svg>
+      </div>
+      <div>
+        <h5 class="fw-bold mb-1">Адрес</h5>
+        <p class="text-muted mb-0">Республика Казахстан, г. Астана</p>
+        <small class="text-muted">Проспект Абылай Хана, 15А (ННЦТО)</small>
+      </div>
+    </div>
 
-    <h5>Email</h5>
-    <p><a href="mailto:trauma@nscto.kz">trauma@nscto.kz</a></p>
+    <div class="d-flex mb-4">
+      <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3"
+        style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+        </svg>
+      </div>
+      <div>
+        <h5 class="fw-bold mb-1">Email</h5>
+        <p class="text-muted mb-0"><a href="mailto:trauma@nscto.kz"
+            class="text-decoration-none text-muted">trauma@nscto.kz</a></p>
+      </div>
+    </div>
 
-    <h5>Телефон</h5>
-    <p><a href="tel:+77781095500">+7 (778) 109–55–00</a></p>
+    <div class="d-flex mb-5">
+      <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3"
+        style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+        </svg>
+      </div>
+      <div>
+        <h5 class="fw-bold mb-1">Телефон</h5>
+        <p class="text-muted mb-0">+7 (778) 109–55–00</p>
+      </div>
+    </div>
+
+    <div class="p-4 bg-light rounded-4">
+      <h6>Реквизиты Ассоциации:</h6>
+      <div class="small text-muted">
+        РК, г. Астана, ул. Абылай хана 15А<br>
+        БИН 030240003055<br>
+        КБЕ 17 / ИИК KZ76...
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-    <!-- карта (оставлена как iframe) -->
-    <div class="ratio ratio-16x9">
-      <iframe src="https://www.google.com/maps" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+  <div class="col-lg-7">
+    <div class="card border-0 shadow-lg p-4 p-md-5">
+      <h3 class="mb-4 text-center">Напишите нам</h3>
+      {% if sent %}
+      <div class="alert alert-success text-center border-0 bg-success bg-opacity-25 text-success-emphasis">
+        <h4 class="alert-heading">Спасибо!</h4>
+        <p>Ваше сообщение успешно отправлено. Мы свяжемся с вами в ближайшее время.</p>
+      </div>
+      {% else %}
+      {% include 'website/partials/form_contact.html' with form=form %}
+      {% endif %}
     </div>
   </div>
 </div>
 
-{% if sent %}
-  <div class="alert alert-success">Сообщение отправлено. Спасибо.</div>
-{% endif %}
-
-<form method="post" class="mb-4">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-primary">Отправить</button>
-</form>
 {% endblock %}

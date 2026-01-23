@@ -1,24 +1,69 @@
 {% extends 'website/base.html' %}
 {% block content %}
-<h1>Мероприятия</h1>
+<div class="row align-items-center mb-5">
+  <div class="col-md-8">
+    <h1 class="display-6 fw-bold">Календарь мероприятий</h1>
+    <p class="text-muted">Конференции, мастер-классы и образовательные курсы для специалистов.</p>
+  </div>
+  <div class="col-md-4 text-md-end">
+    <a href="#" class="btn btn-outline-primary rounded-pill">Скачать план на 2025 год</a>
+  </div>
+</div>
 
-<h5>Предстоящие</h5>
+<h4 class="mb-4 text-primary">Предстоящие события</h4>
 {% for e in upcoming %}
-  <div class="card mb-2">
-    <div class="card-body">
-      <h6><a href="{% url 'event_detail' e.slug %}">{{ e.title }}</a></h6>
-      <small class="text-muted">{{ e.date|date:"d M Y H:i" }} — {{ e.location }}</small>
+<div class="card border-0 shadow-sm mb-4 overflow-hidden card-hover-effect">
+  <div class="row g-0">
+    <div
+      class="col-md-2 bg-light d-flex flex-column align-items-center justify-content-center p-3 text-center border-end">
+      <span class="h1 fw-bold text-primary mb-0" style="line-height:1;">{{ e.date|date:"d" }}</span>
+      <span class="text-uppercase fw-bold text-muted small">{{ e.date|date:"F" }}</span>
+      <span class="small text-muted">{{ e.date|date:"Y" }}</span>
+    </div>
+    <div class="col-md-10">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="card-title fw-bold mb-1">
+              {% if e.external_link %}
+              <a href="{{ e.external_link }}" target="_blank" rel="noopener" class="text-dark text-decoration-none">{{
+                e.title }}</a>
+              {% else %}
+              <a href="{% url 'event_detail' e.slug %}" class="text-dark text-decoration-none">{{ e.title }}</a>
+              {% endif %}
+            </h5>
+            <p class="text-muted mb-2"><i class="bi bi-geo-alt me-2"></i>{{ e.location }} • {{ e.date|date:"H:i" }}</p>
+          </div>
+          {% if e.external_link %}
+          <a href="{{ e.external_link }}" target="_blank" rel="noopener"
+            class="btn btn-primary rounded-pill px-4">Регистрация</a>
+          {% else %}
+          <a href="{% url 'event_detail' e.slug %}" class="btn btn-primary rounded-pill px-4">Подробнее</a>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
-{% empty %}<p>Нет предстоящих мероприятий.</p>{% endfor %}
+</div>
+{% empty %}
+<div class="alert alert-light border text-center py-4">
+  Нет запланированных мероприятий на ближайшее время.
+</div>
+{% endfor %}
 
-<h5 class="mt-4">Прошедшие</h5>
-{% for e in past %}
-  <div class="card mb-2">
-    <div class="card-body">
-      <h6><a href="{% url 'event_detail' e.slug %}">{{ e.title }}</a></h6>
-      <small class="text-muted">{{ e.date|date:"d M Y" }}</small>
+<h5 class="mt-5 mb-3 text-muted">Архив мероприятий</h5>
+<div class="row g-3">
+  {% for e in past %}
+  <div class="col-md-6">
+    <div class="card h-100 border bg-light">
+      <div class="card-body">
+        <h6><a href="{% url 'event_detail' e.slug %}" class="text-decoration-none text-dark">{{ e.title }}</a></h6>
+        <small class="text-muted">{{ e.date|date:"d M Y" }}</small>
+      </div>
     </div>
   </div>
-{% empty %}<p>Архив пуст.</p>{% endfor %}
+  {% empty %}
+  <p class="text-muted small">Архив пуст.</p>
+  {% endfor %}
+</div>
 {% endblock %}

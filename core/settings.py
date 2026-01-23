@@ -129,3 +129,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings (development; в production заменить на SMTP конфиг)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'no-reply@kato.local'
+CONTACT_EMAIL = 'trauma@nscto.kz'
+
+# reCAPTCHA (оставьте пустыми в dev; заполните в prod)
+RECAPTCHA_SITE_KEY = ''
+RECAPTCHA_SECRET_KEY = ''

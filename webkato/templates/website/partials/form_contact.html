@@ -1,0 +1,50 @@
+<form method="post" class="form-contact needs-validation" novalidate>
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="form-floating mb-3">
+    {{ form.name }}
+    <label for="{{ form.name.id_for_label }}">Ваше имя</label>
+    {{ form.name.errors }}
+  </div>
+
+  <div class="form-floating mb-3">
+    {{ form.email }}
+    <label for="{{ form.email.id_for_label }}">Email адрес</label>
+    {{ form.email.errors }}
+  </div>
+
+  <div class="form-floating mb-3">
+    {{ form.message }}
+    <label for="{{ form.message.id_for_label }}">Сообщение</label>
+    {{ form.message.errors }}
+  </div>
+
+  {% if RECAPTCHA_SITE_KEY %}
+  <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+  <script src="https://www.google.com/recaptcha/api.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+  <script>
+    if (window.grecaptcha) {
+      grecaptcha.ready(function () { grecaptcha.execute('{{ RECAPTCHA_SITE_KEY }}', { action: 'contact' }).then(function (token) { var el = document.getElementById('recaptcha_token'); if (el) el.value = token; }); });
+    }
+  </script>
+  {% endif %}
+
+  <div class="d-grid">
+    <button class="btn btn-primary py-3 rounded-pill fw-bold" type="submit">Отправить сообщение</button>
+  </div>
+</form>
+
+<script>
+  // Simple formatting for inputs to look good without extra generic CSS
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('.form-contact input, .form-contact textarea');
+    inputs.forEach(input => {
+      input.classList.add('form-control');
+      input.placeholder = ' '; // Required for floating label
+    });
+    // Add height to textarea
+    const txt = document.querySelector('textarea[name="message"]');
+    if (txt) txt.style.height = '120px';
+  });
+</script>

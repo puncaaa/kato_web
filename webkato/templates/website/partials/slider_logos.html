@@ -1,0 +1,8 @@
+{% load static %}
+<div class="row g-3 align-items-center slider-logos">
+  {% for logo in logos %}
+    <div class="col-6 col-md-2 text-center">
+      <img src="{% static logo %}" alt="Партнёр" class="img-fluid" loading="lazy">
+    </div>
+  {% endfor %}
+</div>

@@ -1,30 +1,138 @@
 {% extends 'website/base.html' %}
+{% load static %}
 {% block content %}
-<h1>Новости</h1>
-<div class="row g-3">
-{% for item in items %}
-  <div class="col-md-12">
-    <div class="card d-flex flex-row">
-      {% if item.image %}
-        <img src="{{ item.image.url }}" class="preview-img" style="width:220px; height:140px; object-fit:cover;">
-      {% endif %}
-      <div class="card-body">
-        <a href="{% url 'news_detail' item.slug %}" class="h5 d-block text-dark">{{ item.title }}</a>
-        <div class="meta">{{ item.created_at|date:"d M Y" }}{% if item.category %} • {{ item.category.name }}{% endif %}</div>
-        <p class="mt-2">{{ item.content|truncatechars:180 }}</p>
-      </div>
-    </div>
+<div class="page-header text-center mb-5">
+  <div class="container">
+    <h1 class="display-5 fw-bold text-white">Новости и события</h1>
+    <p class="lead text-white-50">Последние обновления из мира травматологии и жизнь ассоциации</p>
   </div>
-{% empty %}
-  <p>Нет новостей.</p>
-{% endfor %}
 </div>
 
-<nav aria-label="page" class="mt-4">
-  <ul class="pagination">
-    {% if items.has_previous %}<li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">←</a></li>{% endif %}
-    <li class="page-item disabled"><span class="page-link">Стр. {{ items.number }} из {{ items.paginator.num_pages }}</span></li>
-    {% if items.has_next %}<li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">→</a></li>{% endif %}
-  </ul>
-</nav>
+<div class="container">
+  <div class="row g-4">
+    {% for item in items %}
+    {% if forloop.first and items.number == 1 %}
+    <!-- Featured Full Width News -->
+    <div class="col-12">
+      <div class="card featured-news-card shadow h-100 hover-lift">
+        <div class="row g-0 h-100">
+          <div class="col-md-7 position-relative img-zoom-container" style="min-height: 450px;">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" class="w-100 h-100 position-absolute img-zoom"
+              style="object-fit: cover; top:0; left:0;" alt="{{ item.title }}">
+            {% else %}
+            <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center position-absolute"
+              style="top:0;left:0;">
+              <i class="bi bi-image text-white fs-1"></i>
+            </div>
+            {% endif %}
+            <div class="featured-news-overlay d-md-none"> <!-- Overlay visible only on mobile -->
+              {% if item.category %}
+              <span class="badge bg-primary mb-2">{{ item.category.name }}</span>
+              {% endif %}
+              <h2 class="fw-bold mb-2">{{ item.title }}</h2>
+              <p class="mb-0 text-white-50">{{ item.created_at|date:"d M Y" }}</p>
+            </div>
+            <a href="{% url 'news_detail' item.slug %}" class="stretched-link"></a>
+          </div>
+          <div class="col-md-5 bg-white text-dark p-5 d-flex flex-column justify-content-center">
+            <div class="d-none d-md-block">
+              <div class="mb-3 d-flex align-items-center">
+                {% if item.category %}
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 me-2">{{ item.category.name
+                  }}</span>
+                {% else %}
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 me-2">Новости</span>
+                {% endif %}
+                <small class="text-muted">{{ item.created_at|date:"d M Y" }}</small>
+              </div>
+              <h2 class="fw-bold text-dark mb-3">{{ item.title }}</h2>
+              <p class="text-muted text-justify mb-4" style="line-height: 1.6;">{{ item.content|truncatechars:250 }}</p>
+              <div class="mt-auto">
+                <span class="btn btn-primary rounded-pill px-4 py-2 fw-bold">Читать полностью</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-5 mb-3">
+      <h4 class="fw-bold border-start border-4 border-primary ps-3">Последние новости</h4>
+    </div>
+
+    {% else %}
+    <!-- Standard Grid News -->
+    <div class="col-lg-4 col-md-6">
+      <div class="card h-100 border-0 shadow-sm hover-lift">
+        <div class="card-img-wrapper position-relative img-zoom-container"
+          style="height: 240px; background-color: #f8f9fa;">
+          {% if item.image %}
+          <img src="{{ item.image.url }}" class="w-100 h-100 img-zoom" style="object-fit: cover;"
+            alt="{{ item.title }}">
+          {% else %}
+          <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+            <i class="bi bi-card-image fs-4"></i>
+          </div>
+          {% endif %}
+          {% if item.category %}
+          <div class="position-absolute top-0 start-0 m-3">
+            <span class="badge bg-white text-dark shadow-sm news-badge fw-bold small">{{ item.category.name }}</span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="card-body p-4 d-flex flex-column">
+          <div class="mb-2 text-muted small"><i class="bi bi-calendar3 me-1"></i> {{ item.created_at|date:"d.m.Y" }}
+          </div>
+          <h5 class="card-title fw-bold mb-3 lh-sm"><a href="{% url 'news_detail' item.slug %}"
+              class="text-dark text-decoration-none stretched-link">{{ item.title|truncatechars:60 }}</a></h5>
+          <p class="card-text text-muted small flex-grow-1 text-justify">{{ item.content|truncatechars:110 }}</p>
+          <div class="mt-3 text-primary btn-read-more">Читать далее <i class="bi bi-chevron-right small ms-1"></i></div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% empty %}
+    <div class="col-12 py-5 text-center">
+      <div class="display-1 text-muted opacity-25 mb-3"><i class="bi bi-newspaper"></i></div>
+      <h4 class="text-muted">Новостей пока нет.</h4>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="page" class="mt-5">
+    <ul class="pagination justify-content-center">
+      {% if items.has_previous %}
+      <li class="page-item">
+        <a class="page-link shadow-sm border-0 mx-1 rounded-circle d-flex align-items-center justify-content-center"
+          style="width: 40px; height: 40px;" href="?page={{ items.previous_page_number }}">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% for i in items.paginator.page_range %}
+      {% if items.number == i %}
+      <li class="page-item active"><span
+          class="page-link shadow-sm border-0 mx-1 rounded-circle d-flex align-items-center justify-content-center bg-primary"
+          style="width: 40px; height: 40px;">{{ i }}</span></li>
+      {% else %}
+      <li class="page-item"><a
+          class="page-link shadow-sm border-0 mx-1 rounded-circle d-flex align-items-center justify-content-center text-dark"
+          style="width: 40px; height: 40px;" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+
+      {% if items.has_next %}
+      <li class="page-item">
+        <a class="page-link shadow-sm border-0 mx-1 rounded-circle d-flex align-items-center justify-content-center"
+          style="width: 40px; height: 40px;" href="?page={{ items.next_page_number }}">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
 {% endblock %}

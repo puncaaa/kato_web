@@ -9,6 +9,9 @@ from .models import News, Event, Publication, PublicationCategory, Comment, Memb
 from .forms import ContactForm, CommentForm, MembershipApplicationForm, UserRegistrationForm
 from django.contrib.auth import logout
 from django.http import HttpResponseNotAllowed
+from django.core.mail import send_mail
+from django.conf import settings
+import urllib.request, urllib.parse, json
 
 def home(request):
     latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:4]
@@ -63,6 +66,9 @@ def publication_detail(request, slug):
 def about(request):
     return render(request, 'website/about.html')
 
+def president_bio(request):
+    return render(request, 'website/president.html')
+
 def membership(request):
     types = MembershipType.objects.all()
     applied = request.GET.get('applied') == '1'
@@ -88,10 +94,42 @@ def contacts(request):
     sent = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
+        # optional subject (used by membership quick form)
+        subject = request.POST.get('subject', '').strip()
+        # reCAPTCHA verification (only if secret set)
+        recaptcha_ok = True
+        secret = getattr(settings, 'RECAPTCHA_SECRET_KEY', '')
+        recaptcha_response = request.POST.get('g-recaptcha-response') or request.POST.get('recaptcha_token')
+        if secret:
+            recaptcha_ok = False
+            if recaptcha_response:
+                data = urllib.parse.urlencode({
+                    'secret': secret,
+                    'response': recaptcha_response,
+                    'remoteip': request.META.get('REMOTE_ADDR')
+                }).encode()
+                try:
+                    resp = urllib.request.urlopen('https://www.google.com/recaptcha/api/siteverify', data)
+                    result = json.loads(resp.read().decode())
+                    recaptcha_ok = result.get('success', False) and result.get('score', 0) >= 0.3
+                except Exception:
+                    recaptcha_ok = False
+
+        if form.is_valid() and recaptcha_ok:
+            obj = form.save()
+            # send notification email to CONTACT_EMAIL (non-blocking note: console backend for dev)
+            try:
+                mail_subject = f'Новое сообщение с сайта: {subject or "Контакты"}'
+                mail_body = f"От: {obj.name} <{obj.email}>\n\n{obj.message}"
+                send_mail(mail_subject, mail_body, settings.DEFAULT_FROM_EMAIL, [getattr(settings, 'CONTACT_EMAIL')], fail_silently=True)
+            except Exception:
+                pass
             sent = True
             form = ContactForm()
+        else:
+            # if recaptcha failed, add non-field error
+            if not recaptcha_ok:
+                form.add_error(None, 'reCAPTCHA verification failed. Попробуйте позже.')
     else:
         form = ContactForm()
     return render(request, 'website/contacts.html', {'form': form, 'sent': sent})

@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/profile/', views.profile_redirect, name='profile'),
 
     path('about/', views.about, name='about'),
+    path('about/president/', views.president_bio, name='president_bio'),
     path('membership/', views.membership, name='membership'),
     path('membership/apply/<slug:slug>/', views.membership_apply, name='membership_apply'),
     path('contacts/', views.contacts, name='contacts'),

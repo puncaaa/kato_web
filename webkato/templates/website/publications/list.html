@@ -1,37 +1,89 @@
 {% extends 'website/base.html' %}
 {% block content %}
-<h1>Публикации</h1>
-
-<form method="get" class="row g-2 mb-3">
-  <div class="col-auto">
-    <select name="category" class="form-select">
-      <option value="">Все категории</option>
-      {% for c in categories %}
-        <option value="{{ c.slug }}" {% if request.GET.category == c.slug %}selected{% endif %}>{{ c.name }}</option>
-      {% endfor %}
-    </select>
+<div class="row mb-5 align-items-center">
+  <div class="col-md-6">
+    <h1 class="display-6 fw-bold">Библиотека публикаций</h1>
+    <p class="text-muted">База знаний для специалистов: протоколы, статьи, книги.</p>
   </div>
-  <div class="col-auto">
-    <input type="text" name="year" value="{{ request.GET.year }}" class="form-control" placeholder="Год">
+  <div class="col-md-6">
+    <form method="get" class="card border-0 shadow-sm p-3">
+      <div class="row g-2">
+        <div class="col-md-6">
+          <select name="category" class="form-select border-0 bg-light">
+            <option value="">Все категории</option>
+            {% for c in categories %}
+            <option value="{{ c.slug }}" {% if request.GET.category == c.slug %}selected{% endif %}>{{ c.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-3">
+          <input type="text" name="year" value="{{ request.GET.year }}" class="form-control border-0 bg-light"
+            placeholder="Год">
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-primary w-100">Найти</button>
+        </div>
+      </div>
+    </form>
   </div>
-  <div class="col-auto"><button class="btn btn-primary">Фильтр</button></div>
-</form>
+</div>
 
-{% for p in items %}
-  <div class="card mb-2">
-    <div class="card-body">
-      <h5><a href="{% url 'publication_detail' p.slug %}">{{ p.title }}</a></h5>
-      <small class="text-muted">{{ p.year }}{% if p.category %} — {{ p.category.name }}{% endif %}</small>
-      <p class="small">{{ p.authors }}</p>
+<div class="list-group list-group-flush shadow-sm rounded-3 overflow-hidden">
+  {% for p in items %}
+  <div class="list-group-item p-4 border-bottom action-hover">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="me-3">
+        <div class="mb-1">
+          <span class="badge bg-secondary-subtle text-secondary rounded-pill me-2">{{ p.year }}</span>
+          {% if p.category %}<span class="small text-muted text-uppercase fw-bold">{{ p.category.name }}</span>{% endif %}
+        </div>
+        <h5 class="mb-2"><a href="{% url 'publication_detail' p.slug %}"
+            class="text-decoration-none text-dark fw-bold">{{ p.title }}</a></h5>
+        <p class="small text-muted mb-0">Автор(ы): {{ p.authors }}</p>
+      </div>
+      <a href="{% url 'publication_detail' p.slug %}" class="btn btn-sm btn-outline-primary rounded-pill">Открыть</a>
     </div>
   </div>
-{% empty %}<p>Публикации не найдены.</p>{% endfor %}
+  {% empty %}
+  <div class="text-center py-5">
+    <p class="text-muted">Материалов по вашему запросу не найдено.</p>
+  </div>
+  {% endfor %}
+</div>
 
-<nav aria-label="page">
-  <ul class="pagination">
-    {% if items.has_previous %}<li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">←</a></li>{% endif %}
-    <li class="page-item disabled"><span class="page-link">Стр. {{ items.number }} из {{ items.paginator.num_pages }}</span></li>
-    {% if items.has_next %}<li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">→</a></li>{% endif %}
+<nav aria-label="page" class="mt-5">
+  <ul class="pagination justify-content-center">
+    {% if items.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ items.previous_page_number }}">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&laquo;</span>
+    </li>
+    {% endif %}
+
+    {% for i in items.paginator.page_range %}
+    {% if items.number == i %}
+    <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+    {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if items.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ items.next_page_number }}">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&raquo;</span>
+    </li>
+    {% endif %}
   </ul>
 </nav>
 {% endblock %}

@@ -1,67 +1,254 @@
 {% extends 'website/base.html' %}
+{% load static %}
 {% block content %}
-<section id="about" class="about" style="background-image: url('https://rookato.kz/storage/app/uploads/public/65f/d7d/cbc/65fd7dcbc9197064080641.jpg'); background-size:cover; background-position:center; padding:60px 0;">
-  <div class="container text-white">
-    <h1>О КАТО</h1>
-    <p class="lead">Ассоциация предоставляет площадки для обучения у всемирно известных экспертов и даёт молодым врачам‑травматологам‑ортопедам возможность представить исследования коллегам.</p>
-  </div>
-</section>
 
-<section class="mb-5">
-  <h2>История</h2>
-  <div class="bg-white p-3 rounded">
-    <p>КАТО — Казахстанская ассоциация травматологов и ортопедов — объединяет специалистов области, поддерживает образовательные и научные инициативы и организует съезды и конференции с 2001 года. Ассоциация способствует повышению квалификации врачей, внедрению современных методов и развитию научных исследований в Казахстане.</p>
-  </div>
-</section>
-
-<section class="mb-5">
-  <h2>Миссия и цели</h2>
-  <div class="bg-white p-3 rounded">
-    <p>Содействовать развитию травматологии и ортопедии, профессиональной консолидации, укреплению контактов между специалистами РК и зарубежья. Создавать условия для реализации творческого потенциала профессионалов, поддерживать научные исследования, образование и обмен передовым опытом.</p>
-  </div>
-</section>
-
-<section class="mb-5">
-  <h2>Руководство</h2>
-  <div class="row g-3">
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <img src="https://rookato.kz/storage/app/media/1.jpg" alt="Батпенов Нурлан" class="img-fluid rounded-circle mb-2" style="width:110px;height:110px;object-fit:cover;">
-          <h6 class="mb-0">Батпенов Нурлан Джумагулович</h6>
-          <small class="text-muted">Основатель КАТО</small>
-          <p class="mt-2 small">Организатор и первый директор Научно‑исследовательского института травматологии и ортопедии МЗ РК.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <img src="https://rookato.kz/storage/app/media/2.jpg" alt="Бекарисов Олжас" class="img-fluid rounded-circle mb-2" style="width:110px;height:110px;object-fit:cover;">
-          <h6 class="mb-0">Бекарисов Олжас Сапаргалиевич</h6>
-          <small class="text-muted">Президент КАТО</small>
-          <p class="mt-2 small">Директор Н. Ж. Батпенов атындағы ҰҒТОО, кандидат медицинских наук.</p>
-        </div>
-      </div>
+<section class="py-5 reveal-on-scroll">
+  <div class="container text-center mb-5">
+    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-3 fw-bold">ОБ АССОЦИАЦИИ</span>
+    <h1 class="display-5 fw-bold text-dark mb-4">Казахстанская Ассоциация<br>Травматологов-Ортопедов</h1>
+    <div class="mx-auto" style="max-width: 800px;">
+      <p class="lead text-muted text-justify">
+        Мы объединяем экспертов для развития медицинской науки, повышения качества жизни пациентов и внедрения
+        инновационных технологий в практику. КАТО — это платформа для профессионального роста, обмена опытом и
+        международного сотрудничества.
+      </p>
     </div>
   </div>
 </section>
 
-<section class="mb-5">
-  <h2>Партнёры и сотрудничество</h2>
-  <div class="d-flex flex-wrap gap-3 align-items-center">
-    <img src="https://rookato.kz/storage/app/media/Apex2024.jpg" alt="Apex" style="height:48px;">
-    <img src="https://rookato.kz/storage/app/media/ABMG%20j.jpg" alt="ABMG" style="height:48px;">
-    <img src="https://rookato.kz/storage/app/media/Naton.jpg" alt="Naton" style="height:48px;">
-    <!-- Добавьте другие логотипы при необходимости -->
+
+<section class="py-5 bg-light section-alternate reveal-on-scroll">
+  <div class="container">
+    <div class="hero-mission shadow-lg d-flex flex-column align-items-center text-center"
+      style="background: linear-gradient(135deg, #0056b3, #003366); color: white; border-radius: 20px; padding: 4rem 2rem;">
+      <div class="display-3 mb-3"><i class="bi bi-bullseye text-white"></i></div>
+      <h2 class="fw-bold mb-3 display-6 text-white">Наша Миссия</h2>
+      <p class="lead mb-0 text-white-50 text-justify"
+        style="max-width: 900px; color: rgba(255,255,255,0.8) !important;">
+        Содействовать развитию травматологии и ортопедии в Республике Казахстан, способствовать профессиональной
+        консолидации специалистов отрасли и создавать благоприятные условия для развития научно-исследовательской и
+        образовательной деятельности на уровне мировых стандартов.
+      </p>
+    </div>
   </div>
 </section>
 
-<section class="mb-5">
-  <h2>Документы и нормативные материалы</h2>
-  <ul>
-    <li><a href="#">Устав (PDF) — добавьте документ в админке</a></li>
-  </ul>
+<!-- Strategic Directions -->
+<section class="py-5 reveal-on-scroll">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h3 class="fw-bold display-6">Стратегические направления</h3>
+      <p class="text-muted">Ключевые векторы развития ассоциации</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Directions Grid -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-globe"></i></div>
+          <h5 class="fw-bold">Интеграция</h5>
+          <p class="small text-muted text-justify">Вхождение в международное медицинское сообщество и внедрение
+            стандартов, направленных на снижение травматизма.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-mortarboard"></i></div>
+          <h5 class="fw-bold">Образование</h5>
+          <p class="small text-muted text-justify">Совершенствование системы подготовки кадров, развитие клинической
+            практики и медицинского образования.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-shield-check"></i></div>
+          <h5 class="fw-bold">Защита</h5>
+          <p class="small text-muted text-justify">Популяризация специальности, поддержка и правовая защита членов
+            ассоциации.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-diagram-3"></i></div>
+          <h5 class="fw-bold">Развитие сети</h5>
+          <p class="small text-muted text-justify">Расширение филиальной сети и укрепление связей между регионами.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-graph-up-arrow"></i></div>
+          <h5 class="fw-bold">Инвестиции</h5>
+          <p class="small text-muted text-justify">Привлечение инвестиций в научные исследования, подготовка и обмен
+            опытом.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-newspaper"></i></div>
+          <h5 class="fw-bold">Информирование</h5>
+          <p class="small text-muted text-justify">Новости, рассылки и оперативная информация о мероприятиях отрасли.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-journal-medical"></i></div>
+          <h5 class="fw-bold">Публикации</h5>
+          <p class="small text-muted text-justify">Издание журнала «Traumatology and Orthopaedics of Kazakhstan»,
+            входящего в перечень КСООН (ВАК).</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-collection"></i></div>
+          <h5 class="fw-bold">Библиотека</h5>
+          <p class="small text-muted text-justify">Доступ к архивам семинаров, вебинаров и обширной научной библиотеке.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- Leadership -->
+<section class="py-5 bg-light section-alternate reveal-on-scroll">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-6 fw-bold">Руководство</h2>
+      <p class="text-muted">Лидеры, определяющие стратегию развития</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-5">
+        <div class="card card-person border-0 shadow h-100 text-center p-4 hover-lift">
+          <div class="position-relative d-inline-block mx-auto mb-3">
+            <img src="{% static 'website/img/batpenov.png' %}" alt="Батпенов Нурлан Джумагулович"
+              class="rounded-circle shadow-sm" width="160" height="160" loading="lazy" style="object-fit:cover;">
+          </div>
+          <div class="h5 fw-bold mb-1">Батпенов Нурлан Джумагулович</div>
+          <div class="text-primary fw-semibold mb-3">Основатель КАТО</div>
+          <p class="text-muted small mb-4 text-justify">Организатор и первый директор НИИ травматологии и ортопедии.
+            Заслуженный деятель Республики Казахстан. Доктор медицинских наук, профессор, академик НАН РК.</p>
+          <a href="{% url 'president_bio' %}" class="btn btn-outline-primary rounded-pill px-4 stretched-link">Читать
+            биографию</a>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="card card-person border-0 shadow h-100 text-center p-4 hover-lift">
+          <div class="position-relative d-inline-block mx-auto mb-3">
+            <img src="{% static 'website/img/bekarisov.jpg' %}" alt="Бекарисов Олжас Сапаргалиевич"
+              class="rounded-circle shadow-sm" width="160" height="160" loading="lazy" style="object-fit:cover;">
+          </div>
+          <div class="h5 fw-bold mb-1">Бекарисов Олжас Сапаргалиевич</div>
+          <div class="text-primary fw-semibold mb-3">Президент КАТО</div>
+          <p class="text-muted small text-justify mb-0">Директор НИИ травматологии и ортопедии, кандидат медицинских
+            наук. Продолжатель дела основателя, активно внедряющий международные стандарты и инновационные методы
+            лечения.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Activities / History -->
+<section class="py-5 reveal-on-scroll">
+  <div class="container">
+    <h3 class="mb-5 text-center fw-bold display-6">Деятельность и достижения</h3>
+
+    <div class="accordion accordion-flush accordion-custom" id="activitiesAccordion">
+      <!-- 2024 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapse2024">
+            <i class="bi bi-calendar-check text-primary me-3"></i> 2024 год: Юбилейные съезды и международное
+            сотрудничество
+          </button>
+        </h2>
+        <div id="collapse2024" class="accordion-collapse collapse" data-bs-parent="#activitiesAccordion">
+          <div class="accordion-body text-justify">
+            <p>Проведены <strong>IV Съезд травматологов-ортопедов РК</strong> и <strong>III Съезд КАТО</strong>,
+              посвященные 75-летию Н.Д. Батпенова.</p>
+            <ul>
+              <li>Круглый стол президентов профильных ассоциаций стран СНГ и Европы.</li>
+              <li>Симпозиумы: восстановление мениска, артроскопия плечевого сустава, боевая травма.</li>
+            </ul>
+            <h6 class="text-primary mt-3">Международные мастер-классы:</h6>
+            <ul>
+              <li>Артроскопия голеностопного сустава (Турция), хирургия позвоночника у детей (Россия), двухпортальная
+                эндоскопия (Турция).</li>
+            </ul>
+            <div class="bg-light p-3 rounded mt-3 border-start border-4 border-primary">
+              <strong>Обучение:</strong> За счет КАТО 25 специалистов прошли зарубежные стажировки.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapse2023">
+            <i class="bi bi-calendar-check text-primary me-3"></i> 2023 год: Инновации и 80-летие академика Абдрахманова
+          </button>
+        </h2>
+        <div id="collapse2023" class="accordion-collapse collapse" data-bs-parent="#activitiesAccordion">
+          <div class="accordion-body text-justify">
+            <p>Проведена XIV республиканская научно-практическая конференция «Инновации в травматологии и ортопедии».
+            </p>
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <div class="p-3 bg-light rounded h-100">
+                  <h6 class="fw-bold">Мастер-классы</h6>
+                  <ul class="small mb-0 ps-3">
+                    <li>4Fit навигация эндопротезирования</li>
+                    <li>Внешняя фиксация при политравме</li>
+                    <li>Артроскопия коленного сустава</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 bg-light rounded h-100">
+                  <h6 class="fw-bold">Образование</h6>
+                  <ul class="small mb-0 ps-3">
+                    <li>138 специалистов повысили квалификацию</li>
+                    <li>145 телеконсультаций для регионов</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journal and Science -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseJournal">
+            <i class="bi bi-book text-primary me-3"></i> Наука и ресурсы
+          </button>
+        </h2>
+        <div id="collapseJournal" class="accordion-collapse collapse" data-bs-parent="#activitiesAccordion">
+          <div class="accordion-body text-justify">
+            <p><strong>Журнал «Traumatology and Orthopаedics of Kazakhstan»</strong>: Включен в перечень КСООН (ВАК).
+              Open Access.</p>
+            <p><strong>Научная библиотека:</strong> Помощь в поиске литературы и присвоении индексов УДК.</p>
+            <p><strong>Фонд КАТО:</strong> Travel-гранты для молодых ученых на международные конференции.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light section-alternate text-center">
+  <div class="container">
+    <h3 class="mb-4">Присоединяйтесь к профессиональному сообществу</h3>
+    <a href="{% url 'membership' %}" class="btn btn-primary btn-lg rounded-pill px-5 shadow hover-lift">Вступить в
+      КАТО</a>
+  </div>
+</section>
 {% endblock %}

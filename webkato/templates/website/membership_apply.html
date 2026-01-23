@@ -1,11 +1,75 @@
 {% extends 'website/base.html' %}
+{% load static %}
 {% block content %}
-<h1>Подача на членство — {{ mtype.name }}</h1>
-<p class="small text-muted">Цена: {{ mtype.price }}</p>
+<div class="row justify-content-center py-5">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-header bg-primary text-white p-5 text-center">
+                <h2 class="fw-bold mb-2">Заявка на членство</h2>
+                <div class="badge bg-white text-primary rounded-pill px-3 py-2 fs-6 mb-2">{{ mtype.name }}</div>
+                <div class="h3 mb-0 opacity-75">{{ mtype.price|floatformat:0 }} ₸ / год</div>
+            </div>
+            <div class="card-body p-5">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Пожалуйста, исправьте ошибки в форме.
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-primary">Отправить заявку</button>
-</form>
+                    <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">Личные данные</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">ФИО полностью <span class="text-danger">*</span></label>
+                            {{ form.full_name }}
+                            {% if form.full_name.errors %}<div class="text-danger small">{{ form.full_name.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Дата рождения</label>
+                            {{ form.birth_date }}
+                        </div>
+                        <div class="col-md-6">
+                             <label class="form-label fw-semibold">Гражданство</label>
+                             {{ form.citizenship }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Телефон <span class="text-danger">*</span></label>
+                             {{ form.phone }}
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold text-primary mb-4 border-bottom pb-2">Профессиональная информация</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                             <label class="form-label fw-semibold">Ученая степень</label>
+                             {{ form.degree }}
+                        </div>
+                        <div class="col-md-6">
+                             <label class="form-label fw-semibold">Должность</label>
+                             {{ form.job_title }}
+                        </div>
+                        <div class="col-12">
+                             <label class="form-label fw-semibold">Место работы</label>
+                             {{ form.place_of_work }}
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Дополнительная информация</label>
+                        {{ form.additional_info }}
+                        <div class="form-text">Укажите любую информацию, которую считаете важной для рассмотрения вашей заявки.</div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">Отправить заявку</button>
+                        <a href="{% url 'membership' %}" class="btn btn-light rounded-pill">Назад к тарифам</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

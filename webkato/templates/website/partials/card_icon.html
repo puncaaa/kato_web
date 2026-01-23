@@ -1,0 +1,8 @@
+{% load static %}
+<div class="card card-icon h-100 p-3 text-center">
+  {% if icon %}
+    <img src="{% static icon %}" alt="{{ title }} icon" width="48" height="48" loading="lazy">
+  {% endif %}
+  <h6 class="mt-2">{{ title }}</h6>
+  <p class="small text-muted mb-0">{{ text }}</p>
+</div>
