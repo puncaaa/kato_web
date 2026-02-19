@@ -33,4 +33,27 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('accounts/logout/', views.logout_view, name='logout'),
     path('accounts/register/', views.register, name='register'),
+
+    # Placeholders for new structure
+    path('about/mission/', views.about, name='about_mission'), # Reuse existing about
+    path('about/statutes/', views.about_statutes, name='about_statutes'),
+    path('about/history/', views.about_history, name='about_history'),
+    path('about/international/', views.about_international, name='about_international'),
+    path('about/structure/', views.generic_page, {'title': 'Структура'}, name='about_structure'),
+    path('about/honorary/', views.generic_page, {'title': 'Почетные члены'}, name='about_honorary'),
+
+    path('membership/benefits/', views.membership_benefits, name='membership_benefits'),
+
+    path('congress/current/', views.generic_page, {'title': 'Предстоящий съезд'}, name='congress_current'),
+    path('congress/past/', views.congress_past, name='congress_past'),
+    path('congress/awards/', views.generic_page, {'title': 'Награды'}, name='congress_awards'),
+
+    path('education/webinars/', views.generic_page, {'title': 'Вебинары'}, name='education_webinars'),
+    path('education/protocols/', views.generic_page, {'title': 'Клинические протоколы'}, name='education_protocols'),
+    path('education/courses/', views.generic_page, {'title': 'Образовательные курсы'}, name='education_courses'),
+
+    path('fellowships/', views.generic_page, {'title': 'Гранты и стажировки'}, name='fellowships'),
+    path('fellowships/visiting/', views.generic_page, {'title': 'Визитинг-профессора'}, name='fellowships_visiting'),
+
+    path('cooperation/', views.generic_page, {'title': 'Сотрудничество'}, name='cooperation'),
 ]

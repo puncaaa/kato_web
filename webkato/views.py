@@ -20,6 +20,10 @@ def home(request):
 
 def news_list(request):
     qs = News.objects.filter(is_published=True).order_by('-created_at')
+    query = request.GET.get('q')
+    if query:
+        qs = qs.filter(title__icontains=query) | qs.filter(content__icontains=query)
+        qs = qs.distinct()
     paginator = Paginator(qs, 10)
     page = request.GET.get('page')
     items = paginator.get_page(page)
@@ -33,9 +37,19 @@ def news_detail(request, slug):
 
 def events_list(request):
     now = timezone.now()
+    # Upcoming events split by type
     upcoming = Event.objects.filter(date__gte=now, is_active=True).order_by('date')
+    foreign_events = upcoming.filter(is_international=True)
+    local_events = upcoming.filter(is_international=False)
+    
     past = Event.objects.filter(date__lt=now).order_by('-date')
-    return render(request, 'website/events/list.html', {'upcoming': upcoming, 'past': past})
+    
+    context = {
+        'foreign_events': foreign_events, 
+        'local_events': local_events,
+        'past': past
+    }
+    return render(request, 'website/events/list.html', context)
 
 def event_detail(request, slug):
     event = get_object_or_404(Event, slug=slug)
@@ -181,3 +195,28 @@ def logout_view(request):
         return HttpResponseNotAllowed(['GET', 'POST'])
     logout(request)
     return redirect('home')
+
+def about_history(request):
+    return render(request, 'website/about_history.html')
+
+def about_statutes(request):
+    return render(request, 'website/about_statutes.html')
+
+def membership_benefits(request):
+    return render(request, 'website/membership_benefits.html')
+
+def about_international(request):
+    return render(request, 'website/about_international.html')
+
+def congress_past(request):
+    # Fetch all past events, ordered by date descending
+    past_events = Event.objects.filter(date__lt=timezone.now(), is_active=False).order_by('-date')
+    return render(request, 'website/congress_past.html', {'events': past_events})
+
+def generic_page(request, title="Страница"):
+
+    context = {
+        'title': title,
+        'content': 'Информация в данном разделе находится в стадии наполнения.'
+    }
+    return render(request, 'website/generic.html', context)

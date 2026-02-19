@@ -19,14 +19,36 @@
 
 <body>
   <header class="site-header sticky-top shadow-sm">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <!-- Top Bar -->
+    <div class="top-bar bg-light py-2 border-bottom small">
+      <div class="container d-flex justify-content-end align-items-center gap-3">
+        {% if user.is_authenticated %}
+        <span class="text-secondary">Вы вошли как <strong class="text-dark">{{ user.username }}</strong></span>
+        <a href="{% url 'logout' %}" class="text-decoration-none text-danger">Выйти</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="text-decoration-none text-dark"><i
+            class="bi bi-box-arrow-in-right me-1"></i>Войти</a>
+        <span class="text-muted">|</span>
+        <a href="{% url 'register' %}" class="text-decoration-none text-primary">Регистрация</a>
+        {% endif %}
+        <div class="vr mx-2"></div>
+        <form class="d-flex" role="search" action="{% url 'news_list' %}" method="get">
+          <input class="form-control form-control-sm border-0 bg-transparent" type="search" name="q"
+            placeholder="Поиск..." aria-label="Search" style="width: 100px;">
+        </form>
+      </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
-          <img src="{% static 'website/img/logo.png' %}" alt="KATO Logo" height="50"
-            class="d-inline-block align-text-top">
+          <img src="{% static 'website/img/logo.jpg' %}" alt="KATO Logo" height="80"
+            class="d-inline-block align-text-top brightness-0-invert rounded-circle">
           <div class="lh-1 d-none d-sm-block">
-            <div class="fw-bold text-primary" style="font-size: 1.25rem;">КАТО</div>
-            <div style="font-size: 0.75rem; color: #6c757d; font-weight: 400; line-height: 1.2;">Ассоциация
+            <div class="fw-bold text-white" style="font-size: 1.25rem;">КАТО</div>
+            <div style="font-size: 1rem; color: rgba(255,255,255,0.8); font-weight: 400; line-height: 1.2;">
+              Ассоциация
               травматологов<br>и ортопедов РК</div>
           </div>
         </a>
@@ -36,16 +58,64 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto align-items-center gap-3">
-            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">О нас</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">Новости</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'events_list' %}">Конференции</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'publications_list' %}">Публикации</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contacts' %}">Контакты</a></li>
-            <li class="nav-item ms-lg-2">
-              <a href="{% url 'membership' %}" class="btn btn-primary rounded-pill px-4">Вступить</a>
+          <ul class="navbar-nav ms-auto align-items-center gap-1 fw-medium">
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Главная</a></li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">О нас</a>
+              <ul class="dropdown-menu border-0 shadow-sm">
+                <li><a class="dropdown-item" href="{% url 'about' %}">Миссия и видение</a></li>
+                <li><a class="dropdown-item" href="{% url 'about_statutes' %}">Устав</a></li>
+                <li><a class="dropdown-item" href="{% url 'about_history' %}">История</a></li>
+                <li><a class="dropdown-item" href="{% url 'about_international' %}">Международное сотрудничество</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'about_structure' %}">Структура</a></li>
+                <li><a class="dropdown-item" href="{% url 'president_bio' %}">Правление</a></li>
+                <li><a class="dropdown-item" href="{% url 'about_honorary' %}">Почетные члены</a></li>
+              </ul>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'membership' %}">Членство</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">Съезды</a>
+              <ul class="dropdown-menu border-0 shadow-sm">
+                <li><a class="dropdown-item" href="{% url 'congress_current' %}">Предстоящий съезд</a></li>
+                <li><a class="dropdown-item" href="{% url 'congress_past' %}">Архив съездов</a></li>
+                <li><a class="dropdown-item" href="{% url 'congress_awards' %}">Награды</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                data-bs-toggle="dropdown">Образование</a>
+              <ul class="dropdown-menu border-0 shadow-sm">
+                <li><a class="dropdown-item" href="{% url 'events_list' %}">Календарь событий</a></li>
+                <li><a class="dropdown-item" href="{% url 'education_webinars' %}">Вебинары</a></li>
+                <li><a class="dropdown-item" href="{% url 'education_courses' %}">Образовательные курсы</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'publications_list' %}">Публикации</a></li>
+                <li><a class="dropdown-item" href="{% url 'education_protocols' %}">Клинические протоколы</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">Гранты</a>
+              <ul class="dropdown-menu border-0 shadow-sm">
+                <li><a class="dropdown-item" href="{% url 'fellowships' %}">Стажировки</a></li>
+                <li><a class="dropdown-item" href="{% url 'fellowships_visiting' %}">Визитинг-профессора</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'news_list' %}">Новости</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'contacts' %}">Контакты</a></li>
           </ul>
         </div>
       </div>

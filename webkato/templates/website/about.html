@@ -1,7 +1,7 @@
 {% extends 'website/base.html' %}
 {% load static %}
 {% block content %}
-
+<!-- Intro Section -->
 <section class="py-5 reveal-on-scroll">
   <div class="container text-center mb-5">
     <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-3 fw-bold">ОБ АССОЦИАЦИИ</span>
@@ -240,6 +240,68 @@
         </div>
       </div>
 
+      <!-- 2016 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapse2016">
+            <i class="bi bi-calendar-check text-primary me-3"></i> 2016 год: Инновационные технологии
+          </button>
+        </h2>
+        <div id="collapse2016" class="accordion-collapse collapse" data-bs-parent="#activitiesAccordion">
+          <div class="accordion-body text-justify">
+            <p><strong>13-14 октября 2016 г. - Научно-практическая конференция с международным участием «Инновационные
+                технологии в травматологии и ортопедии» - г. Астана.</strong></p>
+            <p>Мероприятие было посвящено 15-летию НИИ травматологии и ортопедии. В работе конференции приняли участие
+              ведущие специалисты из стран ближнего и дальнего зарубежья.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</section>
+
+<!-- Documents Section -->
+<section class="py-5 bg-white reveal-on-scroll" id="documents">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h3 class="fw-bold display-6">Документы</h3>
+      <p class="text-muted">Юридические и стратегические документы ассоциации</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Strategy 2029 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4 hover-lift text-center">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-file-earmark-bar-graph"></i></div>
+          <h5 class="fw-bold mb-3">Стратегический план<br>2025-2029</h5>
+          <a href="{% static 'website/docs/strategy_2025_2029.pdf' %}" target="_blank"
+            class="btn btn-outline-primary rounded-pill btn-sm stretched-link">Скачать PDF</a>
+        </div>
+      </div>
+
+      <!-- Operation Plan 2025 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4 hover-lift text-center">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-list-check"></i></div>
+          <h5 class="fw-bold mb-3">Операционный план<br>2025</h5>
+          <a href="{% static 'website/docs/plan_2025.pdf' %}" target="_blank"
+            class="btn btn-outline-primary rounded-pill btn-sm stretched-link">Скачать PDF</a>
+        </div>
+      </div>
+
+      <!-- Ethics Code -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4 hover-lift text-center">
+          <div class="mb-3 text-primary fs-2"><i class="bi bi-shield-lock"></i></div>
+          <h5 class="fw-bold mb-3">Кодекс этики</h5>
+          <p class="small text-muted mb-3">Нормы профессионального поведения членов КАТО.</p>
+          <a href="#" class="btn btn-outline-secondary rounded-pill btn-sm disabled">Обновляется</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

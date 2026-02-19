@@ -35,6 +35,8 @@ class Event(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     date = models.DateTimeField()
+    # Optional manual date text (e.g. "13-14 октября 2016 г.")
+    date_text = models.CharField(max_length=100, blank=True, verbose_name="Текст даты (вручную)")
     location = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
     image = models.FileField(upload_to='events/', null=True, blank=True)
@@ -42,6 +44,7 @@ class Event(models.Model):
     external_link = models.URLField(max_length=500, blank=True, null=True, help_text='Optional external URL for the conference (registration page, etc.)')
     program_pdf = models.FileField(upload_to='events/programs/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
+    is_international = models.BooleanField(default=False, verbose_name="Зарубежное мероприятие")
 
     class Meta:
         ordering = ['-date']

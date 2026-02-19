@@ -15,45 +15,104 @@
 <section id="tariffs" class="mb-5 text-center mt-5">
   <div class="container">
     <div class="row g-4 justify-content-center">
-      {% for t in types %}
-      <div class="col-lg-4 col-md-6">
-        <div
-          class="card pricing-card h-100 p-4 border-0 shadow-sm {% if 'Премиум' in t.name or 'Premium' in t.name %}featured{% endif %}">
-          <div class="card-body d-flex flex-column">
-            <h4 class="fw-bold mb-3">{{ t.name }}</h4>
-            <div class="price-tag mb-3">{{ t.price|floatformat:0 }} ₸ <span class="fs-6 text-muted fw-normal">/
-                год</span></div>
-            <p class="text-muted small mb-4 flex-grow-1">
-              {% if t.description %}
-              {{ t.description }}
-              {% else %}
-              Доступ к базовым ресурсам ассоциации.
-              {% endif %}
-            </p>
-
-            <ul class="list-unstyled text-start small text-muted mb-4">
-              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Доступ к протоколам</li>
-              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Участие в вебинарах</li>
-              {% if 'Премиум' in t.name %}
-              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Приоритетная регистрация</li>
-              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Скидки на конференции</li>
-              {% endif %}
+      <!-- Local -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-lift text-center position-relative overflow-hidden">
+          <div class="card-header bg-white border-0 pt-4 pb-0">
+            <div class="icon-circle bg-primary-subtle text-primary mx-auto mb-3"
+              style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+              <i class="bi bi-person-badge fs-2"></i>
+            </div>
+            <h4 class="card-title fw-bold">Для резидентов РК</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled mb-4 text-secondary small text-start mx-auto" style="max-width: 200px;">
+              <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Полный доступ к ресурсам</li>
+              <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Участие в выборах</li>
+              <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Скидки на мероприятия</li>
             </ul>
-
+            <div class="display-6 fw-bold text-dark mb-0">₸10,000<span class="fs-6 text-muted fw-normal">/год</span>
+            </div>
+          </div>
+          <div class="card-footer bg-white border-0 pb-4">
             {% if user.is_authenticated %}
-            <a href="{% url 'membership_apply' t.slug %}" class="btn btn-primary rounded-pill w-100 mt-auto">Выбрать
-              тариф</a>
+            <a href="{% url 'membership_apply' 'local' %}"
+              class="btn btn-outline-primary rounded-pill px-4 w-100">Подать
+              заявку</a>
             {% else %}
             <a href="{% url 'login' %}?next={% url 'membership' %}"
-              class="btn btn-outline-primary rounded-pill w-100 mt-auto">Войти для выбора</a>
+              class="btn btn-outline-primary rounded-pill px-4 w-100">Войти для заявки</a>
             {% endif %}
           </div>
         </div>
       </div>
-      {% empty %}
-      <p>Тарифы не найдены.</p>
-      {% endfor %}
+
+      <!-- Students -->
+      <div class="col-md-4">
+        <div
+          class="card h-100 border-0 shadow-sm hover-lift text-center position-relative overflow-hidden border-top border-4 border-success">
+          <div class="card-header bg-white border-0 pt-4 pb-0">
+            <span class="badge bg-success position-absolute top-0 end-0 m-3">Льготный</span>
+            <div class="icon-circle bg-success-subtle text-success mx-auto mb-3"
+              style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+              <i class="bi bi-mortarboard fs-2"></i>
+            </div>
+            <h4 class="card-title fw-bold">Для студентов, резидентов, докторантов</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled mb-4 text-secondary small text-start mx-auto" style="max-width: 200px;">
+              <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i>Доступ к библиотеке</li>
+              <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i>Участие в вебинарах</li>
+              <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i>Специальные гранты</li>
+            </ul>
+            <div class="display-6 fw-bold text-dark mb-0">₸5,000<span class="fs-6 text-muted fw-normal">/год</span>
+            </div>
+          </div>
+          <div class="card-footer bg-white border-0 pb-4">
+            {% if user.is_authenticated %}
+            <a href="{% url 'membership_apply' 'student' %}"
+              class="btn btn-outline-success rounded-pill px-4 w-100">Подать заявку</a>
+            {% else %}
+            <a href="{% url 'login' %}?next={% url 'membership' %}"
+              class="btn btn-outline-success rounded-pill px-4 w-100">Войти для заявки</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- International -->
+      <div class="col-md-4">
+        <div
+          class="card h-100 border-0 shadow-sm hover-lift text-center position-relative overflow-hidden border-top border-4 border-info">
+          <div class="card-header bg-white border-0 pt-4 pb-0">
+            <div class="icon-circle bg-info-subtle text-info mx-auto mb-3"
+              style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+              <i class="bi bi-globe fs-2"></i>
+            </div>
+            <h4 class="card-title fw-bold">International</h4>
+            <p class="text-muted small">Не резиденты РК</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled mb-4 text-secondary small text-start mx-auto" style="max-width: 200px;">
+              <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>International Network</li>
+              <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Online Access</li>
+              <li class="mb-2"><i class="bi bi-check2 text-info me-2"></i>Event Discounts</li>
+            </ul>
+            <div class="display-6 fw-bold text-dark mb-0">$50<span class="fs-6 text-muted fw-normal">/year</span></div>
+          </div>
+          <div class="card-footer bg-white border-0 pb-4">
+            {% if user.is_authenticated %}
+            <a href="{% url 'membership_apply' 'international' %}"
+              class="btn btn-outline-info rounded-pill px-4 w-100">Apply Now</a>
+            {% else %}
+            <a href="{% url 'login' %}?next={% url 'membership' %}"
+              class="btn btn-outline-info rounded-pill px-4 w-100">Login to Apply</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
   </div>
 </section>
 
