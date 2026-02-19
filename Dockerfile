@@ -13,4 +13,5 @@ ENV PORT=8080
 
 RUN python manage.py collectstatic --noinput
 
-CMD gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
+CMD python manage.py migrate --noinput && \
+    gunicorn core.wsgi:application --bind 0.0.0.0:$PORT

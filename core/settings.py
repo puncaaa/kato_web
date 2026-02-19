@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hi4s5c@&j#&0z8tu7%z0q_m!9=h^w9b89#f3p^j1*c6+c@@0$%'
+# SECURITY WARNING: keep the secret key used in production secret!
+import os
+SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-hi4s5c@&j#&0z8tu7%z0q_m!9=h^w9b89#f3p^j1*c6+c@@0$%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -123,7 +125,7 @@ LOGIN_URL = 'login'
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [BASE_DIR / 'webkato' / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
