@@ -28,6 +28,7 @@ urlpatterns = [
     path('membership/', views.membership, name='membership'),
     path('membership/apply/<slug:slug>/', views.membership_apply, name='membership_apply'),
     path('contacts/', views.contacts, name='contacts'),
+    path('debug-db/', views.debug_db, name='debug_db'),
 
     # auth
     path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),

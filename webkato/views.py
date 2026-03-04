@@ -13,6 +13,12 @@ from django.core.mail import send_mail
 from django.conf import settings
 import urllib.request, urllib.parse, json
 
+def debug_db(request):
+    from django.conf import settings
+    from django.http import HttpResponse
+    db_config = settings.DATABASES['default']
+    return HttpResponse(f"DB Engine: {db_config.get('ENGINE')} | Host: {db_config.get('HOST')} | Name: {db_config.get('NAME')}")
+
 def home(request):
     latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:4]
     upcoming_events = Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')[:3]
