@@ -35,14 +35,8 @@
             </div>
           </div>
           <div class="card-footer bg-white border-0 pb-4">
-            {% if user.is_authenticated %}
-            <a href="{% url 'membership_apply' 'local' %}"
-              class="btn btn-outline-primary rounded-pill px-4 w-100">Подать
-              заявку</a>
-            {% else %}
-            <a href="{% url 'login' %}?next={% url 'membership' %}"
-              class="btn btn-outline-primary rounded-pill px-4 w-100">Войти для заявки</a>
-            {% endif %}
+            <a href="/media/documents/Шаблон заявления  для вступления в КАТО.doc" download
+              class="btn btn-outline-primary rounded-pill px-4 w-100">Скачать форму заявки</a>
           </div>
         </div>
       </div>
@@ -69,13 +63,8 @@
             </div>
           </div>
           <div class="card-footer bg-white border-0 pb-4">
-            {% if user.is_authenticated %}
-            <a href="{% url 'membership_apply' 'student' %}"
-              class="btn btn-outline-success rounded-pill px-4 w-100">Подать заявку</a>
-            {% else %}
-            <a href="{% url 'login' %}?next={% url 'membership' %}"
-              class="btn btn-outline-success rounded-pill px-4 w-100">Войти для заявки</a>
-            {% endif %}
+            <a href="/media/documents/Шаблон заявления  для вступления в КАТО.doc" download
+              class="btn btn-outline-success rounded-pill px-4 w-100">Скачать форму заявки</a>
           </div>
         </div>
       </div>
@@ -101,18 +90,21 @@
             <div class="display-6 fw-bold text-dark mb-0">$50<span class="fs-6 text-muted fw-normal">/year</span></div>
           </div>
           <div class="card-footer bg-white border-0 pb-4">
-            {% if user.is_authenticated %}
-            <a href="{% url 'membership_apply' 'international' %}"
-              class="btn btn-outline-info rounded-pill px-4 w-100">Apply Now</a>
-            {% else %}
-            <a href="{% url 'login' %}?next={% url 'membership' %}"
-              class="btn btn-outline-info rounded-pill px-4 w-100">Login to Apply</a>
-            {% endif %}
+            <a href="/media/documents/Шаблон заявления  для вступления в КАТО.doc" download
+              class="btn btn-outline-info rounded-pill px-4 w-100">Скачать форму заявки</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</section>
+
+<section class="mb-5 text-center">
+  <div class="container">
+    <p class="text-muted mb-2">Заполненную заявку необходимо отправить на нашу почту <strong>trauma@nscto.kz</strong>,
+      предварительно ознакомившись с <a href="/about/statutes/">уставом</a>.</p>
+    <a href="/media/documents/Шаблон заявления о выходе из КАТО.doc" download
+      class="text-muted small text-decoration-underline">Скачать форму заявления о выходе из КАТО</a>
   </div>
 </section>
 

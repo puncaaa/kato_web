@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from .models import News, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
-from .forms import ContactForm, CommentForm, MembershipApplicationForm, UserRegistrationForm
+from .forms import ContactForm, CommentForm
 from django.contrib.auth import logout
 from django.http import HttpResponseNotAllowed
 from django.core.mail import send_mail
@@ -85,24 +85,9 @@ def president_bio(request):
 
 def membership(request):
     types = MembershipType.objects.all()
+    # applied query param might not be needed anymore, but keeping it won't hurt
     applied = request.GET.get('applied') == '1'
     return render(request, 'website/membership.html', {'types': types, 'applied': applied})
-
-@login_required
-def membership_apply(request, slug):
-    mtype = get_object_or_404(MembershipType, slug=slug)
-    if request.method == 'POST':
-        form = MembershipApplicationForm(request.POST)
-        if form.is_valid():
-            app = form.save(commit=False)
-            app.user = request.user
-            app.membership_type = mtype
-            app.save()
-            # redirect to membership page with flag (payment step can be integrated later)
-            return redirect(reverse('membership') + '?applied=1')
-    else:
-        form = MembershipApplicationForm()
-    return render(request, 'website/membership_apply.html', {'form': form, 'mtype': mtype})
 
 def contacts(request):
     sent = False
@@ -171,17 +156,6 @@ def add_comment(request):
     if model_name == 'event':
         return redirect('event_detail', slug=slug)
     return redirect('publication_detail', slug=slug)
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            return redirect('home')
-    else:
-        form = UserRegistrationForm()
-    return render(request, 'registration/register.html', {'form': form})
 
 # New: handle /accounts/profile/ (redirect to home)
 def profile_redirect(request):

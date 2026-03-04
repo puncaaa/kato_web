@@ -26,13 +26,11 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('about/president/', views.president_bio, name='president_bio'),
     path('membership/', views.membership, name='membership'),
-    path('membership/apply/<slug:slug>/', views.membership_apply, name='membership_apply'),
     path('contacts/', views.contacts, name='contacts'),
 
     # auth
     path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('accounts/logout/', views.logout_view, name='logout'),
-    path('accounts/register/', views.register, name='register'),
 
     # Placeholders for new structure
     path('about/mission/', views.about, name='about_mission'), # Reuse existing about
