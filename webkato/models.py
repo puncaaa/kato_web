@@ -127,21 +127,32 @@ class MembershipType(models.Model):
         return self.name
 
 class MembershipApplication(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     membership_type = models.ForeignKey(MembershipType, on_delete=models.SET_NULL, null=True)
     
-    # New detailed fields
-    full_name = models.CharField(max_length=255, verbose_name="ФИО", default="")
+    # Основные данные
+    full_name = models.CharField(max_length=255, verbose_name="ФИО")
     birth_date = models.DateField(null=True, blank=True, verbose_name="Дата рождения")
-    citizenship = models.CharField(max_length=100, verbose_name="Гражданство", default="")
-    degree = models.CharField(max_length=100, blank=True, verbose_name="Ученая степень")
-    job_title = models.CharField(max_length=150, verbose_name="Должность", default="")
-    place_of_work = models.CharField(max_length=255, verbose_name="Место работы", default="")
-    phone = models.CharField(max_length=20, verbose_name="Телефон", default="")
+    place_of_work = models.CharField(max_length=255, verbose_name="Место работы", blank=True)
+    job_title = models.CharField(max_length=150, verbose_name="Занимаемая должность")
 
-    additional_info = models.TextField(blank=True, verbose_name="Дополнительная информация")
+    # Профессиональная информация
+    qualification = models.CharField(max_length=255, verbose_name="Сведения о квалификации / категория", blank=True, null=True)
+    degree = models.CharField(max_length=150, blank=True, verbose_name="Наличие ученой степени или звания", null=True)
+    experience = models.CharField(max_length=100, verbose_name="Стаж работы", blank=True, null=True)
+    
+    # Контактная информация
+    residence = models.CharField(max_length=255, verbose_name="Место жительства", blank=True, null=True)
+    phone = models.CharField(max_length=50, verbose_name="Мобильный телефон")
+    email = models.EmailField(verbose_name="Email")
+
+    # Документы
+    id_card_copy = models.FileField(upload_to='applications/id_cards/', verbose_name="Копия удостоверения личности", null=True, blank=True)
+    payment_receipt = models.FileField(upload_to='applications/receipts/', verbose_name="Чек об оплате", null=True, blank=True)
+
+    agreement_accepted = models.BooleanField(default=False, verbose_name="Подтверждение")
     is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата заполнения")
 
     class Meta:
         verbose_name = 'Заявка на членство'

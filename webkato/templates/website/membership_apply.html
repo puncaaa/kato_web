@@ -1,0 +1,326 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Custom Styles to mimic Google Forms look -->
+<style>
+    body {
+        background-color: #f0ebf8;
+        /* Google Forms default light purple-ish background */
+    }
+
+    .form-container {
+        max-width: 640px;
+        margin: 2rem auto;
+    }
+
+    .form-header {
+        background-color: #fff;
+        border-radius: 8px;
+        border-top: 10px solid #673ab7;
+        /* Google forms purple branding */
+        padding: 24px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 12px;
+    }
+
+    .form-section {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 12px;
+    }
+
+    .form-section-title {
+        font-size: 1.25rem;
+        color: #202124;
+        margin-bottom: 16px;
+        font-weight: 500;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-label {
+        font-size: 1rem;
+        color: #202124;
+        font-weight: 400;
+        margin-bottom: 16px;
+        display: block;
+    }
+
+    .google-input {
+        border: none;
+        border-bottom: 1px solid #dadce0;
+        border-radius: 0;
+        padding: 8px 0;
+        width: 100%;
+        /* remove inner focus ring */
+        outline: none;
+        background: transparent;
+        transition: border-bottom-color 0.2s;
+    }
+
+    .google-input:focus {
+        border-bottom: 2px solid #673ab7;
+        margin-bottom: -1px;
+        box-shadow: none;
+        background: #f8f9fa;
+    }
+
+    .google-input::placeholder {
+        color: #70757a;
+    }
+
+    .google-input[type="date"] {
+        color: #202124;
+    }
+
+    .google-file-input {
+        font-size: 0.9rem;
+        padding: 10px;
+        border: 1px dashed #dadce0;
+        border-radius: 6px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .required-star {
+        color: #d93025;
+        margin-left: 4px;
+    }
+
+    .submit-btn {
+        background-color: #673ab7;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+        background-color: #5e35b1;
+    }
+
+    .help-text {
+        font-size: 0.8rem;
+        color: #70757a;
+        display: block;
+        margin-top: 6px;
+    }
+
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .checkbox-group label {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+</style>
+
+<div class="form-container">
+
+    {% if success %}
+    <!-- Success Screen -->
+    <div class="form-header text-center py-5">
+        <h1 class="h3 fw-bold text-dark mb-3">Спасибо!</h1>
+        <p class="mb-4 text-muted">Ваше заявление отправлено.</p>
+        <p class="mb-5 text-muted small">Если потребуется дополнительная информация, с вами свяжется исполнительный
+            директор.</p>
+        <a href="{% url 'home' %}" class="btn text-primary fw-medium">Вернуться на главную</a>
+    </div>
+
+    {% else %}
+    <!-- Application Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Title Section -->
+        <div class="form-header">
+            <h1 class="h3 mb-3 fw-normal">Заявление на вступление в РОО «Казахстанская Ассоциация
+                травматологов-ортопедов»</h1>
+            <p class="text-muted mb-4 pb-3 border-bottom">Заполните форму для подачи заявления на вступление в РОО
+                «Казахстанская Ассоциация травматологов-ортопедов».<br>После заполнения необходимо прикрепить копию
+                удостоверения личности и чек об оплате вступительного взноса.</p>
+
+            <p class="small text-danger mb-0">* Обязательный вопрос</p>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="form-section">
+            <h2 class="form-section-title">Раздел 1 — Основные данные</h2>
+
+            <div class="form-group mt-4">
+                <label class="form-label" for="{{ form.full_name.id_for_label }}">1. Ф.И.О.<span
+                        class="required-star">*</span></label>
+                {{ form.full_name }}
+                {{ form.full_name.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.birth_date.id_for_label }}">2. Дата рождения</label>
+                {{ form.birth_date }}
+                {{ form.birth_date.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.place_of_work.id_for_label }}">3. Место работы</label>
+                {{ form.place_of_work }}
+                <span class="help-text">название медицинской организации</span>
+                {{ form.place_of_work.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.job_title.id_for_label }}">4. Занимаемая должность<span
+                        class="required-star">*</span></label>
+                {{ form.job_title }}
+                {{ form.job_title.errors }}
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="form-section">
+            <h2 class="form-section-title">Раздел 2 — Профессиональная информация</h2>
+
+            <div class="form-group mt-4">
+                <label class="form-label" for="{{ form.qualification.id_for_label }}">5. Сведения о квалификации /
+                    категория</label>
+                {{ form.qualification }}
+                <span class="help-text">Пример: врач-травматолог первой категории</span>
+                {{ form.qualification.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.degree.id_for_label }}">6. Наличие ученой степени или
+                    звания</label>
+                {{ form.degree }}
+                <span class="help-text">Пример: PhD, кандидат медицинских наук и т.д.</span>
+                {{ form.degree.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.experience.id_for_label }}">7. Стаж работы</label>
+                {{ form.experience }}
+                <span class="help-text">Пример: 15 лет</span>
+                {{ form.experience.errors }}
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="form-section">
+            <h2 class="form-section-title">Раздел 3 — Контактная информация</h2>
+
+            <div class="form-group mt-4">
+                <label class="form-label" for="{{ form.residence.id_for_label }}">8. Место жительства</label>
+                {{ form.residence }}
+                {{ form.residence.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.phone.id_for_label }}">9. Мобильный телефон<span
+                        class="required-star">*</span></label>
+                {{ form.phone }}
+                {{ form.phone.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.email.id_for_label }}">10. Email<span
+                        class="required-star">*</span></label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="form-section">
+            <h2 class="form-section-title">Раздел 4 — Документы</h2>
+            <p class="small text-muted mb-4 border-bottom pb-3">Разрешить: PDF / JPG / PNG</p>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.id_card_copy.id_for_label }}">11. Копия удостоверения
+                    личности<span class="required-star">*</span></label>
+                {{ form.id_card_copy }}
+                {{ form.id_card_copy.errors }}
+            </div>
+
+            <div class="form-group pt-3">
+                <label class="form-label" for="{{ form.payment_receipt.id_for_label }}">12. Чек об оплате вступительного
+                    взноса<span class="required-star">*</span></label>
+                <span class="help-text mb-3 d-block">Вступительный взнос — 20 000 тенге<br>Годовой членский взнос — 10
+                    000 тенге</span>
+                {{ form.payment_receipt }}
+                {{ form.payment_receipt.errors }}
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="form-section">
+            <h2 class="form-section-title">Раздел 5 — Подтверждение заявления</h2>
+
+            <div class="form-group mt-4 checkbox-group">
+                <label for="{{ form.agreement_accepted.id_for_label }}">
+                    {{ form.agreement_accepted }}
+                    <span>Прошу принять меня в члены РОО «Казахстанская Ассоциация травматологов-ортопедов».<br>Обязуюсь
+                        оплатить вступительный и ежегодные членские взносы в установленные сроки.<span
+                            class="required-star">*</span></span>
+                </label>
+                {{ form.agreement_accepted.errors }}
+            </div>
+        </div>
+
+        <!-- Submit Area -->
+        <div class="d-flex justify-content-between align-items-center mt-3 mb-5">
+            <button type="submit" class="submit-btn" id="submitBtn">Отправить</button>
+            <a href="{% url 'membership' %}" class="text-primary text-decoration-none fw-medium small">Очистить
+                форму</a>
+        </div>
+
+    </form>
+
+    <script>
+        // Add Google Forms styling to Django generated inputs
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="date"]');
+            inputs.forEach(input => {
+                // preserve existing classes but add google-input
+                input.className = input.className + " google-input";
+
+                // Form validations
+                if (input.name === 'full_name' || input.name === 'job_title' || input.name === 'phone' || input.name === 'email') {
+                    input.required = true;
+                }
+            });
+
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach(input => {
+                input.className = input.className + " google-file-input";
+                input.required = true;
+            });
+
+            document.getElementById('{{ form.agreement_accepted.id_for_label }}').required = true;
+        });
+    </script>
+    {% endif %}
+
+</div>
+
+{% endblock %}

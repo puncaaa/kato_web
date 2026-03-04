@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from .models import News, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
-from .forms import ContactForm, CommentForm
+from .forms import ContactForm, CommentForm, MembershipApplicationForm
 from django.contrib.auth import logout
 from django.http import HttpResponseNotAllowed
 from django.core.mail import send_mail
@@ -88,6 +88,23 @@ def membership(request):
     # applied query param might not be needed anymore, but keeping it won't hurt
     applied = request.GET.get('applied') == '1'
     return render(request, 'website/membership.html', {'types': types, 'applied': applied})
+
+def membership_apply(request, slug):
+    mtype = get_object_or_404(MembershipType, slug=slug)
+    if request.method == 'POST':
+        form = MembershipApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            app = form.save(commit=False)
+            if request.user.is_authenticated:
+                app.user = request.user
+            app.membership_type = mtype
+            app.save()
+            return redirect(reverse('membership_apply', kwargs={'slug': slug}) + '?success=1')
+    else:
+        form = MembershipApplicationForm()
+    
+    success = request.GET.get('success') == '1'
+    return render(request, 'website/membership_apply.html', {'form': form, 'mtype': mtype, 'success': success})
 
 def contacts(request):
     sent = False
