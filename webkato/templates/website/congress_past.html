@@ -40,7 +40,8 @@
 
                     {% if event.program_pdf %}
                     <div class="mt-4">
-                        <a href="{{ event.program_pdf.url }}" class="btn btn-outline-primary btn-sm" download>
+                        <a href="{{ event.program_pdf.url }}" class="btn btn-outline-primary btn-sm" target="_blank"
+                            rel="noopener noreferrer">
                             <i class="bi bi-download me-2"></i> Скачать материалы
                         </a>
                     </div>

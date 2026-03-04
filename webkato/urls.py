@@ -44,7 +44,7 @@ urlpatterns = [
 
     path('membership/benefits/', views.membership_benefits, name='membership_benefits'),
 
-    path('congress/current/', views.generic_page, {'title': 'Предстоящий съезд'}, name='congress_current'),
+    path('congress/current/', views.congress_current, name='congress_current'),
     path('congress/past/', views.congress_past, name='congress_past'),
     path('congress/awards/', views.generic_page, {'title': 'Награды'}, name='congress_awards'),
 

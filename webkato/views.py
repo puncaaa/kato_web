@@ -210,6 +210,10 @@ def congress_past(request):
     past_events = Event.objects.filter(date__lt=timezone.now(), is_active=False).order_by('-date')
     return render(request, 'website/congress_past.html', {'events': past_events})
 
+def congress_current(request):
+    event = Event.objects.filter(is_active=True).order_by('date').first()
+    return render(request, 'website/congress_current.html', {'event': event})
+
 def generic_page(request, title="Страница"):
 
     context = {
