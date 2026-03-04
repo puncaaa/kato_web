@@ -1,0 +1,94 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Предстоящий съезд - КАТО{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    {% if event %}
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10 text-center">
+            <h1 class="display-5 fw-bold text-primary mb-4">{{ event.title }}</h1>
+
+            <div class="d-flex justify-content-center gap-4 flex-wrap text-muted lead mb-4">
+                <div>
+                    <i class="bi bi-calendar3 text-primary me-2"></i>
+                    {% if event.date_text %}
+                    {{ event.date_text }}
+                    {% else %}
+                    {{ event.date|date:"d E Y" }}
+                    {% endif %}
+                </div>
+                <div>
+                    <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                    {{ event.location }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-5">
+                {% if event.image %}
+                <img src="{{ event.image.url }}" class="card-img-top w-100" alt="{{ event.title }}"
+                    style="object-fit: contain; max-height: 800px; background-color: #f8f9fa; padding: 1rem;">
+                {% endif %}
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="event-description text-dark" style="font-size: 1.15rem; line-height: 1.8;">
+                        {{ event.description|linebreaks }}
+                    </div>
+
+                    <div class="mt-5 p-4 bg-light rounded-3 border-start border-4 border-primary">
+                        <h4 class="text-primary fw-bold mb-3"><i class="bi bi-info-circle me-2"></i>Регистрация
+                            участников</h4>
+                        <p class="mb-0 fs-5">Для участия в конференции необходимо пройти онлайн-регистрацию на сайте и
+                            заполнить регистрационную форму.</p>
+                        {% if event.external_link %}
+                        <div class="mt-4">
+                            <a href="{{ event.external_link }}" class="btn btn-primary btn-lg shadow-sm" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="bi bi-pencil-square me-2"></i> Перейти к регистрации
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center py-5">
+            <h1 class="display-5 fw-bold text-primary mb-3">Предстоящий съезд</h1>
+            <p class="lead text-muted fs-4">В данный момент нет информации о предстоящих съездах.</p>
+            <a href="{% url 'home' %}" class="btn btn-outline-primary mt-3">Вернуться на главную</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .event-description ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .event-description li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .event-description li::before {
+        content: "•";
+        color: #0d6efd;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+</style>
+{% endblock %}
