@@ -17,24 +17,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-
-      {
-      % if event.image %
-    }
-
-    background: url('{{ event.image.url }}') center center/cover;
-    opacity: 0.15;
-
-      {
-      % else %
-    }
-
-    background: linear-gradient(135deg, rgba(26, 46, 68, 1) 0%, rgba(10, 88, 202, 1) 100%);
-
-      {
-      % endif %
-    }
-
+    background: var(--hero-bg, linear-gradient(135deg, rgba(26, 46, 68, 1) 0%, rgba(10, 88, 202, 1) 100%));
+    opacity: var(--hero-opacity, 1);
     z-index: 1;
   }
 
@@ -42,10 +26,39 @@
     position: relative;
     z-index: 2;
   }
+
+  /* Custom styling for markdown-like description */
+  .event-body-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .event-body-content ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+  }
+
+  .event-body-content li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .event-body-content li::before {
+    content: "•";
+    color: #0d6efd;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    left: 0.5rem;
+    top: -0.2rem;
+  }
 </style>
 
 <!-- Event Hero -->
-<div class="event-hero">
+<div class="event-hero"
+  style="{% if event.image %}--hero-bg: url('{{ event.image.url }}') center center/cover; --hero-opacity: 0.15;{% endif %}">
   <div class="container event-hero-content">
     <div class="row align-items-center">
       <div class="col-lg-8">
@@ -80,9 +93,24 @@
       {% endif %}
 
       <div class="card border-0 shadow-sm rounded-4 mb-5 p-4 p-md-5">
-        <h3 class="fw-bold mb-4 border-bottom pb-3">О мероприятии</h3>
-        <div class="fs-5 text-muted" style="line-height: 1.8;">
+        <h3 class="fw-bold mb-4 border-bottom pb-3 text-primary">Основная информация</h3>
+        <div class="fs-5 text-dark event-body-content" style="line-height: 1.8;">
           {{ event.description|linebreaks }}
+        </div>
+
+        <!-- Call to Action Banner -->
+        <div class="mt-5 p-4 bg-primary bg-opacity-10 rounded-4 border-start border-5 border-primary shadow-sm">
+          <h4 class="text-primary fw-bold mb-3"><i class="bi bi-person-plus-fill me-2"></i>Регистрация участников</h4>
+          <p class="mb-0 fs-5 text-dark">Для участия в мероприятии необходимо пройти онлайн-регистрацию. Будем рады
+            видеть вас среди участников!</p>
+          {% if not event.external_link %}
+          <div class="mt-4">
+            <a href="{% url 'contacts' %}?subject=Регистрация: {{ event.title }}"
+              class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
+              Связаться с организаторами
+            </a>
+          </div>
+          {% endif %}
         </div>
 
         {% if event.external_link or event.program_pdf %}
