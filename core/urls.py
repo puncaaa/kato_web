@@ -24,8 +24,8 @@ urlpatterns = [
     path('', include('webkato.urls')),  # подключение основного приложения
 ]
 
-if settings.DEBUG:
-    from django.urls import re_path
-    urlpatterns += [
-        re_path(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'), serve, {'document_root': settings.MEDIA_ROOT}),
-    ]
+from django.urls import re_path
+from django.views.static import serve
+urlpatterns += [
+    re_path(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'), serve, {'document_root': settings.MEDIA_ROOT}),
+]
