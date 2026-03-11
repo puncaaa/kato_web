@@ -57,21 +57,21 @@
 </style>
 
 <!-- Event Hero -->
-<div class="event-hero"
-  style="{% if event.image %}--hero-bg: url('{{ event.image.url }}') center center/cover; --hero-opacity: 0.15;{% endif %}">
-  <div class="container event-hero-content">
-    <div class="row align-items-center">
-      <div class="col-lg-8">
-        <span class="badge bg-primary mb-3 px-3 py-2 rounded-pill fw-bold">{% if event.is_international %}Международное
-          событие{% else %}Национальное событие{% endif %}</span>
-        <h1 class="display-5 fw-bold mb-3">{{ event.title }}</h1>
-        <div class="d-flex flex-wrap gap-4 text-white-50 mb-4">
+<div class="event-hero" style="background-color: #0b5ed7;">
+  <div class="container event-hero-content text-white py-5">
+    <div class="row">
+      <div class="col-lg-10">
+        <span class="badge bg-light text-primary mb-3 px-3 py-2 rounded-pill fw-bold" style="font-size: 0.9rem;">
+          {% if event.is_international %}Международное событие{% else %}Национальное событие{% endif %}
+        </span>
+        <h1 class="display-4 fw-bold mb-4" style="line-height: 1.2;">{{ event.title }}</h1>
+        <div class="d-flex flex-wrap gap-4 mb-2 fs-5">
           <div class="d-flex align-items-center">
-            <i class="bi bi-calendar2-week me-2 fs-5"></i>
+            <i class="bi bi-calendar2-week me-2"></i>
             <span>{{ event.date_text|default:event.date|date:"d E Y" }}</span>
           </div>
           <div class="d-flex align-items-center">
-            <i class="bi bi-geo-alt me-2 fs-5"></i>
+            <i class="bi bi-geo-alt me-2"></i>
             <span>{{ event.location }}</span>
           </div>
         </div>
@@ -132,12 +132,26 @@
         {% endif %}
         
         {% if event.program_pdf %}
-        <div class="mt-5">
-            <h4 class="fw-bold mb-3 border-bottom pb-2 text-primary">Анонс конференции</h4>
-            <div class="rounded-4 overflow-hidden border shadow-sm">
-                <iframe src="{{ event.program_pdf.url }}" width="100%" height="600px" style="border: none;">
-                    Ваш браузер не поддерживает встроенные PDF. Вы можете <a href="{{ event.program_pdf.url }}">скачать файл</a>.
-                </iframe>
+        <div class="mt-5 mb-5 p-4 border border-info rounded-4 bg-info bg-opacity-10 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 shadow-sm">
+            <div>
+                <h4 class="fw-bold mb-1 text-info-emphasis"><i class="bi bi-file-earmark-pdf-fill me-2 text-danger"></i>Анонс конференции</h4>
+                <p class="mb-0 text-muted">Ознакомьтесь с официальным анонсом и программой мероприятия.</p>
+            </div>
+            <a href="{{ event.program_pdf.url }}" target="_blank" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-semibold text-nowrap">
+                <i class="bi bi-download me-2"></i>Скачать PDF
+            </a>
+        </div>
+        
+        <div class="mt-4 mb-5">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-light" style="min-height: 600px;">
+                <object data="{{ event.program_pdf.url }}" type="application/pdf" width="100%" height="800px">
+                    <div class="p-5 text-center">
+                        <i class="bi bi-file-earmark-pdf display-1 text-muted mb-3 d-block"></i>
+                        <h5>Ваш браузер не поддерживает встроенный просмотр PDF</h5>
+                        <p class="text-muted mb-4">Вы можете скачать файл для просмотра на вашем устройстве.</p>
+                        <a href="{{ event.program_pdf.url }}" class="btn btn-primary px-4 rounded-pill">Скачать файл</a>
+                    </div>
+                </object>
             </div>
         </div>
         {% endif %}
