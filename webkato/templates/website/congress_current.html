@@ -5,7 +5,8 @@
 
 {% block content %}
 <div class="container py-5">
-    {% if event %}
+    {% if events %}
+    {% for event in events %}
     <div class="row justify-content-center mb-5">
         <div class="col-lg-10 text-center">
             <h1 class="display-5 fw-bold text-primary mb-4">{{ event.title }}</h1>
@@ -28,7 +29,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-5">
         <div class="col-lg-10">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-5">
                 {% if event.image %}
@@ -60,6 +61,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
     {% else %}
     <div class="row mb-5">
         <div class="col-lg-12 text-center py-5">
