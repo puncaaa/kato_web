@@ -68,7 +68,13 @@
         <div class="d-flex flex-wrap gap-4 mb-2 fs-5">
           <div class="d-flex align-items-center">
             <i class="bi bi-calendar2-week me-2"></i>
-            <span>{{ event.date_text|default:event.date|date:"d E Y" }}</span>
+            <span>
+              {% if event.date_text %}
+                {{ event.date_text }}
+              {% else %}
+                {{ event.date|date:"d E Y" }}
+              {% endif %}
+            </span>
           </div>
           <div class="d-flex align-items-center">
             <i class="bi bi-geo-alt me-2"></i>
@@ -223,7 +229,13 @@
             </div>
             <div>
               <small class="text-muted d-block fw-bold text-uppercase">Дата</small>
-              <span class="text-dark fw-medium">{{ event.date_text|default:event.date|date:"d E Y" }}</span>
+              <span class="text-dark fw-medium">
+                {% if event.date_text %}
+                  {{ event.date_text }}
+                {% else %}
+                  {{ event.date|date:"d E Y" }}
+                {% endif %}
+              </span>
             </div>
           </div>
 
