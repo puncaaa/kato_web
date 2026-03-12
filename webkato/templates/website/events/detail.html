@@ -64,11 +64,11 @@
         <span class="badge bg-light text-primary mb-3 px-3 py-2 rounded-pill fw-bold" style="font-size: 0.9rem;">
           {% if event.is_international %}Международное событие{% else %}Национальное событие{% endif %}
         </span>
-        <h1 class="display-4 fw-bold mb-4" style="line-height: 1.2;">{{ event.title }}</h1>
-        <div class="d-flex flex-wrap gap-4 mb-2 fs-5">
+        <h1 class="display-4 fw-bold mb-4 text-white" style="line-height: 1.2;">{{ event.title }}</h1>
+        <div class="d-flex flex-wrap gap-4 mb-4 fs-5 text-white-50">
           <div class="d-flex align-items-center">
-            <i class="bi bi-calendar2-week me-2"></i>
-            <span>
+            <i class="bi bi-calendar2-week me-2 text-white"></i>
+            <span class="text-white">
               {% if event.date_text %}
                 {{ event.date_text }}
               {% else %}
@@ -77,9 +77,15 @@
             </span>
           </div>
           <div class="d-flex align-items-center">
-            <i class="bi bi-geo-alt me-2"></i>
-            <span>{{ event.location }}</span>
+            <i class="bi bi-geo-alt me-2 text-white"></i>
+            <span class="text-white">{{ event.location }}</span>
           </div>
+        </div>
+        
+        <div class="mt-4 pt-2">
+            <a href="https://25yearsnscto.online/ru-RU/nscto26#register" target="_blank" rel="noopener" class="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg fs-5 text-dark">
+                <i class="bi bi-person-plus-fill me-2"></i>ПРОЙТИ РЕГИСТРАЦИЮ
+            </a>
         </div>
       </div>
     </div>
@@ -91,13 +97,6 @@
 
     <!-- Main Content -->
     <div class="col-lg-8">
-      {% if event.image %}
-      <!-- Big Banner -->
-      <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
-        <img src="{{ event.image.url }}" class="img-fluid w-100" alt="{{ event.title }}">
-      </div>
-      {% endif %}
-
       <div class="card border-0 shadow-sm rounded-4 mb-5 p-4 p-md-5">
         <h3 class="fw-bold mb-4 border-bottom pb-3 text-primary">Основная информация</h3>
         <div class="fs-5 text-dark event-body-content" style="line-height: 1.8;">
@@ -109,14 +108,12 @@
           <h4 class="text-primary fw-bold mb-3"><i class="bi bi-person-plus-fill me-2"></i>Регистрация участников</h4>
           <p class="mb-0 fs-5 text-dark">Для участия в мероприятии необходимо пройти онлайн-регистрацию. Будем рады
             видеть вас среди участников!</p>
-          {% if not event.external_link %}
           <div class="mt-4">
-            <a href="{% url 'contacts' %}?subject=Регистрация: {{ event.title }}"
+            <a href="https://25yearsnscto.online/ru-RU/nscto26#register" target="_blank" rel="noopener"
               class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
-              Связаться с организаторами
+              Перейти к регистрации
             </a>
           </div>
-          {% endif %}
         </div>
 
         {% if event.external_link or event.program_pdf %}
