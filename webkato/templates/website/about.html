@@ -129,21 +129,22 @@
           <div class="text-primary fw-semibold mb-3">Основатель КАТО</div>
           <p class="text-muted small mb-4 text-justify">Организатор и первый директор НИИ травматологии и ортопедии.
             Заслуженный деятель Республики Казахстан. Доктор медицинских наук, профессор, академик НАН РК.</p>
-          <a href="{% url 'president_bio' %}" class="btn btn-outline-primary rounded-pill px-4 stretched-link">Читать
+          <a href="{% url 'about_founder' %}" class="btn btn-outline-primary rounded-pill px-4 stretched-link">Читать
             биографию</a>
         </div>
       </div>
       <div class="col-md-5">
         <div class="card card-person border-0 shadow h-100 text-center p-4 hover-lift">
           <div class="position-relative d-inline-block mx-auto mb-3">
-            <img src="{% static 'website/img/bekarisov.jpg' %}" alt="Бекарисов Олжас Сапаргалиевич"
-              class="rounded-circle shadow-sm" width="160" height="160" loading="lazy" style="object-fit:cover;">
+            <!-- fallback to generic icon if image missing -->
+            <img src="{% static 'website/img/batpen_a_n.jpg' %}" alt="Бәтпен Арман Нұрланұлы" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23ccc\' viewBox=\'0 0 16 16\'><path d=\'M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z\'/></svg>'"
+              class="rounded-circle shadow-sm bg-light" width="160" height="160" loading="lazy" style="object-fit:cover;">
           </div>
-          <div class="h5 fw-bold mb-1">Бекарисов Олжас Сапаргалиевич</div>
+          <div class="h5 fw-bold mb-1">Бәтпен Арман Нұрланұлы</div>
           <div class="text-primary fw-semibold mb-3">Президент КАТО</div>
-          <p class="text-muted small text-justify mb-0">Директор НИИ травматологии и ортопедии, кандидат медицинских
-            наук. Продолжатель дела основателя, активно внедряющий международные стандарты и инновационные методы
-            лечения.</p>
+          <p class="text-muted small text-justify mb-4">Доктор PhD по специальности «Медицина», магистр делового администрирования.
+            Заместитель директора Национального научного центра травматологии и ортопедии по научной работе и стратегии.</p>
+          <a href="{% url 'president_bio' %}" class="btn btn-outline-primary rounded-pill px-4 stretched-link">Правление</a>
         </div>
       </div>
     </div>

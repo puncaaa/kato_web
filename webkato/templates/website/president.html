@@ -11,102 +11,154 @@
     </p>
   </div>
 
-  <!-- Bekarisov Section -->
-  <div class="card border-0 shadow-lg overflow-hidden mb-5 rounded-4">
-    <div class="row g-0">
-      <div class="col-lg-4 bg-light position-relative">
-        <img src="{% static 'website/img/bekarisov.jpg' %}" alt="Бекарисов О.С."
-          class="w-100 h-100 object-fit-cover position-absolute top-0 start-0">
-      </div>
-      <div class="col-lg-8">
-        <div class="card-body p-4 p-lg-5">
-          <div class="d-flex align-items-center mb-4">
-            <div>
-              <h2 class="fw-bold mb-1">Бекарисов Олжас Сапаргалиевич</h2>
-              <div class="badge bg-secondary fs-6 mb-2">Экс-Президент КАТО (2020-2025)</div>
-              <p class="text-muted mb-0">Директор ННЦТО имени академика Н.Д. Батпенова<br>Кандидат медицинских наук, MBA
-              </p>
-            </div>
-          </div>
+  <style>
+    .board-member-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2.5rem;
+      background: #fff;
+    }
+    .board-member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+    .member-img-wrapper {
+      position: relative;
+      height: 100%;
+      min-height: 350px;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .member-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .member-placeholder {
+      font-size: 5rem;
+      color: #dee2e6;
+    }
+  </style>
 
-          <div class="text-justify text-muted">
-            <p>Врач травматолог-ортопед высшей квалификационной категории. Возглавлял Казахстанскую
-              ассоциацию травматологов-ортопедов с 2020 по 2025 год, внеся значительный вклад в международную интеграцию
-              и
-              развитие стандартов оказания помощи.</p>
-            <p><strong>Образование и путь:</strong>
-              Окончил Южно-Казахстанскую государственную медицинскую академию (2001). Прошел путь от врача ординатора до
-              директора Национального научного центра. Обучался и стажировался в ведущих клиниках Германии, Турции, РФ.
-              Защитил диссертацию по лечению переломов позвоночника (2010).</p>
-            <p><strong>Научная деятельность:</strong>
-              Автор более 100 публикаций и 3 патентов. Активный участник конгрессов SICOT. В 2019 году получил степень
-              MBA, защитив стратегию развития научного центра.</p>
-            <p><strong>Награды:</strong>
-              Нагрудные знаки «Денсаулық сақтау ісінің үздігі», «Заслуженный работник НИИТО», Почетные грамоты МЗ РК.
-            </p>
+  <!-- Бәтпен Арман Нұрланұлы -->
+  <div class="card board-member-card">
+    <div class="row g-0">
+      <div class="col-lg-4 col-md-5 member-img-wrapper">
+        <i class="bi bi-person-fill member-placeholder"></i>
+        <!-- Замените 'batpen_a_n.jpg' на реальное имя файла после загрузки -->
+        <img src="{% static 'website/img/batpen_a_n.jpg' %}" alt="Бәтпен А.Н." onerror="this.style.display='none'">
+      </div>
+      <div class="col-lg-8 col-md-7">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="fw-bold mb-1">Бәтпен Арман Нұрланұлы</h2>
+          <div class="badge bg-primary fs-6 mb-3 px-3 py-2">Президент КАТО</div>
+          
+          <div class="text-muted text-justify">
+            <p><strong>Врач травматолог-ортопед, доктор PhD по специальности «Медицина», магистр делового администрирования (MBA).</strong></p>
+            <p>Окончил Медицинский университет Астана по специальности «Лечебное дело». В 2010 году завершил резидентуру по специальности «Травматология и ортопедия». Работал в Научно-исследовательском институте травматологии и ортопедии в отделении артроскопии и спортивной травмы.</p>
+            <p>В 2015 году защитил докторскую диссертацию по теме модернизации компонентов эндопротеза тазобедренного сустава. С 2020 года занимал должность заместителя директора Национального научного центра травматологии и ортопедии имени академика Н.Д. Батпенова по научной работе и стратегии.</p>
+            <p class="mb-0">Автор научных публикаций, монографий и методических рекомендаций, участник международных научных проектов.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Batpenov Section -->
-  <style>
-    .batpenov-img-container {
-      width: 100%;
-      max-width: 400px;
-      height: 500px;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-      margin: 0 auto;
-    }
-
-    @media (max-width: 991px) {
-      .batpenov-img-container {
-        height: 400px;
-      }
-    }
-  </style>
-
-  <div class="card border-0 bg-white shadow-lg rounded-4 p-4 p-lg-5 mb-5">
-    <div class="row align-items-center">
-      <div class="col-lg-5 text-center mb-4 mb-lg-0">
-        <div class="batpenov-img-container position-relative">
-          <img src="{% static 'website/img/batpenov_new.jpg' %}" alt="Н.Д. Батпенов"
-            class="w-100 h-100 object-fit-cover">
-          <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-dark p-3 text-white"
-            style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">
-            <span class="small opacity-75">1949 — 2020</span>
+  <!-- Бекарисов Олжас Сапаргалиевич -->
+  <div class="card board-member-card">
+    <div class="row g-0">
+      <div class="col-lg-4 col-md-5 member-img-wrapper">
+        <i class="bi bi-person-fill member-placeholder"></i>
+        <img src="{% static 'website/img/bekarisov.jpg' %}" alt="Бекарисов О.С." onerror="this.style.display='none'">
+      </div>
+      <div class="col-lg-8 col-md-7">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="fw-bold mb-1">Бекарисов Олжас Сапаргалиевич</h2>
+          <div class="badge bg-secondary fs-6 mb-3 px-3 py-2">Вице-президент КАТО</div>
+          
+          <div class="text-muted text-justify">
+            <p><strong>Врач травматолог-ортопед, кандидат медицинских наук, директор Национального научного центра травматологии и ортопедии имени академика Н.Д. Батпенова.</strong></p>
+            <p>Окончил Южно-Казахстанскую государственную медицинскую академию. Прошел интернатуру по детской хирургии и специализацию по травматологии и ортопедии.</p>
+            <p>В 2010 году защитил кандидатскую диссертацию по лечению переломов грудного отдела позвоночника. Проходил стажировки и специализации в Германии, Турции, Литве и России, участвовал в международных конференциях.</p>
+            <p>С 2020 года является директором Национального научного центра травматологии и ортопедии имени академика Батпенова. В 2020–2025 годах занимал должность президента Казахстанской ассоциации травматологов-ортопедов.</p>
+            <p class="mb-0">Автор более 100 научных публикаций и соавтор патентов.</p>
           </div>
         </div>
-        <div class="mt-4 d-none d-lg-block">
-          <img src="{% static 'website/img/logo.jpg' %}" alt="KATO Logo" width="60"
-            class="rounded-circle grayscale opacity-50">
+      </div>
+    </div>
+  </div>
+
+  <!-- Джаксыбекова Галина Кубаевна -->
+  <div class="card board-member-card">
+    <div class="row g-0">
+      <div class="col-lg-4 col-md-5 member-img-wrapper">
+        <i class="bi bi-person-fill member-placeholder"></i>
+        <img src="{% static 'website/img/jaksybekova_g_k.jpg' %}" alt="Джаксыбекова Г.К." onerror="this.style.display='none'">
+      </div>
+      <div class="col-lg-8 col-md-7">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="fw-bold mb-1">Джаксыбекова Галина Кубаевна</h2>
+          <div class="badge bg-info text-dark fs-6 mb-3 px-3 py-2">Исполнительный директор КАТО</div>
+          
+          <div class="text-muted text-justify">
+            <p><strong>Кандидат медицинских наук, ведущий научный сотрудник Национального научного центра травматологии и ортопедии.</strong></p>
+            <p>Окончила Карагандинский государственный медицинский институт по специальности «Лечебное дело». Работала врачом, главным врачом и руководителем медицинских учреждений.</p>
+            <p>С 2006 года является заместителем директора по организационно-методической работе НИИ травматологии и ортопедии. С 2023 года занимает должность исполнительного директора Казахстанской ассоциации травматологов-ортопедов.</p>
+            <p class="mb-0">Автор около 100 научных публикаций и аналитических исследований в сфере здравоохранения.</p>
+          </div>
         </div>
       </div>
-      <div class="col-lg-7">
-        <div class="ps-lg-4">
-          <h6 class="text-uppercase text-primary fw-bold letter-spacing-2 mb-2">Основатель Ассоциации</h6>
-          <h1 class="fw-bold mb-3 display-5">Академик<br>Батпенов Нурлан Джумагулович</h1>
-          <p class="lead text-dark mb-4 fst-italic">«Травматология — это искусство возвращать людям радость движения»
-          </p>
+    </div>
+  </div>
 
+  <!-- Курмангалиев Еркин-Дауир Толеуович -->
+  <div class="card board-member-card">
+    <div class="row g-0">
+      <div class="col-lg-4 col-md-5 member-img-wrapper">
+        <i class="bi bi-person-fill member-placeholder"></i>
+        <img src="{% static 'website/img/kurmangaliev_e_t.jpg' %}" alt="Курмангалиев Е.Т." onerror="this.style.display='none'">
+      </div>
+      <div class="col-lg-8 col-md-7">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="fw-bold mb-1">Курмангалиев Еркин-Дауир Толеуович</h2>
+          <div class="badge bg-secondary fs-6 mb-3 px-3 py-2">Вице-президент КАТО</div>
+          
           <div class="text-muted text-justify">
-            <p>Выдающийся государственный и общественный деятель, основатель и первый директор Научно-исследовательского
-              института травматологии и ортопедии (2001-2020).</p>
+            <p><strong>Кандидат медицинских наук, доктор делового администрирования (DBA), директор многопрофильной больницы имени профессора Х.Ж. Макажанова.</strong></p>
+            <p>Окончил Карагандинскую государственную медицинскую академию по специальности «Лечебное дело». Работал врачом травматологом-ортопедом и заведующим травматологическим отделением.</p>
+            <p>С 2014 года является директором многопрофильной больницы имени профессора Х.Ж. Макажанова. Также является депутатом городского маслихата города Караганды.</p>
+            <p class="mb-0">Награжден рядом профессиональных и государственных наград.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <p>Доктор медицинских наук, профессор, академик НАН РК, Заслуженный деятель Республики Казахстан, лауреат
-              Государственной премии РК в области науки и техники имени аль-Фараби.</p>
-
-            <div class="bg-light p-3 rounded border-start border-4 border-primary my-3">
-              <strong>Научное наследие:</strong> Разработал более 30 патентов и изобретений, включая уникальные модели
-              эндопротезов, которые применяются хирургами по сей день.
-            </div>
-
-            <p>В 2001 году Нурлан Джумагулович основал Казахстанскую Ассоциацию травматологов-ортопедов (КАТО), сплотив
-              профессиональное сообщество для решения актуальных задач здравоохранения. Его имя золотыми буквами вписано
-              в историю медицины Казахстана.</p>
+  <!-- Досмаилов Биржан Серикбекович -->
+  <div class="card board-member-card">
+    <div class="row g-0">
+      <div class="col-lg-4 col-md-5 member-img-wrapper">
+        <i class="bi bi-person-fill member-placeholder"></i>
+        <img src="{% static 'website/img/dosmailov_b_s.jpg' %}" alt="Досмаилов Б.С." onerror="this.style.display='none'">
+      </div>
+      <div class="col-lg-8 col-md-7">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="fw-bold mb-1">Досмаилов Биржан Серикбекович</h2>
+          <div class="badge bg-secondary fs-6 mb-3 px-3 py-2">Вице-президент КАТО</div>
+          
+          <div class="text-muted text-justify">
+            <p><strong>Врач травматолог-ортопед высшей квалификационной категории, специалист в области менеджмента здравоохранения.</strong></p>
+            <p>Окончил Казахский государственный медицинский университет. Работал врачом травматологом-ортопедом и научным сотрудником в НИИ травматологии и ортопедии.</p>
+            <p>С 2022 года является директором городской клинической больницы №4 города Алматы.</p>
+            <p class="mb-0">Автор научных публикаций, монографий и патентов в области травматологии и ортопедии.</p>
           </div>
         </div>
       </div>

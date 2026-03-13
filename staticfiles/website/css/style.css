@@ -1,0 +1,311 @@
+:root {
+    --primary-color: #0056b3;
+    /* Deep Medical Blue */
+    --secondary-color: #00a896;
+    /* Turquoise/Teal */
+    --accent-color: #f8f9fa;
+    /* Light Gray */
+    --text-dark: #2c3e50;
+    --text-light: #6c757d;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --bs-body-font-family: var(--font-body);
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background-color: #fdfdfd;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: #1a2e44;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* Header & Nav */
+.site-header {
+    background: white;
+    border-bottom: 1px solid #e9ecef;
+    z-index: 1040;
+    /* Ensure header stays above other sticky elements (z-index: 1020) */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: var(--primary-color) !important;
+}
+
+/* High specificity for nav links to fix blue-on-blue issue */
+.site-header .navbar .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    font-weight: 500;
+}
+
+.site-header .navbar .nav-link:hover,
+.site-header .navbar .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: underline;
+}
+
+.topbar {
+    font-size: 0.9rem;
+    background-color: #f8f9fa;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #004494;
+    border-color: #004494;
+    color: white;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.card-text {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Page Headers */
+.page-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.site-footer {
+    background-color: #1a2e44;
+    color: #e9ecef;
+}
+
+.footer-heading {
+    color: white;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-links a {
+    color: #adb5bd;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    background-color: #122131;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Utilities */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+/* Reveal Animation */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Membership Pricing */
+.pricing-card {
+    border: 1px solid #e9ecef;
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--primary-color);
+    background-color: #fbfdff;
+}
+
+.price-tag {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* --- Round 3 Updates --- */
+
+/* Hover Lift Effect */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Featured News Hero */
+.featured-news-card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    color: white;
+}
+
+.featured-news-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+}
+
+/* About Page Sections */
+.section-alternate {
+    background-color: #f8f9fa;
+}
+
+.hero-mission {
+    background-color: #003366;
+    /* Fallback */
+    background: linear-gradient(135deg, #0056b3, #003366);
+    color: white;
+    border-radius: 20px;
+    padding: 4rem 2rem;
+}
+
+/* Accordion Custom */
+.accordion-custom .accordion-item {
+    border: none;
+    background: transparent;
+    margin-bottom: 1rem;
+}
+
+.accordion-custom .accordion-button {
+    background-color: white;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+}
+
+.accordion-custom .accordion-button:not(.collapsed) {
+    background-color: white;
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-custom .accordion-body {
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+/* --- Round 3.1: News Enhancements --- */
+.img-zoom-container {
+    overflow: hidden;
+}
+
+.img-zoom {
+    transition: transform 0.4s ease;
+}
+
+.hover-lift:hover .img-zoom {
+    transform: scale(1.05);
+}
+
+.news-badge {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.btn-read-more {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}

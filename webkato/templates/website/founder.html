@@ -1,0 +1,77 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold mb-3">Основатель КАТО</h1>
+    <p class="text-muted lead mx-auto" style="max-width: 800px;">
+      Академик Нурлан Джумагулович Батпенов — выдающийся деятель, заложивший фундамент современной травматологии и
+      ортопедии в Казахстане.
+    </p>
+  </div>
+
+  <style>
+    .batpenov-img-container {
+      width: 100%;
+      max-width: 400px;
+      height: 500px;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 991px) {
+      .batpenov-img-container {
+        height: 400px;
+      }
+    }
+  </style>
+
+  <div class="card border-0 bg-white shadow-lg rounded-4 p-4 p-lg-5 mb-5">
+    <div class="row align-items-center">
+      <div class="col-lg-5 text-center mb-4 mb-lg-0">
+        <div class="batpenov-img-container position-relative">
+          <img src="{% static 'website/img/batpenov_new.jpg' %}" alt="Н.Д. Батпенов"
+            class="w-100 h-100 object-fit-cover">
+          <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-dark p-3 text-white"
+            style="background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);">
+            <span class="small opacity-75">1949 — 2020</span>
+          </div>
+        </div>
+        <div class="mt-4 d-none d-lg-block">
+          <img src="{% static 'website/img/logo.jpg' %}" alt="KATO Logo" width="60"
+            class="rounded-circle grayscale opacity-50">
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="ps-lg-4">
+          <h6 class="text-uppercase text-primary fw-bold letter-spacing-2 mb-2">Основатель Ассоциации</h6>
+          <h1 class="fw-bold mb-3 display-5">Академик<br>Батпенов Нурлан Джумагулович</h1>
+          <p class="lead text-dark mb-4 fst-italic">«Травматология — это искусство возвращать людям радость движения»
+          </p>
+
+          <div class="text-muted text-justify">
+            <p>Выдающийся государственный и общественный деятель, основатель и первый директор Научно-исследовательского
+              института травматологии и ортопедии (2001-2020).</p>
+
+            <p>Доктор медицинских наук, профессор, академик НАН РК, Заслуженный деятель Республики Казахстан, лауреат
+              Государственной премии РК в области науки и техники имени аль-Фараби.</p>
+
+            <div class="bg-light p-3 rounded border-start border-4 border-primary my-3">
+              <strong>Научное наследие:</strong> Разработал более 30 патентов и изобретений, включая уникальные модели
+              эндопротезов, которые применяются хирургами по сей день.
+            </div>
+
+            <p>В 2001 году Нурлан Джумагулович основал Казахстанскую Ассоциацию травматологов-ортопедов (КАТО), сплотив
+              профессиональное сообщество для решения актуальных задач здравоохранения. Его имя золотыми буквами вписано
+              в историю медицины Казахстана.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -205,6 +205,9 @@ def membership_benefits(request):
 def about_international(request):
     return render(request, 'website/about_international.html')
 
+def about_founder(request):
+    return render(request, 'website/founder.html')
+
 def congress_past(request):
     # Fetch all past events, ordered by date descending
     past_events = Event.objects.filter(date__lt=timezone.now(), is_active=False).order_by('-date')

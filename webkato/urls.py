@@ -40,7 +40,7 @@ urlpatterns = [
     path('about/history/', views.about_history, name='about_history'),
     path('about/international/', views.about_international, name='about_international'),
     path('about/structure/', views.generic_page, {'title': 'Структура'}, name='about_structure'),
-    path('about/honorary/', views.generic_page, {'title': 'Почетные члены'}, name='about_honorary'),
+    path('about/founder/', views.about_founder, name='about_founder'),
 
     path('membership/benefits/', views.membership_benefits, name='membership_benefits'),
 

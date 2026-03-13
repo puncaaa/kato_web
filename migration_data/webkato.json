@@ -1,0 +1,360 @@
+[
+{
+  "model": "webkato.newscategory",
+  "pk": 1,
+  "fields": {
+    "name": "Методические рекомендации",
+    "slug": "methods"
+  }
+},
+{
+  "model": "webkato.newscategory",
+  "pk": 2,
+  "fields": {
+    "name": "Конференции",
+    "slug": "conferences"
+  }
+},
+{
+  "model": "webkato.newscategory",
+  "pk": 3,
+  "fields": {
+    "name": "Образование",
+    "slug": "education"
+  }
+},
+{
+  "model": "webkato.news",
+  "pk": 1,
+  "fields": {
+    "title": "Проведен мастер-класс по артроскопии коленного сустава",
+    "slug": "master-class-arthroscopy-2024",
+    "category": 3,
+    "image": "",
+    "content": "В ННЦТО прошел двухдневный мастер-класс с участием ведущих специалистов из Турции. Были разобраны сложные случаи повреждения менисков и передней крестообразной связки. Участники смогли отработать навыки на муляжах и присутствовать на показательных операциях.",
+    "created_at": "2026-02-02T04:35:03.278Z",
+    "is_published": true
+  }
+},
+{
+  "model": "webkato.news",
+  "pk": 2,
+  "fields": {
+    "title": "III Съезд травматологов-ортопедов Казахстана",
+    "slug": "iii-congress-kato",
+    "category": 2,
+    "image": "",
+    "content": "Съезд собрал более 500 делегатов из 10 стран мира. Основными темами стали инновации в эндопротезировании, лечение политравмы и реабилитация пациентов. В рамках съезда прошла выставка медицинского оборудования.",
+    "created_at": "2026-02-02T04:35:03.279Z",
+    "is_published": true
+  }
+},
+{
+  "model": "webkato.news",
+  "pk": 3,
+  "fields": {
+    "title": "Новые методические рекомендации по лечению переломов",
+    "slug": "new-methods-fractures",
+    "category": 1,
+    "image": "",
+    "content": "Ассоциация выпустила обновленные рекомендации по остеосинтезу длинных трубчатых костей. Документ доступен для скачивания в разделе Публикации для всех членов ассоциации.",
+    "created_at": "2026-02-02T04:35:03.279Z",
+    "is_published": true
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 1,
+  "fields": {
+    "title": "Международная конференция \"Травма 2025\"",
+    "slug": "trauma-2025",
+    "date": "2026-03-04T04:35:03.280Z",
+    "date_text": "",
+    "location": "г. Астана, Hotel Rixos",
+    "description": "Ежегодная конференция, посвященная актуальным вопросам современной травматологии. Приглашенные спикеры из Германии, Израиля и России.",
+    "image": "",
+    "external_link": null,
+    "program_pdf": "",
+    "is_active": true,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 2,
+  "fields": {
+    "title": "Вебинар: \"Ошибки при эндопротезировании\"",
+    "slug": "webinar-errors-replacement",
+    "date": "2026-02-09T04:35:03.280Z",
+    "date_text": "",
+    "location": "Онлайн (Zoom)",
+    "description": "Разбор клинических случаев и ошибок при первичном эндопротезировании тазобедренного сустава. Лектор: д.м.н. Бекарисов О.С.",
+    "image": "",
+    "external_link": null,
+    "program_pdf": "",
+    "is_active": true,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 3,
+  "fields": {
+    "title": "Мастер-класс: Хирургия стопы",
+    "slug": "foot-surgery-masterclass",
+    "date": "2026-03-19T04:35:03.281Z",
+    "date_text": "",
+    "location": "г. Алматы, ГКБ №4",
+    "description": "Практический курс по коррекции деформаций переднего отдела стопы. Ограниченное количество мест.",
+    "image": "",
+    "external_link": null,
+    "program_pdf": "",
+    "is_active": true,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 4,
+  "fields": {
+    "title": "Международная научно-практическая конференция «Междисциплинарная травматология и ортопедия: от диагностики к реабилитации»",
+    "slug": "conf-2026",
+    "date": "2026-09-17T04:00:00Z",
+    "date_text": "",
+    "location": "Астана",
+    "description": "Посвящена 25-летию Национального Научного центра травматологии и ортопедии им. ак. Н. Батпенова.",
+    "image": "events/conf2026.jpg",
+    "external_link": null,
+    "program_pdf": "",
+    "is_active": true,
+    "is_international": true
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 5,
+  "fields": {
+    "title": "XIV Республиканская научно-практическая конференция",
+    "slug": "conf-2023",
+    "date": "2023-09-15T03:00:00Z",
+    "date_text": "15 сентября 2023 г.",
+    "location": "Астана",
+    "description": "XIV Республиканская научно-практическая конференция с международным участием.",
+    "image": "events/conf-2023_preview.png",
+    "external_link": null,
+    "program_pdf": "events/programs/2023_Конференция_Cmjsfmk.doc",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 6,
+  "fields": {
+    "title": "Научно-практическая конференция в Туркестане",
+    "slug": "conf-2022-turkestan",
+    "date": "2022-09-20T03:00:00Z",
+    "date_text": "20 сентября 2022 г.",
+    "location": "Туркестан",
+    "description": "Выездная конференция, посвященная региональным аспектам травматологической помощи.",
+    "image": "events/conf-2022-turkestan_preview.png",
+    "external_link": null,
+    "program_pdf": "events/programs/2022_Конференция_в_Туркестане_x7WAAKj.doc",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 7,
+  "fields": {
+    "title": "Юбилейная конференция к 20-летию ННЦТО",
+    "slug": "conf-2021-20th",
+    "date": "2021-09-30T03:00:00Z",
+    "date_text": "",
+    "location": "Астана",
+    "description": "Торжественное мероприятие, посвященное 20-летию основания Национального Научного центра травматологии и ортопедии им. академика Н.Д. Батпенова.",
+    "image": "",
+    "external_link": null,
+    "program_pdf": "",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 8,
+  "fields": {
+    "title": "Научно-практическая конференция, посвященная 10-летию НИИТО",
+    "slug": "conf-2011-10-years",
+    "date": "2011-10-01T03:00:00Z",
+    "date_text": "Октябрь 2011 г.",
+    "location": "Астана",
+    "description": "Юбилейная конференция, посвященная 10-летию НИИ травматологии и ортопедии.",
+    "image": "events/conf-2011-10-years_preview.png",
+    "external_link": null,
+    "program_pdf": "events/programs/2011_Конференция_-_10_лет_НИИТО_8wwJgKT.doc",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 9,
+  "fields": {
+    "title": "Научно-практическая конференция в Уральске",
+    "slug": "conf-2013-uralsk",
+    "date": "2013-09-01T03:00:00Z",
+    "date_text": "Сентябрь 2013 г.",
+    "location": "Уральск",
+    "description": "Выездная научно-практическая конференция КАТО в г. Уральск.",
+    "image": "",
+    "external_link": null,
+    "program_pdf": "events/programs/2013_Конференция_в_Уральске_ak4OCfR.pdf",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 10,
+  "fields": {
+    "title": "Научно-практическая конференция в Петропавловске",
+    "slug": "conf-2012-petropavlovsk",
+    "date": "2012-09-01T03:00:00Z",
+    "date_text": "Сентябрь 2012 г.",
+    "location": "Петропавловск",
+    "description": "Выездная научно-практическая конференция КАТО в г. Петропавловск.",
+    "image": "events/conf-2012-petropavlovsk_preview.png",
+    "external_link": null,
+    "program_pdf": "events/programs/2012_Конференция__в_Петропавловске_kW7PABW.doc",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.event",
+  "pk": 11,
+  "fields": {
+    "title": "Юбилейная конференция к 20-летию ННЦТО",
+    "slug": "conf-2021-20-years",
+    "date": "2021-09-30T03:00:00Z",
+    "date_text": "30 сентября 2021 г.",
+    "location": "Астана",
+    "description": "Торжественное мероприятие, посвященное 20-летию основания Национального Научного центра травматологии и ортопедии им. академика Н.Д. Батпенова.",
+    "image": "events/conf-2021-20-years_preview.png",
+    "external_link": null,
+    "program_pdf": "events/programs/2021_Конференция_к__20_летию_ННЦТО_8JBZeUK.doc",
+    "is_active": false,
+    "is_international": false
+  }
+},
+{
+  "model": "webkato.publicationcategory",
+  "pk": 1,
+  "fields": {
+    "name": "Клинические протоколы",
+    "slug": "protocols"
+  }
+},
+{
+  "model": "webkato.publicationcategory",
+  "pk": 2,
+  "fields": {
+    "name": "Научные статьи",
+    "slug": "articles"
+  }
+},
+{
+  "model": "webkato.publication",
+  "pk": 1,
+  "fields": {
+    "title": "Диагностика и лечение повреждений вращательной манжеты плеча",
+    "slug": "rotator-cuff-guide",
+    "category": 1,
+    "year": 2024,
+    "authors": "Батпенов Н.Д., Осипов А.А.",
+    "description": "Клинический протокол, утвержденный МЗ РК. Описывает алгоритмы диагностики и выбора тактики лечения.",
+    "pdf": "",
+    "created_at": "2026-02-02T04:35:03.281Z"
+  }
+},
+{
+  "model": "webkato.publication",
+  "pk": 2,
+  "fields": {
+    "title": "Результаты тотального эндопротезирования при диспластическом коксартрозе",
+    "slug": "coxarthrosis-results",
+    "category": 2,
+    "year": 2023,
+    "authors": "Иванов И.И., Петров П.П.",
+    "description": "Анализ 5-летней выживаемости имплантов у пациентов с тяжелой степенью дисплазии.",
+    "pdf": "",
+    "created_at": "2026-02-02T04:35:03.282Z"
+  }
+},
+{
+  "model": "webkato.publication",
+  "pk": 3,
+  "fields": {
+    "title": "Применение 3D-печати в ортопедии",
+    "slug": "3d-printing-orthopedy",
+    "category": 2,
+    "year": 2024,
+    "authors": "Сидоров С.С.",
+    "description": "Обзор современных возможностей аддитивных технологий для создания индивидуальных имплантов.",
+    "pdf": "",
+    "created_at": "2026-02-02T04:35:03.282Z"
+  }
+},
+{
+  "model": "webkato.membershiptype",
+  "pk": 1,
+  "fields": {
+    "name": "Стандартное членство",
+    "slug": "standard",
+    "price": "15000.00",
+    "description": "Ежегодный взнос. Дает доступ к библиотеке, скидку 10% на платные мероприятия и право голоса на собраниях."
+  }
+},
+{
+  "model": "webkato.membershiptype",
+  "pk": 2,
+  "fields": {
+    "name": "Премиум членство",
+    "slug": "premium",
+    "price": "40000.00",
+    "description": "Включает все привилегии стандарта, плюс бесплатный доступ к 2 мастер-классам в год и приоритетную регистрацию."
+  }
+},
+{
+  "model": "webkato.membershiptype",
+  "pk": 3,
+  "fields": {
+    "name": "Студенты",
+    "slug": "student",
+    "price": "5000.00",
+    "description": "Для резидентов и докторантов. Доступ к библиотеке, вебинары, гранты."
+  }
+},
+{
+  "model": "webkato.membershiptype",
+  "pk": 4,
+  "fields": {
+    "name": "Для местных",
+    "slug": "local",
+    "price": "10000.00",
+    "description": "Полный доступ к ресурсам, участие в выборах, скидки на мероприятия."
+  }
+},
+{
+  "model": "webkato.membershiptype",
+  "pk": 5,
+  "fields": {
+    "name": "International",
+    "slug": "international",
+    "price": "23000.00",
+    "description": "International Network, Online Access, Event Discounts."
+  }
+}
+]
