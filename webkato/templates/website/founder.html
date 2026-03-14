@@ -61,15 +61,33 @@
     </div>
   </div>
 
-  <div class="row g-4 mt-5">
-      <div class="col-lg-8 mx-auto">
-          <h3 class="fw-bold mb-4 text-center">Фотоархив</h3>
-          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-              <img src="{% static 'website/img/batpenov_new.jpg' %}" alt="Академик Батпенов" class="img-fluid w-100">
-              <div class="card-body p-4 text-center">
-                  <p class="text-muted mb-0">Академик Нурлан Джумагулович Батпенов на торжественном мероприятии</p>
-              </div>
+  <div class="mt-5 pt-5">
+      <h3 class="fw-bold mb-4 text-center">Фотоархив</h3>
+      <div class="row g-4">
+        <!-- 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+            <img src="{% static 'website/img/batpenov_portrait.jpg' %}" alt="Академик Батпенов" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;">
           </div>
+        </div>
+        <!-- 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+            <img src="{% static 'website/img/history/batpenov_main.jpg' %}" alt="Академик Батпенов" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;">
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+            <img src="{% static 'website/img/history/batpenov_portrait.jpg' %}" alt="Академик Батпенов" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;">
+          </div>
+        </div>
+        <!-- 4 (Original) -->
+        <div class="col-md-12">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden mt-2">
+            <img src="{% static 'website/img/batpenov_new.jpg' %}" alt="Академик Батпенов" class="img-fluid w-100">
+          </div>
+        </div>
       </div>
   </div>
 </div>
