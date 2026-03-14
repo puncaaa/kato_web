@@ -18,6 +18,7 @@
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
       margin: 0 auto;
+      background: #eee;
     }
     .quote-block {
       font-size: 1.25rem;
@@ -26,12 +27,15 @@
       margin: 2rem 0;
       color: var(--bs-dark);
     }
+    .text-justify {
+        text-align: justify;
+    }
   </style>
 
-  <div class="row align-items-center g-5">
+  <div class="row align-items-center g-5 mb-5">
     <div class="col-lg-5 order-lg-2">
       <div class="founder-img-container">
-        <img src="{% static 'website/img/batpenov_new.jpg' %}" alt="Н.Д. Батпенов" class="w-100 object-fit-cover" style="min-height: 500px;">
+        <img src="{% static 'website/img/batpenov.png' %}" alt="Н.Д. Батпенов" class="w-100 object-fit-cover" style="min-height: 500px;">
       </div>
       <div class="text-center mt-3 text-muted">
         <small>1949 — 2020</small>
@@ -55,6 +59,18 @@
         <p><strong>Научное наследие:</strong> Академик Батпенов является автором более 30 патентов и изобретений, включая уникальные модели эндопротезов тазобедренного сустава, которые успешно применяются в хирургической практике по сей день.</p>
       </div>
     </div>
+  </div>
+
+  <div class="row g-4 mt-5">
+      <div class="col-lg-8 mx-auto">
+          <h3 class="fw-bold mb-4 text-center">Фотоархив</h3>
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+              <img src="{% static 'website/img/batpenov_new.jpg' %}" alt="Академик Батпенов" class="img-fluid w-100">
+              <div class="card-body p-4 text-center">
+                  <p class="text-muted mb-0">Академик Нурлан Джумагулович Батпенов на торжественном мероприятии</p>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
 {% endblock %}
