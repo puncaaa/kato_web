@@ -199,6 +199,9 @@ def about_history(request):
 def about_statutes(request):
     return render(request, 'website/about_statutes.html')
 
+def about_ethics(request):
+    return render(request, 'website/about_ethics.html')
+
 def membership_benefits(request):
     return render(request, 'website/membership_benefits.html')
 

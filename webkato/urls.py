@@ -37,6 +37,7 @@ urlpatterns = [
     # Placeholders for new structure
     path('about/mission/', views.about, name='about_mission'), # Reuse existing about
     path('about/statutes/', views.about_statutes, name='about_statutes'),
+    path('about/ethics/', views.about_ethics, name='about_ethics'),
     path('about/history/', views.about_history, name='about_history'),
     path('about/international/', views.about_international, name='about_international'),
     path('about/structure/', views.generic_page, {'title': 'Структура'}, name='about_structure'),
