@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-hi4s5c@&j#&0z8tu7%z0q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["katokz.kz", "www.katokz.kz", "kato-web-665424752344.europe-west1.run.app", "localhost", "127.0.0.1"]
 
 
 # Application definition
