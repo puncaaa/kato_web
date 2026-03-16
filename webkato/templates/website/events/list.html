@@ -95,20 +95,4 @@
   Нет запланированных мероприятий в Казахстане.
 </div>
 {% endfor %}
-
-<h5 class="mt-5 mb-3 text-muted">Архив мероприятий</h5>
-<div class="row g-3">
-  {% for e in past %}
-  <div class="col-md-6">
-    <div class="card h-100 border bg-light">
-      <div class="card-body">
-        <h6><a href="{% url 'event_detail' e.slug %}" class="text-decoration-none text-dark">{{ e.title }}</a></h6>
-        <small class="text-muted">{{ e.date|date:"d M Y" }}</small>
-      </div>
-    </div>
-  </div>
-  {% empty %}
-  <p class="text-muted small">Архив пуст.</p>
-  {% endfor %}
-</div>
 {% endblock %}
