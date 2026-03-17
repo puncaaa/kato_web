@@ -5,7 +5,7 @@
     <div class="col-lg-8">
         <div class="card shadow border-0 overflow-hidden">
             <div class="card-header bg-primary text-white py-4 text-center">
-                <h2 class="fw-bold mb-0">Заявка на членство ({{ mtype.name }})</h2>
+                <h2 class="fw-bold mb-0 text-white">Заявка на членство ({{ mtype.name }})</h2>
                 <p class="mb-0 opacity-75">Пожалуйста, заполните все поля формы</p>
             </div>
             <div class="card-body p-4 p-md-5">
@@ -26,7 +26,12 @@
                         </div>
                         <div class="col-md-12">
                             <label class="form-label small fw-bold">Пароль</label>
-                            {{ form.password }}
+                            <div class="input-group">
+                                {{ form.password }}
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
                             {% if form.password.errors %}<div class="text-danger small">{{ form.password.errors }}</div>{% endif %}
                         </div>
                     </div>
