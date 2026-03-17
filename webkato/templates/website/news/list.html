@@ -3,7 +3,7 @@
 {% block content %}
 <div class="page-header text-center mb-5">
   <div class="container">
-    <h1 class="display-5 fw-bold text-white">Новости и события</h1>
+    <h1 class="display-5 fw-bold text-white">{% if title %}{{ title }}{% else %}Новости и события{% endif %}</h1>
     <p class="lead text-white-50">Последние обновления из мира травматологии и жизнь ассоциации</p>
   </div>
 </div>

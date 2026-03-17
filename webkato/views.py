@@ -288,8 +288,15 @@ def congress_current(request):
     events = Event.objects.filter(is_active=True).order_by('date')
     return render(request, 'website/congress_current.html', {'events': events})
 
-def generic_page(request, title="Страница"):
+def education_courses(request):
+    courses_cat = NewsCategory.objects.filter(slug='educational_courses').first()
+    qs = News.objects.filter(category=courses_cat, is_published=True).order_by('-created_at')
+    paginator = Paginator(qs, 10)
+    page = request.GET.get('page')
+    items = paginator.get_page(page)
+    return render(request, 'website/news/list.html', {'items': items, 'title': 'Образовательные курсы'})
 
+def generic_page(request, title="Страница"):
     context = {
         'title': title,
         'content': 'Информация в данном разделе находится в стадии наполнения.'

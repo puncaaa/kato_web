@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   {% load static %}
   <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+  <link rel="icon" type="image/jpeg" href="{% static 'website/img/logo.jpg' %}">
   {% block extra_head %}{% endblock %}
 </head>
 
@@ -94,7 +95,6 @@
                 data-bs-toggle="dropdown">Образование</a>
               <ul class="dropdown-menu border-0 shadow-sm">
                 <li><a class="dropdown-item" href="{% url 'events_list' %}">Календарь событий</a></li>
-                <li><a class="dropdown-item" href="{% url 'education_webinars' %}">Вебинары</a></li>
                 <li><a class="dropdown-item" href="{% url 'education_courses' %}">Образовательные курсы</a></li>
                 <li>
                   <hr class="dropdown-divider">
