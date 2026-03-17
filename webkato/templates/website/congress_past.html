@@ -29,18 +29,34 @@
                         <i class="bi bi-geo-alt-fill me-1"></i>{{ event.location }}
                     </p>
 
-                    <div class="text-muted small mb-4">
-                        {{ event.description|truncatewords:50|linebreaks }}
-                    </div>
+                    <div class="row">
+                        {% if event.image %}
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <img src="{{ event.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ event.title }}">
+                        </div>
+                        {% endif %}
+                        <div class="{% if event.image %}col-md-9{% else %}col-12{% endif %}">
+                            <div class="text-muted small mb-4">
+                                {{ event.description|truncatewords:50|linebreaks }}
+                            </div>
 
-                    {% if event.program_pdf %}
-                    <div>
-                        <a href="{{ event.program_pdf.url }}" class="btn btn-primary btn-sm rounded-pill px-4" target="_blank"
-                            rel="noopener noreferrer">
-                            <i class="bi bi-download me-2"></i> Скачать материалы
-                        </a>
+                            <div class="d-flex flex-wrap gap-2">
+                                {% if event.program_pdf %}
+                                <a href="{{ event.program_pdf.url }}" class="btn btn-outline-primary btn-sm rounded-pill px-4" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="bi bi-download me-2"></i> Материалы
+                                </a>
+                                {% endif %}
+                                
+                                {% if event.external_link %}
+                                <a href="{{ event.external_link }}" class="btn btn-primary btn-sm rounded-pill px-4" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="bi bi-box-arrow-up-right me-2"></i> Перейти на сайт
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    {% endif %}
                 </div>
             </div>
             {% empty %}
