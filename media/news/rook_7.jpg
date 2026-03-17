@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="zhalgas">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="OctoberCMS">
+        <title>Международная научно–практическая конференция</title>
+<meta name="description" content="Международная научно–практическая конференция посвященная 110-ЛЕТИЮ со дня рождения профессора Х.Ж. МАКАЖАНОВА 9-10 2025" />
+<meta name="title" content="Международная научно–практическая конференция" />
+<link rel="canonical" href="https://rookato.kz/:slug" />
+<meta name="og:title" content="Международная научно–практическая конференция" />
+<meta name="og:description" content="Международная научно–практическая конференция посвященная 110-ЛЕТИЮ со дня рождения профессора Х.Ж. МАКАЖАНОВА 9-10 2025" />
+<meta property="og:url" content="https://rookato.kz/:slug" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:image"
+  content="https://rookato.kz/storage/app/media/logoog.jpg"
+/>
+<link rel="shortcut icon" href="https://rookato.kz/storage/app/media/fav.png" type="icon/png">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+/>
+
+<link rel="stylesheet" href="https://rookato.kz/themes/demo/assets/css/swiper-bundle.min.css">
+
+<link rel="stylesheet" href="https://use.typekit.net/jrx1dnn.css">
+
+<link rel="stylesheet" href="https://rookato.kz/themes/demo/assets/css/fancybox.css">
+
+<link rel="stylesheet" href="https://rookato.kz/combine/2b52a8144c541723bfd6994800ad1c9d-1744712391">
+
+<meta name="google-site-verification" content="7lmba_KFQLf1Rb29ESRGnq2_YkI3jMKvHJvEiLRyypU" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QWHW33QCKT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QWHW33QCKT');
+</script>
+
+<meta name="yandex-verification" content="b332c26cc4f62cdc" />
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(96942571, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96942571" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->            </head>
+    <body>
+        <div class="wrapper">
+        <!-- Header -->
+        <header class="header">
+  <div class="header__container _container">
+    <div class="header__top">
+      <a href="/" class="header__logo">
+        <img src="https://rookato.kz/themes/demo/assets/images/header/logo.png" alt="Logo">
+      </a>
+      <div class="header__right">
+        <div class="header__langs-wrapper">
+          <img src="https://rookato.kz/themes/demo/assets/images/header/langs.svg" alt="Langs">
+          <div class="header__langs">
+                        <a href="kz" data-request="onSwitchLocale" data-request-data="locale: 'kz'"
+              class="header__lang ">KZ</a>
+                        <a href="ru" data-request="onSwitchLocale" data-request-data="locale: 'ru'"
+              class="header__lang active">RU</a>
+                        <a href="en" data-request="onSwitchLocale" data-request-data="locale: 'en'"
+              class="header__lang ">EN</a>
+                      </div>
+        </div>
+        <a href="tel:+77781095500" class="header__phone">
+          <img src="https://rookato.kz/themes/demo/assets/images/header/phone.svg" alt="Phone">
+          <span>+7 (778) 109–55–00</span>
+        </a>
+        <!-- <a href="https://rookato.kz/registraciya" class="header__button blue-button">Регистрация</a> -->
+      </div>
+      <div class="header__hidden">
+        <div class="header__langs-wrapper">
+          <img src="https://rookato.kz/themes/demo/assets/images/header/langs.svg" alt="Langs">
+          <div class="header__langs">
+                        <a href="kz" data-request="onSwitchLocale" data-request-data="locale: 'kz'"
+              class="header__lang ">KZ</a>
+                        <a href="ru" data-request="onSwitchLocale" data-request-data="locale: 'ru'"
+              class="header__lang active">RU</a>
+                        <a href="en" data-request="onSwitchLocale" data-request-data="locale: 'en'"
+              class="header__lang ">EN</a>
+                      </div>
+        </div>
+        <div class="burger">
+          <img src="https://rookato.kz/themes/demo/assets/images/burger.svg" alt="Burger">
+        </div>
+      </div>
+    </div>
+    <div class="header__bot">
+      <div class="header__items" style="justify-content: space-between; flex: 0 0 100%; column-gap: 12px;">
+        <a href="#organizers" class="header__item">Организаторы</a>
+        <a href="#programs" class="header__item">Направления конференции</a>
+        <a href="#register" class="header__item">ФОРМА УЧАСТИЯ</a>
+        <a href="#form" class="header__item">Публикация тезисов</a>
+        <a href="#list" class="header__item">Батпеновские чтения</a>
+        <a href="#contacts" class="header__item">КОНТАКТЫ</a>
+      </div>
+    </div>
+  </div>
+  <div class="menu">
+    <button class="menu__close">&times;</button>
+    <div class="menu__top">
+      <a href="tel:+77781095500" class="header__phone">
+        <img src="https://rookato.kz/themes/demo/assets/images/header/phone.svg" alt="Phone">
+        <span>+7 (778) 109–55–00</span>
+      </a>
+    </div>
+    <div class="menu__items">
+      <a href="#organizers" class="header__item">Организаторы</a>
+        <a href="#programs" class="header__item">Направления конференции</a>
+        <a href="#register" class="header__item">ФОРМА УЧАСТИЯ</a>
+        <a href="#form" class="header__item">Публикация тезисов</a>
+        <a href="#list" class="header__item">Батпеновские чтения</a>
+        <a href="#contacts" class="header__item">КОНТАКТЫ</a>
+    </div>
+    <a href="https://rookato.kz/vstupit-v-kato" class="header__button blue-button">Вступить в КАТО</a>
+  </div>
+</header>
+        <!-- Content -->
+        <div class="page">
+            <section class="main" style="background-image: url('/storage/app/media/');">
+  <div class="main__container _container">
+    <div class="main__body">
+      <div class="main__content">
+        <h1 class="main__title"></h1>
+        <div class="main__text"></div>
+        <!-- <div class="main__buttons">
+        <a href="https://rookato.kz/registraciya" class="main__button white-button">Регистрация</a>
+        <a href="https://rookato.kz/vnesti-vznos" class="main__button white-button white-button-n">Внести взнос</a>
+        </div> -->
+      </div>
+      <div class="main__items">
+              </div>
+    </div>
+  </div>
+</section>
+
+<section class="organizers" id="organizers">
+  <div class="organizers__container _container">
+    <div class="organizers__title title"></div>
+    <div class="organizers__items">
+          </div>
+  </div>
+</section>
+
+<section id="welcome" class="welcome">
+  <div class="welcome__container _container">
+    <div class="welcome__body">
+      <div class="welcome__image">
+        <img src="/storage/app/media/" alt="Image">
+      </div>
+      <div class="welcome__content">
+        <div class="welcome__title title"></div>
+        <div class="welcome__text"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="general">
+  <div class="general__container _container">
+    <div class="general__title title"></div>
+    <div class="general__items-wrapper">
+      <div class="general__prev general__arrow">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.903809" y="0.0532227" width="36.2103" height="36.2103" fill="#EEEEEE" />
+          <path d="M21.8207 12.5334L16.1951 18.1591L21.8207 23.7847" stroke="#151515" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="general__next general__arrow">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36.2103" height="36.2103" transform="matrix(-1 0 0 1 37.0968 0.0532227)" fill="#EEEEEE" />
+          <path d="M16.18 12.5334L21.8057 18.1591L16.18 23.7847" stroke="#151515" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="general__items swiper">
+        <div class="swiper-wrapper">
+                  </div>
+        <div class="general__pagination slider-pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="partners__container _container">
+    <div class="partners__title title"></div>
+    <div class="partners__items-wrapper">
+      <div class="partners__prev partners__arrow">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.903809" y="0.0532227" width="36.2103" height="36.2103" fill="#EEEEEE" />
+          <path d="M21.8207 12.5334L16.1951 18.1591L21.8207 23.7847" stroke="#151515" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="partners__next partners__arrow">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36.2103" height="36.2103" transform="matrix(-1 0 0 1 37.0968 0.0532227)" fill="#EEEEEE" />
+          <path d="M16.18 12.5334L21.8057 18.1591L16.18 23.7847" stroke="#151515" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="partners__items swiper">
+        <div class="swiper-wrapper">
+                  </div>
+        <div class="partners__pagination slider-pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="register" class="about" style="background-image: url('/storage/app/media/');">
+  <div class="about__container _container">
+    <div class="about__body">
+      <div class="about__title title"></div>
+      <div class="about__text" style="max-width: 571px;"></div>
+      <!-- <a href="https://rookato.kz/registraciya" class="about__button white-button">Подать заявку</a> -->
+    </div>
+  </div>
+</section>
+
+<section id="hotels" class="hotels">
+  <div class="hotels__container _container">
+    <div class="hotels__title title"></div>
+    <div class="hotels__items-wrapper">
+      <div class="hotels__items swiper">
+        <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+            <div class="hotels__item">
+              <div class="hotels__image">
+                <img src="/storage/app/media/hotels/hotel.jpg" alt="Image">
+              </div>
+              <div class="hotels__content">
+                <div class="hotels__name">Comfort Hotel Astana</div>
+                <div class="hotels__text"><p>Уважаемые участники,&nbsp;</p>
+
+<p>Для Вашего удобства мы подобрали список отелей, предоставляющие скидки на проживание гостям Съезда.</p>
+
+<p>При бронировании просим озвучить менеджеру о том, что вы являетесь участником конферецнии Съезда травматологов и ортопедов.</p>
+
+<p>Одноместный 28 000 тенге ($60)</p>
+
+<p>Двухместный 34 000 тенге ($72)</p></div>
+                <a 
+                  data-request="onOpenHotel"
+                  data-request-data="id: '1'"
+                  data-request-update="{ 'hotel': '#hotel-wrapper' }"
+                  data-request-success="openHotel()"
+                  class="hotels__link"
+                >
+                 Подробнее
+                </a>
+              </div>
+            </div>
+          </div>
+                    <div class="swiper-slide">
+            <div class="hotels__item">
+              <div class="hotels__image">
+                <img src="/storage/app/media/cropped-images/2%20hotel-0-0-0-0-1711610544.jpg" alt="Image">
+              </div>
+              <div class="hotels__content">
+                <div class="hotels__name">Holiday lnn Express: Astana-Turan</div>
+                <div class="hotels__text"><p>Уважаемые участники,&nbsp;</p>
+
+<p>Для Вашего удобства мы подобрали список отелей, предоставляющие скидки на проживание гостям Съезда.</p>
+
+<p>При бронировании просим озвучить менеджеру о том, что вы являетесь участником конферецнии Съезда травматологов и ортопедов.</p>
+
+<p>Одном. стандарт номер 26 000 kzt ($ 59)
+	<br>Двухм. стандарт номер 29 000 kzt ($ 65)</p></div>
+                <a 
+                  data-request="onOpenHotel"
+                  data-request-data="id: '3'"
+                  data-request-update="{ 'hotel': '#hotel-wrapper' }"
+                  data-request-success="openHotel()"
+                  class="hotels__link"
+                >
+                 Подробнее
+                </a>
+              </div>
+            </div>
+          </div>
+                    <div class="swiper-slide">
+            <div class="hotels__item">
+              <div class="hotels__image">
+                <img src="/storage/app/media/cropped-images/3%20hotel-0-0-0-0-1711612395.jpg" alt="Image">
+              </div>
+              <div class="hotels__content">
+                <div class="hotels__name">Wyndham Garden Astana</div>
+                <div class="hotels__text"><p>Уважаемые участники,&nbsp;</p>
+
+<p>Для Вашего удобства мы подобрали список отелей, предоставляющие скидки на проживание гостям Съезда.</p>
+
+<p>При бронировании просим озвучить менеджеру о том, что вы являетесь участником конферецнии Съезда травматологов и ортопедов.</p>
+
+<p>Одном. стандарт номер 39 000 kzt ($ 83)
+	<br>Двухм. стандарт номер 49 000 kzt ($ 105)</p></div>
+                <a 
+                  data-request="onOpenHotel"
+                  data-request-data="id: '4'"
+                  data-request-update="{ 'hotel': '#hotel-wrapper' }"
+                  data-request-success="openHotel()"
+                  class="hotels__link"
+                >
+                 Подробнее
+                </a>
+              </div>
+            </div>
+          </div>
+                    <div class="swiper-slide">
+            <div class="hotels__item">
+              <div class="hotels__image">
+                <img src="/storage/app/media/cropped-images/4%20hotel-0-0-0-0-1711612611.jpg" alt="Image">
+              </div>
+              <div class="hotels__content">
+                <div class="hotels__name">Hilton</div>
+                <div class="hotels__text"><p>Уважаемые участники,&nbsp;</p>
+
+<p>Для Вашего удобства мы подобрали список отелей, предоставляющие скидки на проживание гостям Съезда.</p>
+
+<p>При бронировании просим озвучить менеджеру о том, что вы являетесь участником конферецнии Съезда травматологов и ортопедов.</p>
+
+<p>Одном. стандарт номер 60 000 kzt ($ 130)
+	<br>Двухм. стандарт номер 70 000 kzt ($ 150)</p></div>
+                <a 
+                  data-request="onOpenHotel"
+                  data-request-data="id: '5'"
+                  data-request-update="{ 'hotel': '#hotel-wrapper' }"
+                  data-request-success="openHotel()"
+                  class="hotels__link"
+                >
+                 Подробнее
+                </a>
+              </div>
+            </div>
+          </div>
+                    <div class="swiper-slide">
+            <div class="hotels__item">
+              <div class="hotels__image">
+                <img src="/storage/app/media/cropped-images/5%20hotel-0-0-0-0-1711612723.jpg" alt="Image">
+              </div>
+              <div class="hotels__content">
+                <div class="hotels__name">Sheraton Astana Hotel</div>
+                <div class="hotels__text"><p>Уважаемые участники,&nbsp;</p>
+
+<p>Для Вашего удобства мы подобрали список отелей, предоставляющие скидки на проживание гостям Съезда.</p>
+
+<p>При бронировании просим озвучить менеджеру о том, что вы являетесь участником конферецнии Съезда травматологов и ортопедов.</p>
+
+<p>Одном. стандарт номер 78 400 kzt ($ 175)
+	<br>Двухм. стандарт номер 90 720 kzt ($ 203)</p>
+
+<p>
+	<br>
+</p></div>
+                <a 
+                  data-request="onOpenHotel"
+                  data-request-data="id: '6'"
+                  data-request-update="{ 'hotel': '#hotel-wrapper' }"
+                  data-request-success="openHotel()"
+                  class="hotels__link"
+                >
+                 Подробнее
+                </a>
+              </div>
+            </div>
+          </div>
+                  </div>
+        <div class="hotels__pagination slider-pagination"></div>
+      </div>
+      <div class="hotels__prev hotels__arrow">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.903809" y="0.0532227" width="36.2103" height="36.2103" fill="#EEEEEE" />
+          <path d="M21.8207 12.5334L16.1951 18.1591L21.8207 23.7847" stroke="#151515" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="hotels__next hotels__arrow">
+        <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36.2103" height="36.2103" transform="matrix(-1 0 0 1 37.0968 0.0532227)" fill="#EEEEEE" />
+          <path d="M16.18 12.5334L21.8057 18.1591L16.18 23.7847" stroke="#151515" stroke-width="2" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs" class="programs">
+  <div class="programs__container _container">
+    <div class="programs__title title"></div>
+    <div class="programs__items">
+          </div>
+  </div>
+</section>
+
+<section id="form" class="part">
+  <div class="part__container _container">
+    <div class="part__body">
+      <div class="part__content">
+        <div class="part__title title"></div>
+        <div class="part__text"></div>
+      </div>
+      <div class="part__image">
+        <img src="/storage/app/media/" alt="Image">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="list" class="list">
+  <div class="list__container _container">
+    <div class="list__title title"></div>
+    <div class="list__items">
+          </div>
+  </div>
+</section>
+
+<section id="contacts" class="contacts">
+  <div class="contacts__container _container">
+    <div class="contacts__body">
+      <div class="contacts__map">
+        
+      </div>
+      <div class="contacts__items">
+        <div class="contacts__item contact">
+          <div class="contact__title">Адрес:</div>
+          <div class="contact__text"></div>
+        </div>
+        <div class="contacts__item contact">
+          <div class="contact__title">Email:</div>
+          <a href="mailto:" class="contact__text"></a>
+        </div>
+        <div class="contacts__item contact">
+          <div class="contact__title">Телефон:</div>
+          <a href="tel:" class="contact__text"></a>
+        </div>
+        <div class="contacts__item contact">
+          <div class="contact__title">Ответственный редактор</div>
+          <div class="contact__text">
+            <a href="mailto:"></a>
+            <a href="tel:"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="hotel-wrapper">
+<div class="hotel" onclick="closeHotel()">
+  <div class="hotel__white" onclick="event.stopPropagation()">
+    <div class="hotel__close" onclick="closeHotel()">&times;</div>
+    <div class="hotel__body">
+      <div class="hotel__image">
+        <img src="/storage/app/media/" alt="Image">
+      </div>
+      <div class="hotel__content">
+        <div class="hotel__title title"></div>
+        <div class="hotel__text"></div>
+      </div>
+    </div>
+    <div class="hotel__info info-hotel">
+      <div class="info-hotel__title">В стоимость включено:</div>
+      <div class="info-hotel__body">
+        <div class="info-hotel__includes">
+                  </div>
+        <div class="info-hotel__items">
+                  </div>
+      </div>
+    </div>
+      </div>
+</div></div>
+
+<section></section>        </div>
+
+        <!-- Footer -->
+        <footer id="contacts" class="footer">
+  <div class="footer__container _container">
+    <div class="footer__body">
+      <div class="footer__content">
+        <a href="/" class="footer__logo">
+          <img src="https://rookato.kz/themes/demo/assets/images/footer/logo.png" alt="Logo">
+        </a>
+        <div class="footer__nav">
+          <div class="footer__title">конференции</div>
+          <div class="footer__nav-items">
+                          <a href="https://rookato.kz/v-sezd">V СЪЕЗД</a>
+                      </div>
+        </div>
+        <div class="footer__contacts">
+          <div class="footer__title">КОНТАКТЫ</div>
+          <div class="footer__contacts-items">
+            <div class="footer__address">Республика Казахстан, г. Астана</div>
+            <a href="tel:+77781095500" class="footer__phone">+7 (778) 109–55–00</a>
+            <a href="mailto:trauma@nscto.kz" class="footer__email">trauma@nscto.kz</a>
+          </div>
+        </div>
+      </div>
+      <a href="https://rookato.kz/vstupit-v-kato" class="footer__button">Вступить в КАТО</a>
+    </div>
+    <div class="footer__foot">
+      <div class="footer__abc">
+        <span>Разработано в</span>
+        <img src="https://rookato.kz/themes/demo/assets/images/footer/abc.svg" alt="ABC DESIGN">
+        <span>- создание сайтов в Астане</span>
+      </div>
+    </div>
+  </div>
+</footer>        </div>
+
+        <!-- Scripts -->
+        <script src="https://rookato.kz/themes/demo/assets/vendor/jquery.js"></script>
+<script src="https://rookato.kz/themes/demo/assets/vendor/bootstrap.js"></script>
+<script src="https://rookato.kz/themes/demo/assets/js/fancybox.umd.js"></script>
+<script src="https://rookato.kz/themes/demo/assets/js/jquery.maskedinput.js"></script>
+<script src="https://rookato.kz/themes/demo/assets/js/swiper-bundle.min.js"></script>
+<script src="https://rookato.kz/themes/demo/assets/js/app.js?v=2"></script>        <script src="/modules/system/assets/js/framework.js"></script>
+<script src="/modules/system/assets/js/framework.extras.js"></script>
+<link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework.extras.css">
+                
+    </body>
+</html>
