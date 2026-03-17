@@ -1,0 +1,55 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="icon-circle bg-success-subtle text-success mx-auto mb-4" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                <i class="bi bi-check-circle fs-1"></i>
+            </div>
+            <h2 class="fw-bold mb-3">Аккаунт активирован!</h2>
+            <p class="lead mb-4">Добро пожаловать в КАТО, {{ user.username }}.</p>
+            
+            <div class="card shadow-sm border-0 p-4 mb-4">
+                <h4 class="fw-bold mb-3">Оплата членского взноса</h4>
+                <p>Для завершения процесса вступления и получения полного доступа к ресурсам Ассоциации, необходимо оплатить членский взнос.</p>
+                <div class="d-grid gap-2 col-md-6 mx-auto mt-3">
+                    <button id="payButton" class="btn btn-success btn-lg rounded-pill">Оплатить взнос</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CloudPayments Widget -->
+<script src="https://widget.cloudpayments.kz/bundles/cloudpayments.js"></script>
+<script>
+    document.getElementById('payButton').addEventListener('click', function() {
+        var widget = new cp.CloudPayments();
+        widget.pay('auth', // или 'charge'
+            { //options
+                publicId: '{{ CLOUDPAYMENTS_PUBLIC_ID|default:"test_id" }}', // ID из ЛК CloudPayments
+                description: 'Членский взнос КАТО', //назначение
+                amount: 10000, //сумма (нужно динамически подставлять в зависимости от типа)
+                currency: 'KZT', //валюта
+                invoiceId: '{{ user.id }}', //номер заказа
+                accountId: '{{ user.email }}', //идентификатор плательщика
+                email: '{{ user.email }}',
+                data: {
+                    myProp: 'myValue'
+                }
+            },
+            {
+                onSuccess: function (options) { // success
+                    window.location.href = "{% url 'payment_success' %}";
+                },
+                onFail: function (reason, options) { // fail
+                    window.location.href = "{% url 'payment_fail' %}";
+                },
+                onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от cp.ru ответ о результате транзакции.
+                    //параметр paymentResult содержит ответ от CloudPayments
+                }
+            }
+        )
+    });
+</script>
+{% endblock %}

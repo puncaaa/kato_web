@@ -153,11 +153,15 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings (development; в production заменить на SMTP конфиг)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'no-reply@kato.local'
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'katokz.help@outlook.com'
+EMAIL_HOST_PASSWORD = 'KATO!2026*pgz'
+DEFAULT_FROM_EMAIL = 'katokz.help@outlook.com'
 CONTACT_EMAIL = 'trauma@nscto.kz'
 
-# reCAPTCHA (оставьте пустыми в dev; заполните в prod)
-RECAPTCHA_SITE_KEY = ''
-RECAPTCHA_SECRET_KEY = ''
+# CloudPayments configuration
+CLOUDPAYMENTS_PUBLIC_ID = os.environ.get("CLOUDPAYMENTS_PUBLIC_ID", "") # Provide via environment variable or placeholder

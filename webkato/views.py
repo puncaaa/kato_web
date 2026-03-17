@@ -6,11 +6,13 @@ from django.contrib.auth import login as auth_login
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from .models import News, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
-from .forms import ContactForm, CommentForm, MembershipApplicationForm
-from django.contrib.auth import logout
-from django.http import HttpResponseNotAllowed
-from django.core.mail import send_mail
-from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from .forms import ContactForm, CommentForm, MembershipApplicationForm, MembershipRegistrationForm
 import urllib.request, urllib.parse, json
 
 def debug_db(request):
@@ -111,6 +113,72 @@ def membership_apply(request, slug):
     
     success = request.GET.get('success') == '1'
     return render(request, 'website/membership_apply.html', {'form': form, 'mtype': mtype, 'success': success})
+
+def membership_register(request, slug):
+    mtype = get_object_or_404(MembershipType, slug=slug)
+    if request.method == 'POST':
+        form = MembershipRegistrationForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Create inactive user
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password'],
+                is_active=False
+            )
+            
+            # Create application
+            app = form.save(commit=False)
+            app.user = user
+            app.membership_type = mtype
+            app.save()
+
+            # Send activation email
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            domain = request.get_host()
+            link = reverse('activate', kwargs={'uidb64': uid, 'token': token})
+            activate_url = f"http://{domain}{link}"
+            
+            subject = 'Активация аккаунта КАТО'
+            message = render_to_string('website/emails/activation_email.html', {
+                'user': user,
+                'activate_url': activate_url,
+            })
+            email = EmailMessage(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+            email.content_subtype = "html"
+            email.send()
+
+            return render(request, 'website/registration_pending.html', {'email': user.email})
+    else:
+        form = MembershipRegistrationForm()
+    
+    return render(request, 'website/membership_register.html', {'form': form, 'mtype': mtype})
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        auth_login(request, user)
+        # Redirect to payment page or success
+        return render(request, 'website/registration_success.html', {
+            'user': user,
+            'CLOUDPAYMENTS_PUBLIC_ID': settings.CLOUDPAYMENTS_PUBLIC_ID
+        })
+    else:
+        return render(request, 'website/registration_invalid.html')
+
+def payment_success(request):
+    return render(request, 'website/payment_success.html')
+
+def payment_fail(request):
+    return render(request, 'website/payment_fail.html')
 
 def contacts(request):
     sent = False

@@ -27,6 +27,10 @@ urlpatterns = [
     path('about/president/', views.president_bio, name='president_bio'),
     path('membership/', views.membership, name='membership'),
     path('membership/apply/<slug:slug>/', views.membership_apply, name='membership_apply'),
+    path('membership/register/<slug:slug>/', views.membership_register, name='membership_register'),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    path('payment/success/', views.payment_success, name='payment_success'),
+    path('payment/fail/', views.payment_fail, name='payment_fail'),
     path('contacts/', views.contacts, name='contacts'),
     path('debug-db/', views.debug_db, name='debug_db'),
 

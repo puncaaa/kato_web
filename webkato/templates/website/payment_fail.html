@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="icon-circle bg-warning-subtle text-warning mx-auto mb-4" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                <i class="bi bi-exclamation-triangle fs-1"></i>
+            </div>
+            <h2 class="fw-bold mb-3">Ошибка оплаты</h2>
+            <p class="lead mb-4">При проведении платежа произошла ошибка. Пожалуйста, попробуйте еще раз или выберите другой способ оплаты.</p>
+            <div class="mt-5">
+                <a href="{% url 'membership' %}" class="btn btn-primary rounded-pill px-4">Попробовать снова</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

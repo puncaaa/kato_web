@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="icon-circle bg-danger-subtle text-danger mx-auto mb-4" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                <i class="bi bi-x-circle fs-1"></i>
+            </div>
+            <h2 class="fw-bold mb-3">Ошибка активации</h2>
+            <p class="lead mb-4">К сожалению, ссылка для активации недействительна или срок её действия испек.</p>
+            <div class="mt-5">
+                <a href="{% url 'contacts' %}" class="btn btn-outline-secondary rounded-pill px-4">Связаться с поддержкой</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

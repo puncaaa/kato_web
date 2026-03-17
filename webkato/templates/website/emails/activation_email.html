@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .button {
+            background-color: #0d6efd;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Здравствуйте, {{ user.full_name|default:user.username }}!</h2>
+    <p>Благодарим вас за регистрацию в Казахстанской Ассоциации травматологов-ортопедов (КАТО).</p>
+    <p>Для активации вашего аккаунта, пожалуйста, нажмите на кнопку ниже:</p>
+    <a href="{{ activate_url }}" class="button">Активировать аккаунт</a>
+    <p>Если кнопка не работает, скопируйте и вставьте следующую ссылку в адресную строку вашего браузера:</p>
+    <p>{{ activate_url }}</p>
+    <p>С уважением,<br>Команда КАТО</p>
+</body>
+</html>

@@ -142,7 +142,7 @@ class MembershipApplication(models.Model):
     experience = models.CharField(max_length=100, verbose_name="Стаж работы", blank=True, null=True)
     
     # Контактная информация
-    residence = models.CharField(max_length=255, verbose_name="Место жительства", blank=True, null=True)
+    city = models.CharField(max_length=255, verbose_name="Город", blank=True, null=True)
     phone = models.CharField(max_length=50, verbose_name="Мобильный телефон")
     email = models.EmailField(verbose_name="Email")
 

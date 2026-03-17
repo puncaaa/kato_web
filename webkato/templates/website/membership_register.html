@@ -1,0 +1,101 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row justify-content-center py-5">
+    <div class="col-lg-8">
+        <div class="card shadow border-0 overflow-hidden">
+            <div class="card-header bg-primary text-white py-4 text-center">
+                <h2 class="fw-bold mb-0">Заявка на членство ({{ mtype.name }})</h2>
+                <p class="mb-0 opacity-75">Пожалуйста, заполните все поля формы</p>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <h5 class="fw-bold mb-3 text-primary border-bottom pb-2">Данные аккаунта</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Username (для входа)</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}<div class="text-danger small">{{ form.username.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}<div class="text-danger small">{{ form.email.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Пароль</label>
+                            {{ form.password }}
+                            {% if form.password.errors %}<div class="text-danger small">{{ form.password.errors }}</div>{% endif %}
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 text-primary border-bottom pb-2">Личные данные</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Ф.И.О.</label>
+                            {{ form.full_name }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Дата рождения</label>
+                            {{ form.birth_date }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Город</label>
+                            {{ form.city }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Мобильный телефон</label>
+                            {{ form.phone }}
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 text-primary border-bottom pb-2">Профессиональная информация</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Место работы (название организации)</label>
+                            {{ form.place_of_work }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Занимаемая должность</label>
+                            {{ form.job_title }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Квалификация / категория</label>
+                            {{ form.qualification }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Ученая степень / звание</label>
+                            {{ form.degree }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Стаж работы</label>
+                            {{ form.experience }}
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3 text-primary border-bottom pb-2">Документы</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold">Копия удостоверения личности (PDF/JPG/PNG)</label>
+                            {{ form.id_card_copy }}
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        {{ form.agreement_accepted }}
+                        <label class="form-check-label small" for="{{ form.agreement_accepted.id_for_label }}">
+                            Я подтверждаю достоверность предоставленных данных и согласен с условиями членства и оплатой взносов в КАТО.
+                        </label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold py-3">Зарегистрироваться</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
