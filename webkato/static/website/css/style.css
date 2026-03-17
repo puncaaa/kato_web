@@ -109,7 +109,7 @@ a {
 }
 
 .card-img-top {
-    height: 200px;
+    height: 240px;
     object-fit: cover;
 }
 
@@ -231,7 +231,12 @@ a {
     border-radius: 16px;
     overflow: hidden;
     position: relative;
-    color: white;
+    background-color: #f8f9fa;
+}
+
+.featured-news-card .img-zoom {
+    object-fit: contain !important;
+    background-color: #f8f9fa;
 }
 
 .featured-news-overlay {
@@ -241,6 +246,7 @@ a {
     left: 0;
     width: 100%;
     padding: 2rem;
+    color: white;
 }
 
 /* About Page Sections */

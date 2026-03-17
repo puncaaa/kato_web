@@ -7,7 +7,7 @@
   </div>
 
   {% if item.image %}<img src="{{ item.image.url }}" class="img-fluid rounded mb-3" alt="">{% endif %}
-  <div class="content">{{ item.content|linebreaks }}</div>
+  <div class="content">{{ item.content|safe }}</div>
 
   <hr/>
   <h5>Комментарии</h5>
