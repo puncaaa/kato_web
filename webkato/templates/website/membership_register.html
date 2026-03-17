@@ -104,13 +104,25 @@
     </div>
 </div>
 
+{% block extra_scripts %}
+{{ block.super }}
 <script>
-document.getElementById('togglePassword').addEventListener('click', function (e) {
-    const password = document.querySelector('input[name="password"]');
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    this.querySelector('i').classList.toggle('bi-eye');
-    this.querySelector('i').classList.toggle('bi-eye-slash');
+document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('id_password');
+    
+    if (togglePassword && password) {
+        togglePassword.addEventListener('click', function () {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // toggle the eye icon
+            const icon = this.querySelector('i');
+            icon.classList.toggle('bi-eye');
+            icon.classList.toggle('bi-eye-slash');
+        });
+    }
 });
 </script>
 {% endblock %}
