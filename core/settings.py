@@ -34,6 +34,12 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["katokz.kz", "www.katokz.kz", "kato-web-665424752344.europe-west1.run.app", "localhost", "127.0.0.1"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://katokz.kz",
+    "https://www.katokz.kz",
+    "https://kato-web-665424752344.europe-west1.run.app"
+]
+
 
 # Application definition
 
