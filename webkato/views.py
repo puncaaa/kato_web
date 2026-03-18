@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
-from .models import News, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
+from .models import News, NewsCategory, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -22,12 +22,12 @@ def debug_db(request):
     return HttpResponse(f"DB Engine: {db_config.get('ENGINE')} | Host: {db_config.get('HOST')} | Name: {db_config.get('NAME')}")
 
 def home(request):
-    latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:4]
+    latest_news = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')[:4]
     upcoming_events = Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')[:3]
     return render(request, 'website/home.html', {'latest_news': latest_news, 'upcoming_events': upcoming_events})
 
 def news_list(request):
-    qs = News.objects.filter(is_published=True).order_by('-created_at')
+    qs = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')
     query = request.GET.get('q')
     if query:
         qs = qs.filter(title__icontains=query) | qs.filter(content__icontains=query)
