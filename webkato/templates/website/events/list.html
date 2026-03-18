@@ -10,6 +10,53 @@
   </div>
 </div>
 
+<!-- Local Events -->
+<h4 class="mb-4 text-primary">Казахстанские мероприятия</h4>
+{% for e in local_events %}
+<div class="card border-0 shadow-sm mb-4 overflow-hidden card-hover-effect position-relative" style="cursor: pointer;" onclick="window.location.href='/events/{{ e.slug }}/'">
+  <div class="row g-0">
+    <div
+      class="col-md-2 bg-light d-flex flex-column align-items-center justify-content-center p-3 text-center border-end">
+      <span class="h1 fw-bold text-primary mb-0" style="line-height:1;">
+        {% if e.slug == 'conf-2026-astana' %}
+        10-11
+        {% else %}
+        {{ e.date|date:"d" }}
+        {% endif %}
+      </span>
+      <span class="text-uppercase fw-bold text-muted small">{{ e.date|date:"F" }}</span>
+      <span class="small text-muted">{{ e.date|date:"Y" }}</span>
+    </div>
+    <div class="col-md-10">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="flex-grow-1">
+            <h5 class="card-title fw-bold mb-1">
+              {{ e.title }}
+            </h5>
+            <p class="text-muted mb-2"><i class="bi bi-geo-alt me-2"></i>{{ e.location }} • {{ e.date|date:"H:i" }}</p>
+          </div>
+          <div class="ms-3">
+            {% if e.external_link %}
+            <a href="{{ e.external_link }}" target="_blank" rel="noopener"
+              class="btn btn-primary rounded-pill px-4 position-relative" style="z-index: 2;" onclick="event.stopPropagation();">Регистрация</a>
+            {% else %}
+            <a href="{% url 'event_detail' e.slug %}" class="btn btn-primary rounded-pill px-4 position-relative" style="z-index: 2;" onclick="event.stopPropagation();">Подробнее</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% empty %}
+<div class="alert alert-light border text-center py-4 mb-5">
+  Нет запланированных казахстанских мероприятий.
+</div>
+{% endfor %}
+
+<hr class="my-5">
+
 <!-- Foreign Events -->
 <h4 class="mb-4 text-primary">Зарубежные мероприятия</h4>
 
@@ -65,46 +112,27 @@
 </div>
 {% endfor %}
 
-<!-- Local Events -->
-<h4 class="mb-4 text-primary">Казахстанские мероприятия</h4>
-{% for e in local_events %}
-<div class="card border-0 shadow-sm mb-4 overflow-hidden card-hover-effect position-relative" style="cursor: pointer;" onclick="window.location.href='https://kato-web-665424752344.europe-west1.run.app/events/conf-2026-astana/'">
-  <div class="row g-0">
-    <div
-      class="col-md-2 bg-light d-flex flex-column align-items-center justify-content-center p-3 text-center border-end">
-      <span class="h1 fw-bold text-primary mb-0" style="line-height:1;">
-        {% if e.slug == 'conf-2026-astana' %}
-        10-11
-        {% else %}
-        {{ e.date|date:"d" }}
-        {% endif %}
-      </span>
-      <span class="text-uppercase fw-bold text-muted small">{{ e.date|date:"F" }}</span>
-      <span class="small text-muted">{{ e.date|date:"Y" }}</span>
-    </div>
-    <div class="col-md-10">
-      <div class="card-body p-4">
-        <div class="d-flex justify-content-between align-items-start">
-          <div class="flex-grow-1">
-            <h5 class="card-title fw-bold mb-1">
-              {{ e.title }}
-            </h5>
-            <p class="text-muted mb-2"><i class="bi bi-geo-alt me-2"></i>{{ e.location }} • {{ e.date|date:"H:i" }}</p>
-          </div>
-          {% if e.external_link %}
-          <a href="{{ e.external_link }}" target="_blank" rel="noopener"
-            class="btn btn-primary rounded-pill px-4 position-relative" style="z-index: 2;" onclick="event.stopPropagation();">Регистрация</a>
-          {% else %}
-          <a href="{% url 'event_detail' e.slug %}" class="btn btn-primary rounded-pill px-4 position-relative" style="z-index: 2;" onclick="event.stopPropagation();">Подробнее</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% empty %}
-<div class="alert alert-light border text-center py-4">
-  Нет запланированных мероприятий в Казахстане.
-</div>
-{% endfor %}
+<!-- Pagination for Foreign Events -->
+{% if foreign_events.has_other_pages %}
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center mb-5">
+    {% if foreign_events.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ foreign_events.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Назад</a></li>
+    {% endif %}
+    
+    {% for num in foreign_events.paginator.page_range %}
+      {% if foreign_events.number == num %}
+      <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% elif num > foreign_events.number|add:'-3' and num < foreign_events.number|add:'3' %}
+      <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+    
+    {% if foreign_events.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ foreign_events.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Вперед</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
 {% endblock %}

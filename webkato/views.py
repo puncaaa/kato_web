@@ -23,8 +23,18 @@ def debug_db(request):
 
 def home(request):
     latest_news = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')[:4]
-    upcoming_events = Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')[:3]
-    return render(request, 'website/home.html', {'latest_news': latest_news, 'upcoming_events': upcoming_events})
+    
+    # Pin Astana conference to hero section
+    featured_event = Event.objects.filter(slug='conf-2026-astana', is_active=True).first()
+    upcoming_qs = Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')
+    
+    if featured_event:
+        other_events = upcoming_qs.exclude(pk=featured_event.pk)[:2]
+        events_to_show = [featured_event] + list(other_events)
+    else:
+        events_to_show = list(upcoming_qs[:3])
+        
+    return render(request, 'website/home.html', {'latest_news': latest_news, 'upcoming_events': events_to_show})
 
 def news_list(request):
     qs = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')
@@ -47,8 +57,12 @@ def events_list(request):
     now = timezone.now()
     # Upcoming events split by type
     upcoming = Event.objects.filter(date__gte=now, is_active=True).order_by('date')
-    foreign_events = upcoming.filter(is_international=True)
     local_events = upcoming.filter(is_international=False)
+    
+    foreign_qs = upcoming.filter(is_international=True)
+    paginator = Paginator(foreign_qs, 5)
+    page_number = request.GET.get('page')
+    foreign_events = paginator.get_page(page_number)
     
     past = Event.objects.filter(date__lt=now).order_by('-date')
     
