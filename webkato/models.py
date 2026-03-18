@@ -136,15 +136,17 @@ class MembershipApplication(models.Model):
     place_of_work = models.CharField(max_length=255, verbose_name="Место работы", blank=True)
     job_title = models.CharField(max_length=150, verbose_name="Занимаемая должность")
 
-    # Профессиональная информация
-    qualification = models.CharField(max_length=255, verbose_name="Сведения о квалификации / категория", blank=True, null=True)
-    degree = models.CharField(max_length=150, blank=True, verbose_name="Наличие ученой степени или звания", null=True)
-    experience = models.CharField(max_length=100, verbose_name="Стаж работы", blank=True, null=True)
-    
     # Контактная информация
+    country = models.CharField(max_length=150, verbose_name="Страна", blank=True, null=True)
     city = models.CharField(max_length=255, verbose_name="Город", blank=True, null=True)
     phone = models.CharField(max_length=50, verbose_name="Мобильный телефон")
     email = models.EmailField(verbose_name="Email")
+
+    # Профессиональная информация
+    specialty = models.CharField(max_length=255, verbose_name="Специальность", blank=True, null=True)
+    qualification = models.CharField(max_length=255, verbose_name="Сведения о квалификации / категория", blank=True, null=True)
+    degree = models.CharField(max_length=150, blank=True, verbose_name="Наличие ученой степени или звания", null=True)
+    experience = models.CharField(max_length=100, verbose_name="Стаж работы", blank=True, null=True)
 
     # Документы
     id_card_copy = models.FileField(upload_to='applications/id_cards/', verbose_name="Копия удостоверения личности", null=True, blank=True)
