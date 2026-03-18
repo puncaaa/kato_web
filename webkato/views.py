@@ -11,7 +11,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from .forms import ContactForm, CommentForm, MembershipApplicationForm, MembershipRegistrationForm
 import urllib.request, urllib.parse, json
 
@@ -223,9 +223,14 @@ def contacts(request):
             obj = form.save()
             # send notification email to CONTACT_EMAIL (non-blocking note: console backend for dev)
             try:
+                # determine recipient
+                recipient = getattr(settings, 'CONTACT_EMAIL')
+                if subject == 'join_question':
+                    recipient = 'jaxybekova_g@nscto.kz'
+                
                 mail_subject = f'Новое сообщение с сайта: {subject or "Контакты"}'
                 mail_body = f"От: {obj.name} <{obj.email}>\n\n{obj.message}"
-                send_mail(mail_subject, mail_body, settings.DEFAULT_FROM_EMAIL, [getattr(settings, 'CONTACT_EMAIL')], fail_silently=True)
+                send_mail(mail_subject, mail_body, settings.DEFAULT_FROM_EMAIL, [recipient], fail_silently=True)
             except Exception:
                 pass
             sent = True
