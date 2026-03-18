@@ -299,8 +299,9 @@ def congress_past(request):
     return render(request, 'website/congress_past.html', {'events': past_events})
 
 def congress_current(request):
-    events = Event.objects.filter(is_active=True).order_by('date')
-    return render(request, 'website/congress_current.html', {'events': events})
+    # Only show local congresses/events (Kazakhstan only)
+    events = Event.objects.filter(is_active=True, is_international=False).order_by('date')
+    return render(request, 'website/congress_current.html', {'events': events, 'title': 'Предстоящие съезды КАТО'})
 
 def education_courses(request):
     courses_cat = NewsCategory.objects.filter(slug='educational_courses').first()

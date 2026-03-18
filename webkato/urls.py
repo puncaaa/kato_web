@@ -55,7 +55,7 @@ urlpatterns = [
 
     path('education/webinars/', views.generic_page, {'title': 'Вебинары'}, name='education_webinars'),
     path('education/protocols/', views.generic_page, {'title': 'Клинические протоколы'}, name='education_protocols'),
-    path('education/courses/', views.generic_page, {'title': 'Образовательные курсы'}, name='education_courses'),
+    path('education/courses/', views.education_courses, name='education_courses'),
 
     path('fellowships/', views.generic_page, {'title': 'Гранты и стажировки'}, name='fellowships'),
     path('fellowships/visiting/', views.generic_page, {'title': 'Визитинг-профессора'}, name='fellowships_visiting'),
