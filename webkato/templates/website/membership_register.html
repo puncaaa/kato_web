@@ -103,6 +103,11 @@
                         </label>
                     </div>
 
+                    {% if RECAPTCHA_SITE_KEY %}
+                    <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+                    <script src="https://www.google.com/recaptcha/api.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+                    {% endif %}
+                    
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold py-3">Зарегистрироваться</button>
                     </div>
@@ -130,6 +135,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const icon = this.querySelector('i');
             icon.classList.toggle('bi-eye');
             icon.classList.toggle('bi-eye-slash');
+        });
+    }
+
+    if (window.grecaptcha && document.getElementById('recaptcha_token')) {
+        grecaptcha.ready(function () { 
+            grecaptcha.execute('{{ RECAPTCHA_SITE_KEY }}', { action: 'register' }).then(function (token) { 
+                var el = document.getElementById('recaptcha_token'); 
+                if (el) el.value = token; 
+            }); 
         });
     }
 });

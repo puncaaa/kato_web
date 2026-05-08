@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, logout
 from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from .models import News, NewsCategory, Event, Publication, PublicationCategory, Comment, MembershipType, MembershipApplication
@@ -14,36 +14,41 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
 from .forms import ContactForm, CommentForm, MembershipApplicationForm, MembershipRegistrationForm
 import urllib.request, urllib.parse, json
+from django.contrib.auth.views import LoginView
+from django_ratelimit.decorators import ratelimit
+from django.utils.decorators import method_decorator
 
-def debug_db(request):
-    from django.conf import settings
-    from django.http import HttpResponse
-    db_config = settings.DATABASES['default']
-    return HttpResponse(f"DB Engine: {db_config.get('ENGINE')} | Host: {db_config.get('HOST')} | Name: {db_config.get('NAME')}")
+# Removed debug_db view for security
 
 def home(request):
     latest_news = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')[:4]
     
-    # Pin Astana conference to hero section
-    featured_event = Event.objects.filter(slug='conf-2026-astana', is_active=True).first()
-    upcoming_qs = Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')
+    # Pin Astana conference to hero section (only show this one)
+    featured_event = Event.objects.filter(slug='upcoming-scientific-conference-2026', is_active=True).first()
     
     if featured_event:
-        other_events = upcoming_qs.exclude(pk=featured_event.pk)[:2]
-        events_to_show = [featured_event] + list(other_events)
+        events_to_show = [featured_event]
     else:
-        events_to_show = list(upcoming_qs[:3])
+        # Fallback if the event doesn't exist
+        events_to_show = list(Event.objects.filter(date__gte=timezone.now(), is_active=True).order_by('date')[:1])
         
     return render(request, 'website/home.html', {'latest_news': latest_news, 'upcoming_events': events_to_show})
 
 def news_list(request):
     qs = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
     if query:
+        if len(query) > 200:
+            query = query[:200]
         qs = qs.filter(title__icontains=query) | qs.filter(content__icontains=query)
         qs = qs.distinct()
     paginator = Paginator(qs, 10)
-    page = request.GET.get('page')
+    try:
+        page = int(request.GET.get('page', 1))
+        if page < 1: page = 1
+        if page > 1000: page = 1000
+    except (TypeError, ValueError):
+        page = 1
     items = paginator.get_page(page)
     return render(request, 'website/news/list.html', {'items': items})
 
@@ -89,7 +94,12 @@ def publications_list(request):
         qs = qs.filter(category__slug=cat)
     categories = PublicationCategory.objects.all()
     paginator = Paginator(qs, 10)
-    page = request.GET.get('page')
+    try:
+        page = int(request.GET.get('page', 1))
+        if page < 1: page = 1
+        if page > 1000: page = 1000
+    except (TypeError, ValueError):
+        page = 1
     items = paginator.get_page(page)
     return render(request, 'website/publications/list.html', {'items': items, 'categories': categories})
 
@@ -128,6 +138,7 @@ def membership_apply(request, slug):
     success = request.GET.get('success') == '1'
     return render(request, 'website/membership_apply.html', {'form': form, 'mtype': mtype, 'success': success})
 
+@ratelimit(key='ip', rate='3/h', method='POST', block=True)
 def membership_register(request, slug):
     mtype = get_object_or_404(MembershipType, slug=slug)
     if request.method == 'POST':
@@ -141,6 +152,30 @@ def membership_register(request, slug):
                 is_active=False
             )
             
+            # reCAPTCHA verification
+            recaptcha_ok = True
+            secret = getattr(settings, 'RECAPTCHA_SECRET_KEY', '')
+            recaptcha_response = request.POST.get('g-recaptcha-response') or request.POST.get('recaptcha_token')
+            if secret:
+                recaptcha_ok = False
+                if recaptcha_response:
+                    data = urllib.parse.urlencode({
+                        'secret': secret,
+                        'response': recaptcha_response,
+                        'remoteip': request.META.get('REMOTE_ADDR')
+                    }).encode()
+                    try:
+                        resp = urllib.request.urlopen('https://www.google.com/recaptcha/api/siteverify', data)
+                        result = json.loads(resp.read().decode())
+                        recaptcha_ok = result.get('success', False) and result.get('score', 0) >= 0.3
+                    except Exception:
+                        recaptcha_ok = False
+            
+            if not recaptcha_ok:
+                user.delete()
+                form.add_error(None, 'reCAPTCHA verification failed. Попробуйте позже.')
+                return render(request, 'website/membership_register.html', {'form': form, 'mtype': mtype})
+            
             # Create application
             app = form.save(commit=False)
             app.user = user
@@ -152,7 +187,8 @@ def membership_register(request, slug):
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             domain = request.get_host()
             link = reverse('activate', kwargs={'uidb64': uid, 'token': token})
-            activate_url = f"http://{domain}{link}"
+            protocol = 'https' if not settings.DEBUG else 'http'
+            activate_url = f"{protocol}://{domain}{link}"
             
             subject = 'Активация аккаунта КАТО'
             message = render_to_string('website/emails/activation_email.html', {
@@ -194,6 +230,7 @@ def payment_success(request):
 def payment_fail(request):
     return render(request, 'website/payment_fail.html')
 
+@ratelimit(key='ip', rate='10/h', method='POST', block=True)
 def contacts(request):
     sent = False
     if request.method == 'POST':
@@ -244,22 +281,32 @@ def contacts(request):
     return render(request, 'website/contacts.html', {'form': form, 'sent': sent})
 
 @login_required
+@ratelimit(key='user', rate='100/m', method='POST', block=True)
 def add_comment(request):
     if request.method != 'POST':
         return redirect('home')
+    
+    form = CommentForm(request.POST)
+    if not form.is_valid():
+        return redirect('home') # Or handle error more gracefully
+        
     model_name = request.POST.get('model')
     slug = request.POST.get('slug')
-    content = request.POST.get('content')
+    content = form.cleaned_data['content']
+    
     model_map = {'news': News, 'event': Event, 'publication': Publication}
     Model = model_map.get(model_name)
     if not Model:
         return redirect('home')
+        
     try:
         obj = Model.objects.get(slug=slug)
     except Model.DoesNotExist:
         return redirect('home')
+        
     ct = ContentType.objects.get_for_model(Model)
     Comment.objects.create(user=request.user, content_type=ct, object_id=obj.pk, content=content)
+    
     # redirect back to detail
     if model_name == 'news':
         return redirect('news_detail', slug=slug)
@@ -273,10 +320,10 @@ def profile_redirect(request):
         return redirect('home')
     return redirect('login')
 
-# New: logout view that accepts GET and POST and redirects to home
+# Updated logout to require POST and redirect to home
 def logout_view(request):
-    if request.method not in ('GET', 'POST'):
-        return HttpResponseNotAllowed(['GET', 'POST'])
+    if request.method != 'POST':
+        return redirect('home')
     logout(request)
     return redirect('home')
 
@@ -312,7 +359,12 @@ def education_courses(request):
     courses_cat = NewsCategory.objects.filter(slug='educational_courses').first()
     qs = News.objects.filter(category=courses_cat, is_published=True).order_by('-created_at')
     paginator = Paginator(qs, 10)
-    page = request.GET.get('page')
+    try:
+        page = int(request.GET.get('page', 1))
+        if page < 1: page = 1
+        if page > 1000: page = 1000
+    except (TypeError, ValueError):
+        page = 1
     items = paginator.get_page(page)
     return render(request, 'website/news/list.html', {'items': items, 'title': 'Образовательные курсы'})
 
@@ -322,3 +374,6 @@ def generic_page(request, title="Страница"):
         'content': 'Информация в данном разделе находится в стадии наполнения.'
     }
     return render(request, 'website/generic.html', context)
+@method_decorator(ratelimit(key='ip', rate='5/m', method='POST', block=True), name='dispatch')
+class RateLimitedLoginView(LoginView):
+    template_name = 'registration/login.html'

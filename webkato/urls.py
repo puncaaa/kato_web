@@ -7,20 +7,18 @@ urlpatterns = [
 
     path('news/', views.news_list, name='news_list'),
     path('news/<slug:slug>/', views.news_detail, name='news_detail'),
-    # news-specific comment URL removed — используется общий путь ниже
+
 
     path('events/', views.events_list, name='events_list'),
     path('events/<slug:slug>/', views.event_detail, name='event_detail'),
-    # event-specific comment URL removed
+
 
     path('publications/', views.publications_list, name='publications_list'),
     path('publications/<slug:slug>/', views.publication_detail, name='publication_detail'),
-    # publication-specific comment URL removed
 
-    # universal endpoint for posting comments (templates post here)
+
     path('comment/add/', views.add_comment, name='add_comment'),
 
-    # handle default Django profile redirect after login
     path('accounts/profile/', views.profile_redirect, name='profile'),
 
     path('about/', views.about, name='about'),
@@ -32,14 +30,19 @@ urlpatterns = [
     path('payment/success/', views.payment_success, name='payment_success'),
     path('payment/fail/', views.payment_fail, name='payment_fail'),
     path('contacts/', views.contacts, name='contacts'),
-    path('debug-db/', views.debug_db, name='debug_db'),
 
     # auth
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('accounts/login/', views.RateLimitedLoginView.as_view(), name='login'),
     path('accounts/logout/', views.logout_view, name='logout'),
 
-    # Placeholders for new structure
-    path('about/mission/', views.about, name='about_mission'), # Reuse existing about
+    # password reset
+    path('accounts/password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
+    path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+
+
+    path('about/mission/', views.about, name='about_mission'), 
     path('about/statutes/', views.about_statutes, name='about_statutes'),
     path('about/ethics/', views.about_ethics, name='about_ethics'),
     path('about/history/', views.about_history, name='about_history'),

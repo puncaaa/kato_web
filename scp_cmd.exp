@@ -1,0 +1,9 @@
+#!/usr/bin/expect -f
+set timeout 30
+set password [lindex $argv 0]
+set local_file [lindex $argv 1]
+set remote_dest [lindex $argv 2]
+spawn scp -o StrictHostKeyChecking=no $local_file root@89.35.125.232:$remote_dest
+expect "password:"
+send "$password\r"
+expect eof

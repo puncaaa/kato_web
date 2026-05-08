@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+import uuid
 
 class NewsCategory(models.Model):
     name = models.CharField(max_length=120)
@@ -35,12 +36,12 @@ class Event(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     date = models.DateTimeField()
-    # Optional manual date text (e.g. "13-14 октября 2016 г.")
+    
     date_text = models.CharField(max_length=100, blank=True, verbose_name="Текст даты (вручную)")
     location = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
     image = models.FileField(upload_to='events/', null=True, blank=True)
-    # Optional external URL for the event (e.g. registration page, conference site)
+   
     external_link = models.URLField(max_length=500, blank=True, null=True, help_text='Optional external URL for the conference (registration page, etc.)')
     program_pdf = models.FileField(upload_to='events/programs/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
@@ -102,6 +103,7 @@ class Comment(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -129,6 +131,7 @@ class MembershipType(models.Model):
 class MembershipApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     membership_type = models.ForeignKey(MembershipType, on_delete=models.SET_NULL, null=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     
     # Основные данные
     full_name = models.CharField(max_length=255, verbose_name="ФИО")

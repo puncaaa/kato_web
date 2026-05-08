@@ -26,13 +26,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-hi4s5c@&j#&0z8tu7%z0q_m!9=h^w9b89#f3p^j1*c6+c@@0$%')
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY is not set in the environment")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["katokz.kz", "www.katokz.kz", "kato-web-665424752344.europe-west1.run.app", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "katokz.kz,www.katokz.kz,localhost,127.0.0.1").split(",")
+
+# Security headers for production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://katokz.kz",
@@ -78,6 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'webkato.context_processors.recaptcha_context',
             ],
         },
     },
@@ -120,6 +134,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -132,9 +153,17 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Добавлено: куда перенаправлять после успешного логина
+# Authentication settings
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
+
+# Session hardening
+SESSION_COOKIE_AGE = 7200  # 2 hours
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_HTTPONLY = True
+
+# Password reset timeout
+PASSWORD_RESET_TIMEOUT = 3600  # 1 hour
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -164,10 +193,21 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'katokz.help@outlook.com'
-EMAIL_HOST_PASSWORD = 'KATO!2026*pgz'
-DEFAULT_FROM_EMAIL = 'katokz.help@outlook.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'katokz.help@outlook.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'katokz.help@outlook.com')
 CONTACT_EMAIL = 'trauma@nscto.kz'
 
 # CloudPayments configuration
-CLOUDPAYMENTS_PUBLIC_ID = os.environ.get("CLOUDPAYMENTS_PUBLIC_ID", "") # Provide via environment variable or placeholder
+CLOUDPAYMENTS_PUBLIC_ID = os.environ.get("CLOUDPAYMENTS_PUBLIC_ID", "")
+
+# Abuse Protection: Size Limits
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1048576  # 1MB for regular fields
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760 # 10MB for file uploads
+
+# reCAPTCHA Configuration
+RECAPTCHA_SITE_KEY = os.environ.get("RECAPTCHA_SITE_KEY", "")
+RECAPTCHA_SECRET_KEY = os.environ.get("RECAPTCHA_SECRET_KEY", "")
+
+# Rate Limiting
+RATELIMIT_ENABLE = True
