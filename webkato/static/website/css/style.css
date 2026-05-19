@@ -315,3 +315,38 @@ a {
     text-transform: uppercase;
     font-size: 0.8rem;
 }
+
+/* Custom Language Switcher Styling */
+.language-switcher .dropdown-item {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    padding: 0.4rem 1rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.language-switcher .dropdown-item:hover {
+    background-color: var(--primary-color);
+    color: white !important;
+}
+
+/* Hide default Google Translate widgets & top bar completely */
+body {
+    top: 0 !important;
+}
+.goog-te-banner-frame,
+.goog-te-banner,
+.goog-te-menu-value,
+.goog-te-menu-frame,
+#google_translate_element {
+    display: none !important;
+}
+.goog-tooltip,
+.goog-tooltip:hover {
+    display: none !important;
+}
+.goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
