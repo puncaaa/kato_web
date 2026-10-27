@@ -18,13 +18,15 @@ from django.contrib.auth.views import LoginView
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 
+from django.db.models import Q
+
 # Removed debug_db view for security
 
 def home(request):
     latest_news = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')[:4]
     
-    # Pin Astana conference to hero section (only show this one)
-    featured_event = Event.objects.filter(slug='upcoming-scientific-conference-2026', is_active=True).first()
+    # Pin HKA 2026 conference to hero slider section
+    featured_event = Event.objects.filter(slug='hka-2026', is_active=True).first()
     
     if featured_event:
         events_to_show = [featured_event]
@@ -346,8 +348,8 @@ def about_founder(request):
     return render(request, 'website/founder.html')
 
 def congress_past(request):
-    # Fetch all past events, ordered by date descending
-    past_events = Event.objects.filter(date__lt=timezone.now(), is_active=False).order_by('-date')
+    # Fetch all archived or past events, ordered by date descending
+    past_events = Event.objects.filter(Q(is_active=False) | Q(date__lt=timezone.now())).order_by('-date')
     return render(request, 'website/congress_past.html', {'events': past_events})
 
 def congress_current(request):

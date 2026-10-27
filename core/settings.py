@@ -106,13 +106,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+db_config = dj_database_url.config(
+    default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+)
+if db_config.get('ENGINE') != 'django.db.backends.sqlite3':
+    db_config['CONN_MAX_AGE'] = 600
+    db_config['CONN_HEALTH_CHECKS'] = True
+
+DATABASES = {'default': db_config}
 
 
 

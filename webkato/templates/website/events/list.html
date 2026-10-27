@@ -18,7 +18,9 @@
     <div
       class="col-md-2 bg-light d-flex flex-column align-items-center justify-content-center p-3 text-center border-end">
       <span class="h1 fw-bold text-primary mb-0" style="line-height:1;">
-        {% if e.slug == 'conf-2026-astana' %}
+        {% if e.slug == 'hka-2026' or '30–31' in e.date_text or '30-31' in e.date_text %}
+        30-31
+        {% elif e.slug == 'conf-2026-astana' or '10-11' in e.date_text %}
         10-11
         {% else %}
         {{ e.date|date:"d" }}

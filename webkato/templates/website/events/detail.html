@@ -83,9 +83,9 @@
         </div>
 
         <div class="mt-4 pt-2">
-          <a href="https://25yearsnscto.online/ru-RU/nscto26#register" target="_blank" rel="noopener"
+          <a href="{% if event.external_link %}{{ event.external_link }}{% else %}https://25yearsnscto.online/ru-RU/nscto26#register{% endif %}" target="_blank" rel="noopener"
             class="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg fs-5 text-dark">
-            <i class="bi bi-person-plus-fill me-2"></i>ПРОЙТИ РЕГИСТРАЦИЮ
+            <i class="bi bi-person-plus-fill me-2"></i>{% if event.external_link %}ПЕРЕЙТИ НА САЙТ / РЕГИСТРАЦИЯ{% else %}ПРОЙТИ РЕГИСТРАЦИЮ{% endif %}
           </a>
         </div>
       </div>
@@ -107,12 +107,12 @@
         <!-- Call to Action Banner -->
         <div class="mt-5 p-4 bg-primary bg-opacity-10 rounded-4 border-start border-5 border-primary shadow-sm">
           <h4 class="text-primary fw-bold mb-3"><i class="bi bi-person-plus-fill me-2"></i>Регистрация участников</h4>
-          <p class="mb-0 fs-5 text-dark">Для участия в мероприятии необходимо пройти онлайн-регистрацию. Будем рады
+          <p class="mb-0 fs-5 text-dark">Для участия в мероприятии необходимо перейти на страницу регистрации. Будем рады
             видеть вас среди участников!</p>
           <div class="mt-4">
-            <a href="https://25yearsnscto.online/ru-RU/nscto26#register" target="_blank" rel="noopener"
+            <a href="{% if event.external_link %}{{ event.external_link }}{% else %}https://25yearsnscto.online/ru-RU/nscto26#register{% endif %}" target="_blank" rel="noopener"
               class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
-              Перейти к регистрации
+              {% if event.external_link %}Перейти на сайт конференции{% else %}Перейти к регистрации{% endif %}
             </a>
           </div>
         </div>
