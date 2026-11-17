@@ -26,7 +26,7 @@ def home(request):
     latest_news = News.objects.filter(is_published=True).exclude(category__slug='educational_courses').order_by('-created_at')[:4]
     
     # Pin HKA 2026 conference to hero slider section
-    featured_event = Event.objects.filter(slug='hka-2026', is_active=True).first()
+    featured_event = Event.objects.filter(slug='apoa-2027', is_active=True).first()
     
     if featured_event:
         events_to_show = [featured_event]
