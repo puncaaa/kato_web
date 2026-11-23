@@ -37,7 +37,7 @@
                         {% endif %}
                         <div class="{% if event.image %}col-md-9{% else %}col-12{% endif %}">
                             <div class="text-muted small mb-4">
-                                {{ event.description|truncatewords:50|linebreaks }}
+                                {{ event.description|striptags|truncatewords:50|linebreaks }}
                             </div>
 
                             <div class="d-flex flex-wrap gap-2">

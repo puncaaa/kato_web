@@ -348,10 +348,19 @@ def about_founder(request):
     return render(request, 'website/founder.html')
 
 def congress_past(request):
-    # Fetch all archived or past congresses and conferences held in Kazakhstan, ordered by date descending
+    # Fetch archived congresses held in Kazakhstan for specified dates:
+    # 10–11 сентября 2026, 30–31 октября 2026, and 9-10 октября 2025
+    featured_slugs = [
+        'hka-2026',
+        'upcoming-scientific-conference-2026',
+        'conf-2026-astana',
+        'conf-2025-karaganda',
+        'karaganda-2025-v3'
+    ]
     past_events = Event.objects.filter(
         Q(is_active=False) | Q(date__lt=timezone.now()),
-        is_international=False
+        is_international=False,
+        slug__in=featured_slugs
     ).exclude(
         location__icontains='Тайвань'
     ).exclude(
@@ -362,6 +371,31 @@ def congress_past(request):
         location__icontains='Zoom'
     ).order_by('-date')
     return render(request, 'website/congress_past.html', {'events': past_events})
+
+def congress_program_archive(request):
+    # Fetch all archived past conferences and congresses except the featured 2025-2026 ones
+    featured_slugs = [
+        'hka-2026',
+        'upcoming-scientific-conference-2026',
+        'conf-2026-astana',
+        'conf-2025-karaganda',
+        'karaganda-2025-v3'
+    ]
+    program_events = Event.objects.filter(
+        Q(is_active=False) | Q(date__lt=timezone.now()),
+        is_international=False
+    ).exclude(
+        slug__in=featured_slugs
+    ).exclude(
+        location__icontains='Тайвань'
+    ).exclude(
+        location__icontains='Тайбэй'
+    ).exclude(
+        location__icontains='Онлайн'
+    ).exclude(
+        location__icontains='Zoom'
+    ).order_by('-date')
+    return render(request, 'website/congress_program_archive.html', {'events': program_events})
 
 def congress_current(request):
     # Only show local congresses/events (Kazakhstan only)

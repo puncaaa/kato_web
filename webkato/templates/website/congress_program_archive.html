@@ -1,0 +1,73 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Архив программ - КАТО{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+            <h1 class="display-5 fw-bold text-primary mb-3">Архив программ</h1>
+            <p class="lead text-muted">Программы съездов и научно-практических конференций КАТО прошлых лет</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            {% for event in events %}
+            <div class="card mb-4 border-0 shadow-sm border-start border-4 border-primary">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h2 class="h4 card-title text-dark fw-bold mb-0">{{ event.title }}</h2>
+                        <span class="badge bg-primary rounded-pill">{{ event.date|date:"Y" }}</span>
+                    </div>
+                    
+                    <p class="text-muted small mb-3">
+                        <i class="bi bi-calendar3 me-1"></i>
+                        {% if event.date_text %}{{ event.date_text }}{% else %}{{ event.date|date:"d E Y" }}{% endif %}
+                        <span class="mx-2">•</span>
+                        <i class="bi bi-geo-alt-fill me-1"></i>{{ event.location }}
+                    </p>
+
+                    <div class="row">
+                        {% if event.image %}
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <img src="{{ event.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ event.title }}">
+                        </div>
+                        {% endif %}
+                        <div class="{% if event.image %}col-md-9{% else %}col-12{% endif %}">
+                            <div class="text-muted small mb-4">
+                                {{ event.description|striptags|truncatewords:50|linebreaks }}
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2">
+                                {% if event.program_pdf %}
+                                <a href="{{ event.program_pdf.url }}" class="btn btn-outline-primary btn-sm rounded-pill px-4" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="bi bi-file-earmark-pdf-fill me-2 text-danger"></i> Программа (PDF)
+                                </a>
+                                {% endif %}
+                                
+                                {% if event.external_link %}
+                                <a href="{{ event.external_link }}" class="btn btn-primary btn-sm rounded-pill px-4" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="bi bi-box-arrow-up-right me-2"></i> Перейти на сайт
+                                </a>
+                                {% endif %}
+                                <a href="{% url 'event_detail' event.slug %}" class="btn btn-outline-secondary btn-sm rounded-pill px-4">
+                                    Подробнее
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="text-center py-5">
+                <p class="lead text-muted">Архив программ пока пуст.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -54,6 +54,7 @@ urlpatterns = [
 
     path('congress/current/', views.congress_current, name='congress_current'),
     path('congress/past/', views.congress_past, name='congress_past'),
+    path('congress/programs/', views.congress_program_archive, name='congress_program_archive'),
     path('congress/awards/', views.generic_page, {'title': 'Награды'}, name='congress_awards'),
 
     path('education/webinars/', views.generic_page, {'title': 'Вебинары'}, name='education_webinars'),
