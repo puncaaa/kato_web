@@ -348,8 +348,19 @@ def about_founder(request):
     return render(request, 'website/founder.html')
 
 def congress_past(request):
-    # Fetch all archived or past events, ordered by date descending
-    past_events = Event.objects.filter(Q(is_active=False) | Q(date__lt=timezone.now())).order_by('-date')
+    # Fetch all archived or past congresses and conferences held in Kazakhstan, ordered by date descending
+    past_events = Event.objects.filter(
+        Q(is_active=False) | Q(date__lt=timezone.now()),
+        is_international=False
+    ).exclude(
+        location__icontains='Тайвань'
+    ).exclude(
+        location__icontains='Тайбэй'
+    ).exclude(
+        location__icontains='Онлайн'
+    ).exclude(
+        location__icontains='Zoom'
+    ).order_by('-date')
     return render(request, 'website/congress_past.html', {'events': past_events})
 
 def congress_current(request):

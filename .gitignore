@@ -16,3 +16,8 @@ venv/
 
 # Environment variables
 .env
+
+# Archives and large media folders
+*.tar.gz
+ВСЕ КОНФЕРЕНЦИИ/
+media/events/programs/
