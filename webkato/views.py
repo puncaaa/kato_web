@@ -349,12 +349,10 @@ def about_founder(request):
 
 def congress_past(request):
     # Fetch archived congresses held in Kazakhstan for specified dates:
-    # 10–11 сентября 2026, 30–31 октября 2026, and 9-10 октября 2025
+    # 30–31 октября 2026 (HKA 2026), 10–11 сентября 2026 (25 лет ННЦТО), and 9-10 октября 2025
     featured_slugs = [
         'hka-2026',
         'upcoming-scientific-conference-2026',
-        'conf-2026-astana',
-        'conf-2025-karaganda',
         'karaganda-2025-v3'
     ]
     past_events = Event.objects.filter(
@@ -373,12 +371,10 @@ def congress_past(request):
     return render(request, 'website/congress_past.html', {'events': past_events})
 
 def congress_program_archive(request):
-    # Fetch all archived past conferences and congresses except the featured 2025-2026 ones
+    # Fetch all archived past conferences and congresses (including conf-2026-astana and conf-2025-karaganda)
     featured_slugs = [
         'hka-2026',
         'upcoming-scientific-conference-2026',
-        'conf-2026-astana',
-        'conf-2025-karaganda',
         'karaganda-2025-v3'
     ]
     program_events = Event.objects.filter(
